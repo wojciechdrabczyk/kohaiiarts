@@ -1,20 +1,35 @@
 import InprntIcon from '@/assets/icons/InprntIcon';
 import NewgroundsIcon from '@/assets/icons/NewgroundsIcon';
 import ThroneIcon from '@/assets/icons/ThroneIcon';
-import { ChangeEvent, FormEvent, useState } from 'react';
+import { FormEvent, useState } from 'react';
 import { BsInstagram } from 'react-icons/bs';
 import { FaDiscord } from 'react-icons/fa';
 import { FaPatreon, FaXTwitter } from 'react-icons/fa6';
-import { router } from '@inertiajs/react';
+import { router, usePage } from '@inertiajs/react';
+import type { PageProps } from '@inertiajs/inertia';
+
+type Status = 'success' | 'error' | null;
+
+
 
 export default function Contact() {
+    const [status, setStatus] = useState<Status>(null);
+    const { errors } = usePage<PageProps>().props as {
+        errors: Record<string, string>;
+    };
     const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         const formData = new FormData(e.currentTarget);
 
-        router.post('/contact', formData);
-        e.currentTarget.reset();
-        alert('Message sent!');
+        router.post('/contact', formData, {
+            onSuccess: () => {
+                setStatus('success');
+                e.currentTarget.reset();
+            },
+            onError: () => {
+                setStatus('error')
+            },
+        });
     };
     const socialLinks = [
         {
@@ -86,25 +101,38 @@ export default function Contact() {
                     name="name"
                     placeholder="Your name*"
                     required
-                    className="w-full border border-gray-300 px-4 py-2 rounded"
+                    className={`w-full px-4 py-2 rounded border ${errors.name ? 'border-red-600' : 'border-gray-300'}`}
                 />
+                {errors.name && <p className="text-red-600 text-sm">{errors.name}</p>}
+
                 <input
                     name="email"
                     type="email"
                     placeholder="Email*"
                     required
-                    className="w-full border border-gray-300 px-4 py-2 rounded"
+                    className={`w-full px-4 py-2 rounded border ${errors.email ? 'border-red-600' : 'border-gray-300'}`}
                 />
+                {errors.email && <p className="text-red-600 text-sm">{errors.email}</p>}
+
                 <textarea
                     name="message"
                     placeholder="Your message*"
                     required
                     rows={5}
-                    className="w-full border border-gray-300 px-4 py-2 rounded"
+                    className={`w-full px-4 py-2 rounded border ${errors.message ? 'border-red-600' : 'border-gray-300'}`}
                 />
+                {errors.message && <p className="text-red-600 text-sm">{errors.message}</p>}
+
                 <button type="submit" className="w-full bg-black text-white py-2 rounded hover:bg-gray-800">
                     Send
                 </button>
+
+                {status === 'success' && (
+                    <p className="text-green-600 text-center">Thank you! Your message has been sent.</p>
+                )}
+                {status === 'error' && (
+                    <p className="text-red-600 text-center">Oops! Something went wrong. Please try again.</p>
+                )}
             </form>
         </div>
     );

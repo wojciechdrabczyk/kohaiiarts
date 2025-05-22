@@ -11,9 +11,9 @@ class ContactController extends Controller
     public function send(Request $request)
     {
         $data = $request->validate([
-            'name' => 'required|string|max:30',
-            'email' => 'nullable|email',
-            'message' => 'required|string|max:255',
+            'name' => 'required|string|min:2|max:30',
+            'email' => 'nullable|email|min:10|max:30',
+            'message' => 'required|string|min:5|max:255',
         ]);
 
         Mail::to(config('mail.from.address'))->send(new ContactMessage($data));
