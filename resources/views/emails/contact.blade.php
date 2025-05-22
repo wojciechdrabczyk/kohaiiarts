@@ -1,7 +1,9 @@
 <p><strong>Name:</strong> {{ $data['name'] }}</p>
+<p><strong>Email:</strong> {{ $data['email'] }}</p>
 
-@if(!empty($data['email']))
-    <p><strong>Email:</strong> {{ $data['email'] }}</p>
+@if(!empty($data['subject']))
+    <p><strong>Subject:</strong> {{ $data['subject'] }}</p>
 @endif
 
-<p><strong>Message:</strong><br>{!! nl2br(e($data['message'])) !!}</p>
+<p><strong>Message:</strong></p>
+<p>{!! nl2br(e($data['message'])) !!}</p>
