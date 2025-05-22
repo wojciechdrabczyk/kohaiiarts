@@ -5,44 +5,17 @@ import { ChangeEvent, FormEvent, useState } from 'react';
 import { BsInstagram } from 'react-icons/bs';
 import { FaDiscord } from 'react-icons/fa';
 import { FaPatreon, FaXTwitter } from 'react-icons/fa6';
-
-type FormData = {
-    name: string;
-    email: string;
-    message: string;
-};
-type Status = 'success' | 'error' | null;
+import { router } from '@inertiajs/react';
 
 export default function Contact() {
-    const [formData, setFormData] = useState<FormData>({
-        name: '',
-        email: '',
-        message: '',
-    });
-    const [status, setStatus] = useState<Status>(null);
-
-    const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-        const { name, value } = e.target;
-        setFormData((prevState) => ({
-            ...prevState,
-            [name]: value,
-        }));
-    };
-    const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        if (!formData.name || !formData.message) {
-            setStatus('error');
-            return;
-        }
-        try {
-            await new Promise((resolve) => setTimeout(resolve, 1000)); // simulate send
-            setFormData({ name: '', email: '', message: '' });
-            setStatus('success');
-        } catch (err) {
-            setStatus('error');
-        }
-    };
+        const formData = new FormData(e.currentTarget);
 
+        router.post('/contact', formData);
+        e.currentTarget.reset();
+        alert('Message sent!');
+    };
     const socialLinks = [
         {
             name: 'X',
@@ -103,44 +76,35 @@ export default function Contact() {
             </div>
             <div className="flex justify-center px-4 py-6 text-sm font-light text-gray-600 sm:px-6 md:px-10">
                 <p className="max-w-2xl text-center">
-                    Thanks so much for checking out my art! You can support me through INPRNT, Throne, or Patreon, or just say hi on social media. For
+                    Thank you so much for checking out my art! You can support me through INPRNT, Throne, or Patreon, or just say hi on social media. For
                     commissions or collaborations, feel free to DM me on Instagram, X, or connect on Discord — I’m happy to chat! You can also just
                     send me a message directly below.
                 </p>
             </div>
-            <form onSubmit={handleChange} className="mx-auto mt-8 max-w-xl space-y-4">
+            <form onSubmit={handleSubmit} className="max-w-md mx-auto space-y-4 p-4">
                 <input
-                    type="text"
                     name="name"
-                    placeholder="Your name"
-                    value={formData.name}
-                    onChange={handleChange}
+                    placeholder="Your name*"
                     required
-                    className="w-full rounded border border-gray-300 px-4 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                    className="w-full border border-gray-300 px-4 py-2 rounded"
                 />
                 <input
-                    type="email"
                     name="email"
-                    placeholder="Email (optional)"
-                    value={formData.email}
-                    onChange={handleChange}
-                    className="w-full rounded border border-gray-300 px-4 py-2"
+                    type="email"
+                    placeholder="Email*"
+                    required
+                    className="w-full border border-gray-300 px-4 py-2 rounded"
                 />
                 <textarea
                     name="message"
                     placeholder="Your message*"
-                    value={formData.message}
-                    onChange={handleChange}
                     required
                     rows={5}
-                    className="w-full rounded border border-gray-300 px-4 py-2"
+                    className="w-full border border-gray-300 px-4 py-2 rounded"
                 />
-                <button type="submit" className="w-full rounded bg-black py-2 text-white transition hover:bg-gray-800">
-                    Send Message
+                <button type="submit" className="w-full bg-black text-white py-2 rounded hover:bg-gray-800">
+                    Send
                 </button>
-
-                {status === 'success' && <p className="text-green-600">Message sent!</p>}
-                {status === 'error' && <p className="text-red-600">Please fill out the required fields.</p>}
             </form>
         </div>
     );
