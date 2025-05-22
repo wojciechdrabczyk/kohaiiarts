@@ -8,7 +8,7 @@ use Inertia\Inertia;
 class StaticPageController extends Controller
 {
     public function welcome() {
-        return Inertia::render('Welcome');
+        return Inertia::render('welcome');
     }
     public function services() {
         return Inertia::render('services');

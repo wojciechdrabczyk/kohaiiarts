@@ -5,6 +5,7 @@ import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
 import { createRoot } from 'react-dom/client';
 import { initializeTheme } from './hooks/use-appearance';
 import NavBar from '@/components/nav-bar';
+import ThemeToggle from '@/components/themetoggle';
 
 const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
 
