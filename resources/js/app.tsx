@@ -1,12 +1,12 @@
 import '../css/app.css';
 
+import Footer from '@/components/footer';
+import NavBar from '@/components/nav-bar';
+import ThemeToggleFloating from '@/components/themetogglefloating';
 import { createInertiaApp } from '@inertiajs/react';
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
 import { createRoot } from 'react-dom/client';
 import { initializeTheme } from './hooks/use-appearance';
-import NavBar from '@/components/nav-bar';
-import ThemeToggle from '@/components/themetoggle';
-import ThemeToggleFloating from '@/components/themetogglefloating';
 
 const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
 
@@ -18,9 +18,12 @@ createInertiaApp({
 
         root.render(
             <>
-                <NavBar/>
-                <ThemeToggleFloating/>
-                <App {...props} />
+                <NavBar />
+                <ThemeToggleFloating />
+                <main className="flex-grow">
+                    <App {...props} />
+                </main>
+                <Footer />
             </>,
         );
     },
