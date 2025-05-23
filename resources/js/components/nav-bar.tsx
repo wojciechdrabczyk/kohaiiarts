@@ -1,11 +1,14 @@
 import { Popover, PopoverButton, PopoverPanel } from '@headlessui/react';
 import { Link } from '@inertiajs/react';
 import { useEffect, useState } from 'react';
-import { FaSun, FaMoon } from 'react-icons/fa';
+import { FaMoon, FaSun } from 'react-icons/fa';
 
 export default function NavBar() {
     const [isOpen, setIsOpen] = useState(false);
     const [theme, setTheme] = useState(() => localStorage.getItem('theme') || 'light');
+
+    const toggleTheme = () => setTheme((prev) => (prev === 'dark' ? 'light' : 'dark'));
+    const ThemeIcon = theme === 'dark' ? FaSun : FaMoon;
 
     useEffect(() => {
         const root = document.documentElement;
@@ -17,15 +20,12 @@ export default function NavBar() {
         localStorage.setItem('theme', theme);
     }, [theme]);
 
-    const toggleTheme = () => setTheme(prev => (prev === 'dark' ? 'light' : 'dark'));
-
-    const ThemeIcon = theme === 'dark' ? FaSun : FaMoon;
 
     return (
-        <div className="bg-gray-800">
-            <nav className={'bg-white dark:bg-gray-900 shadow-md'}>
+        <div className="">
+            <nav className={'bg-white shadow-md dark:bg-black'}>
                 <div className={'mx-auto max-w-7xl px-4 sm:px-6 lg:px-8'}>
-                    <div className={'flex h-16 justify-between items-center'}>
+                    <div className={'flex h-16 items-center justify-between'}>
                         <div className={'flex items-center'}>
                             <Link href={route('home')} className={'text-xl font-black text-gray-800 dark:text-white'}>
                                 Kohaii Arts
@@ -62,15 +62,16 @@ export default function NavBar() {
                             <Link href={route('contact')} className={'text-gray-500 hover:text-gray-700 dark:text-gray-300'}>
                                 Contact
                             </Link>
-                            <button
+                            <div
+                                className="hidden cursor-pointer items-center space-x-2 rounded-full border border-gray-300 px-3 py-1 transition hover:bg-gray-100 md:flex dark:border-gray-600 dark:hover:bg-gray-800"
                                 onClick={toggleTheme}
-                                className=" px-2 py-1 text-sm text-gray-700 dark:text-gray-300 border-gray-300 dark:border-gray-600"
                             >
-                                <ThemeIcon />
-                            </button>
+                                <ThemeIcon className="text-gray-700 dark:text-gray-300" />
+                                <span className="text-sm text-gray-700 dark:text-gray-300">{theme === 'dark' ? 'Light Mode' : 'Dark Mode'}</span>
+                            </div>
                         </div>
                         <div className="flex items-center md:hidden">
-                            <button onClick={() => setIsOpen(!isOpen)} className="text-gray-800 dark:text-white focus:outline-none">
+                            <button onClick={() => setIsOpen(!isOpen)} className="text-gray-800 focus:outline-none dark:text-white">
                                 <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path
                                         strokeLinecap="round"
@@ -125,12 +126,6 @@ export default function NavBar() {
                         <Link href={route('contact')} className={'text-gray-500 hover:text-gray-700 dark:text-gray-300'}>
                             Contact
                         </Link>
-                        <button
-                            onClick={toggleTheme}
-                            className="rounded border px-2 py-1 text-sm text-gray-700 dark:text-gray-300 border-gray-300 dark:border-gray-600"
-                        >
-                            <ThemeIcon />
-                        </button>
                     </div>
                 )}
             </nav>
