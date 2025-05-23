@@ -6,7 +6,7 @@ import { router, usePage } from '@inertiajs/react';
 import { FormEvent, useState } from 'react';
 import { BsInstagram } from 'react-icons/bs';
 import { FaDiscord } from 'react-icons/fa';
-import { FaPatreon, FaXTwitter } from 'react-icons/fa6';
+import { FaPatreon, FaThreads, FaXTwitter } from 'react-icons/fa6';
 
 type Status = 'success' | 'error' | null;
 
@@ -33,6 +33,7 @@ export default function Contact() {
 
     const socialLinks = [
         { name: 'X', url: 'https://x.com/KohaiiArts', icon: <FaXTwitter size={32} /> },
+        { name: 'Threads', url: 'https://www.threads.com/@kohaii_arts', icon: <FaThreads size={32} /> },
         { name: 'Instagram', url: 'https://www.instagram.com/kohaii_arts/', icon: <BsInstagram size={32} className="text-pink-500" /> },
         { name: 'Discord', url: 'invitation link to the discord server?', icon: <FaDiscord size={32} className="text-indigo-500" /> },
         { name: 'Newgrounds', url: 'https://kohaiiarts.newgrounds.com/art', icon: <NewgroundsIcon className="h-8 w-8 text-orange-500" /> },
@@ -67,7 +68,7 @@ export default function Contact() {
             <div className="text-center text-sm font-light text-gray-600 dark:text-gray-300 mb-8 px-2">
                 <p className="max-w-2xl mx-auto">
                     Thank you so much for checking out my art! You can support me through INPRNT, Throne, or Patreon, or just say hi on social media.
-                    For commissions or collaborations, feel free to DM me on Instagram, X, or connect on Discord — I’m happy to chat! You can also
+                    For commissions or collaborations, feel free to DM me on Instagram, X, Threads, or connect on Discord — I’m happy to chat! You can also
                     just send me a message directly below.
                 </p>
             </div>
