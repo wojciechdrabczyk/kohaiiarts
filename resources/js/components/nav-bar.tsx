@@ -1,7 +1,12 @@
+import NewgroundsIcon from '@/assets/icons/NewgroundsIcon';
+import ThroneIcon from '@/assets/icons/ThroneIcon';
 import { Popover, PopoverButton, PopoverPanel } from '@headlessui/react';
 import { Link } from '@inertiajs/react';
 import { useEffect, useState } from 'react';
-import { FaMoon, FaSun } from 'react-icons/fa';
+import { BsInstagram } from 'react-icons/bs';
+import { FaDiscord } from 'react-icons/fa';
+import { FaSun, FaMoon, FaPatreon, FaThreads, FaXTwitter } from 'react-icons/fa6';
+import { SiThreads } from 'react-icons/si';
 
 export default function NavBar() {
     const [isOpen, setIsOpen] = useState(false);
@@ -20,6 +25,10 @@ export default function NavBar() {
         localStorage.setItem('theme', theme);
     }, [theme]);
 
+    const popoverPanelStyles =
+        'absolute top-full mt-2 rounded-xl w-44 rounded-md border border-gray-200 bg-white dark:bg-gray-800 shadow-lg z-10';
+    const popoverLinkStyles =
+        'flex items-center gap-2 rounded-xl w-full px-4 py-2 text-sm text-left text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700';
 
     return (
         <div className="">
@@ -40,9 +49,13 @@ export default function NavBar() {
                             </a>
                             <Popover className="relative">
                                 <PopoverButton className="text-gray-500 hover:text-gray-700 dark:text-gray-300">Support</PopoverButton>
-                                <PopoverPanel anchor="bottom" className="ml-4 flex flex-col space-y-1 p-2">
-                                    <a href="https://www.patreon.com/KohaiiArts">Patreon</a>
-                                    <a href="https://throne.com/kohaiiarts">Throne.gg</a>
+                                <PopoverPanel className={popoverPanelStyles}>
+                                    <a href="https://www.patreon.com/KohaiiArts" className={popoverLinkStyles}>
+                                        <span className="w-4 flex justify-center"><FaPatreon size={14} /></span> Patreon
+                                    </a>
+                                    <a href="https://throne.com/kohaiiarts" className={popoverLinkStyles}>
+                                        <span className="w-4 flex justify-center"><ThroneIcon className="h-4 w-4" /></span> Throne
+                                    </a>
                                 </PopoverPanel>
                             </Popover>
                             <Link href={route('services')} className={'text-gray-500 hover:text-gray-700 dark:text-gray-300'}>
@@ -50,12 +63,25 @@ export default function NavBar() {
                             </Link>
                             <Popover className="relative">
                                 <PopoverButton className="text-gray-500 hover:text-gray-700 dark:text-gray-300">Socials</PopoverButton>
-                                <PopoverPanel anchor="bottom" className="ml-4 flex flex-col space-y-1 p-2">
-                                    <a href="https://x.com/KohaiiArts">Twitter / X</a>
-                                    <a href="https://www.instagram.com/kohaii_arts/">Instagram</a>
-                                    <a href="https://kohaiiarts.newgrounds.com/art">Newgrounds</a>
+                                <PopoverPanel className={popoverPanelStyles}>
+                                    <a href="https://x.com/KohaiiArts" className={popoverLinkStyles}>
+                                        <span className="w-4 flex justify-center"><FaXTwitter size={14} /></span> Twitter / X
+                                    </a>
+                                    <a href="https://www.instagram.com/kohaii_arts/" className={popoverLinkStyles}>
+                                        <span className="w-4 flex justify-center"><BsInstagram size={14} /></span> Instagram
+                                    </a>
+                                    <a href="https://kohaiiarts.newgrounds.com/art" className={popoverLinkStyles}>
+                                        <span className="w-4 flex justify-center"><NewgroundsIcon className="w-4 h-4" /></span> Newgrounds
+                                    </a>
+                                    <a href="https://www.threads.net/@kohaii_arts" className={popoverLinkStyles}>
+                                        <span className="w-4 flex justify-center"><SiThreads size={14} /></span> Threads
+                                    </a>
+                                    <a href="#" className={popoverLinkStyles}>
+                                        <span className="w-4 flex justify-center"><FaDiscord size={14} /></span> Discord
+                                    </a>
                                 </PopoverPanel>
                             </Popover>
+
                             <Link href={route('faq')} className={'text-gray-500 hover:text-gray-700 dark:text-gray-300'}>
                                 FAQ
                             </Link>
@@ -84,50 +110,6 @@ export default function NavBar() {
                         </div>
                     </div>
                 </div>
-                {isOpen && (
-                    <div className="flex flex-col space-y-2 px-4 pb-4 md:hidden">
-                        <Link href={route('home')} className={'text-gray-500 hover:text-gray-700 dark:text-gray-300'}>
-                            Illustrations
-                        </Link>
-                        <a href="https://www.inprnt.com/gallery/kohaiiarts/" className={'text-gray-500 hover:text-gray-700 dark:text-gray-300'}>
-                            Shop
-                        </a>
-                        <div>
-                            <p className={'font-semibold text-gray-700 dark:text-gray-300'}>Support</p>
-                            <div className={'ml-4 flex flex-col space-y-1'}>
-                                <a href="https://www.patreon.com/KohaiiArts" className={'text-gray-500 hover:text-gray-700 dark:text-gray-300'}>
-                                    Patreon
-                                </a>
-                                <a href="https://throne.com/kohaiiarts" className={'text-gray-500 hover:text-gray-700 dark:text-gray-300'}>
-                                    Throne.gg
-                                </a>
-                            </div>
-                        </div>
-                        <Link href={route('services')} className={'text-gray-500 hover:text-gray-700 dark:text-gray-300'}>
-                            Services
-                        </Link>
-                        <div>
-                            <p className={'font-semibold text-gray-700 dark:text-gray-300'}>Socials</p>
-                            <div className={'ml-4 flex flex-col space-y-1'}>
-                                <a href="https://x.com/KohaiiArts" className={'text-gray-500 hover:text-gray-700 dark:text-gray-300'}>
-                                    Twitter / X
-                                </a>
-                                <a href="https://www.instagram.com/kohaii_arts/" className={'text-gray-500 hover:text-gray-700 dark:text-gray-300'}>
-                                    Instagram
-                                </a>
-                                <a href="https://kohaiiarts.newgrounds.com/art" className={'text-gray-500 hover:text-gray-700 dark:text-gray-300'}>
-                                    Newgrounds
-                                </a>
-                            </div>
-                        </div>
-                        <Link href={route('faq')} className={'text-gray-500 hover:text-gray-700 dark:text-gray-300'}>
-                            FAQ
-                        </Link>
-                        <Link href={route('contact')} className={'text-gray-500 hover:text-gray-700 dark:text-gray-300'}>
-                            Contact
-                        </Link>
-                    </div>
-                )}
             </nav>
         </div>
     );

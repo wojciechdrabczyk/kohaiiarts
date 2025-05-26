@@ -2,7 +2,6 @@ import '../css/app.css';
 
 import Footer from '@/components/footer';
 import NavBar from '@/components/nav-bar';
-import ThemeToggleFloating from '@/components/themetogglefloating';
 import { createInertiaApp } from '@inertiajs/react';
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
 import { createRoot } from 'react-dom/client';
@@ -17,15 +16,15 @@ createInertiaApp({
         const root = createRoot(el);
 
         root.render(
-            <>
+            <div className="flex flex-col min-h-screen">
                 <NavBar />
-                <ThemeToggleFloating />
-                <main className="flex-grow">
+                <main className="flex-1">
                     <App {...props} />
                 </main>
                 <Footer />
-            </>,
+            </div>,
         );
+
     },
     progress: {
         color: '#4B5563',
