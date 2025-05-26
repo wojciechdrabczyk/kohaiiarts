@@ -5,7 +5,7 @@ import { Link } from '@inertiajs/react';
 import { useEffect, useState } from 'react';
 import { BsInstagram } from 'react-icons/bs';
 import { FaDiscord } from 'react-icons/fa';
-import { FaSun, FaMoon, FaPatreon, FaThreads, FaXTwitter } from 'react-icons/fa6';
+import { FaSun, FaMoon, FaPatreon, FaXTwitter } from 'react-icons/fa6';
 import { SiThreads } from 'react-icons/si';
 
 export default function NavBar() {
@@ -110,6 +110,56 @@ export default function NavBar() {
                         </div>
                     </div>
                 </div>
+                {isOpen && (
+                    <div className="flex flex-col space-y-2 px-4 pb-4 md:hidden">
+                        <Link href={route('home')} className={'text-gray-500 hover:text-gray-700 dark:text-gray-300'}>
+                            <span className="inline-flex items-center gap-2">Illustrations</span>
+                        </Link>
+                        <a href="https://www.inprnt.com/gallery/kohaiiarts/" className={'text-gray-500 hover:text-gray-700 dark:text-gray-300'}>
+                            <span className="inline-flex items-center gap-2">Shop</span>
+                        </a>
+                        <div>
+                            <p className={'font-semibold text-gray-700 dark:text-gray-300'}>Support</p>
+                            <div className={'ml-4 flex flex-col space-y-1'}>
+                                <a href="https://www.patreon.com/KohaiiArts" className={'text-gray-500 hover:text-gray-700 dark:text-gray-300'}>
+                                    <span className="inline-flex items-center gap-2"><FaPatreon size={14} /> Patreon</span>
+                                </a>
+                                <a href="https://throne.com/kohaiiarts" className={'text-gray-500 hover:text-gray-700 dark:text-gray-300'}>
+                                    <span className="inline-flex items-center gap-2"><ThroneIcon className="w-4 h-4" /> Throne</span>
+                                </a>
+                            </div>
+                        </div>
+                        <Link href={route('services')} className={'text-gray-500 hover:text-gray-700 dark:text-gray-300'}>
+                            <span className="inline-flex items-center gap-2">Services</span>
+                        </Link>
+                        <div>
+                            <p className={'font-semibold text-gray-700 dark:text-gray-300'}>Socials</p>
+                            <div className={'ml-4 flex flex-col space-y-1'}>
+                                <a href="https://x.com/KohaiiArts" className={'text-gray-500 hover:text-gray-700 dark:text-gray-300 '}>
+                                    <span className="inline-flex items-center gap-2 px-1 py-2"><FaXTwitter size={14} /> Twitter / X</span>
+                                </a>
+                                <a href="https://www.instagram.com/kohaii_arts/" className={'text-gray-500 hover:text-gray-700 dark:text-gray-300'}>
+                                    <span className="inline-flex items-center gap-2 px-1 py-2"><BsInstagram size={14} /> Instagram</span>
+                                </a>
+                                <a href="https://kohaiiarts.newgrounds.com/art" className={'text-gray-500 hover:text-gray-700 dark:text-gray-300'}>
+                                    <span className="inline-flex items-center gap-2 px-1 py-2"><NewgroundsIcon className="w-4 h-4" /> Newgrounds</span>
+                                </a>
+                                <a href="https://www.threads.net/@kohaii_arts" className={'text-gray-500 hover:text-gray-700 dark:text-gray-300'}>
+                                    <span className="inline-flex items-center gap-2 px-1 py-2"><SiThreads size={14} /> Threads</span>
+                                </a>
+                                <a href="#" className={'text-gray-500 hover:text-gray-700 dark:text-gray-300'}>
+                                    <span className="inline-flex items-center gap-2 px-1 py-2"><FaDiscord size={14} /> Discord</span>
+                                </a>
+                            </div>
+                        </div>
+                        <Link href={route('faq')} className={'text-gray-500 hover:text-gray-700 dark:text-gray-300'}>
+                            <span className="inline-flex items-center gap-2">FAQ</span>
+                        </Link>
+                        <Link href={route('contact')} className={'text-gray-500 hover:text-gray-700 dark:text-gray-300'}>
+                            <span className="inline-flex items-center gap-2">Contact</span>
+                        </Link>
+                    </div>
+                )}
             </nav>
         </div>
     );
