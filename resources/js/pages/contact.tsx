@@ -7,6 +7,7 @@ import { FormEvent, useState } from 'react';
 import { BsInstagram } from 'react-icons/bs';
 import { FaDiscord } from 'react-icons/fa';
 import { FaPatreon, FaThreads, FaXTwitter } from 'react-icons/fa6';
+import DefaultLayout from '@/layouts/default-layout';
 
 type Status = 'success' | 'error' | null;
 
@@ -122,3 +123,5 @@ export default function Contact() {
         </div>
     );
 }
+Contact.layout = (page: React.ReactNode) => <DefaultLayout>{page}</DefaultLayout>;
+

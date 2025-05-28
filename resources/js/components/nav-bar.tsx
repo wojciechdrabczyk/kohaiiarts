@@ -1,17 +1,18 @@
 import NewgroundsIcon from '@/assets/icons/NewgroundsIcon';
 import ThroneIcon from '@/assets/icons/ThroneIcon';
+import DefaultLayout from '@/layouts/default-layout';
 import { Popover, PopoverButton, PopoverPanel } from '@headlessui/react';
-import { Link } from '@inertiajs/react';
+import { Link, usePage } from '@inertiajs/react';
 import { useEffect, useState } from 'react';
 import { BsInstagram } from 'react-icons/bs';
 import { FaDiscord } from 'react-icons/fa';
-import { FaSun, FaMoon, FaPatreon, FaXTwitter } from 'react-icons/fa6';
+import { FaMoon, FaPatreon, FaSun, FaXTwitter } from 'react-icons/fa6';
 import { SiThreads } from 'react-icons/si';
 
 export default function NavBar() {
+    const { url } = usePage();
     const [isOpen, setIsOpen] = useState(false);
     const [theme, setTheme] = useState(() => localStorage.getItem('theme') || 'light');
-
     const toggleTheme = () => setTheme((prev) => (prev === 'dark' ? 'light' : 'dark'));
     const ThemeIcon = theme === 'dark' ? FaSun : FaMoon;
 
@@ -25,8 +26,7 @@ export default function NavBar() {
         localStorage.setItem('theme', theme);
     }, [theme]);
 
-    const popoverPanelStyles =
-        'absolute top-full mt-2 rounded-xl w-44 rounded-md border border-gray-200 bg-white dark:bg-gray-800 shadow-lg z-10';
+    const popoverPanelStyles = 'absolute top-full mt-2 rounded-xl w-44 rounded-md border border-gray-200 bg-white dark:bg-gray-800 shadow-lg z-10';
     const popoverLinkStyles =
         'flex items-center gap-2 rounded-xl w-full px-4 py-2 text-sm text-left text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700';
 
@@ -41,51 +41,88 @@ export default function NavBar() {
                             </Link>
                         </div>
                         <div className={'hidden items-center space-x-8 md:flex'}>
-                            <Link href={route('home')} className={'text-gray-500 hover:text-gray-700 dark:text-gray-300'}>
+                            <Link
+                                href={route('home')}
+                                className={`text-gray-500 hover:text-gray-700 dark:text-gray-300 ${url === '/' ? 'font-bold text-black underline dark:text-white' : ''}`}
+                            >
                                 Illustrations
                             </Link>
                             <a href="https://www.inprnt.com/gallery/kohaiiarts/" className={'text-gray-500 hover:text-gray-700 dark:text-gray-300'}>
                                 Shop
                             </a>
                             <Popover className="relative">
-                                <PopoverButton className="text-gray-500 hover:text-gray-700 dark:text-gray-300">Support</PopoverButton>
+                                <PopoverButton className="text-gray-500 hover:text-gray-700 focus:ring-0 focus:outline-none dark:text-gray-300">
+                                    Support
+                                </PopoverButton>
                                 <PopoverPanel className={popoverPanelStyles}>
                                     <a href="https://www.patreon.com/KohaiiArts" className={popoverLinkStyles}>
-                                        <span className="w-4 flex justify-center"><FaPatreon size={14} /></span> Patreon
+                                        <span className="flex w-4 justify-center">
+                                            <FaPatreon size={14} />
+                                        </span>{' '}
+                                        Patreon
                                     </a>
                                     <a href="https://throne.com/kohaiiarts" className={popoverLinkStyles}>
-                                        <span className="w-4 flex justify-center"><ThroneIcon className="h-4 w-4" /></span> Throne
+                                        <span className="flex w-4 justify-center">
+                                            <ThroneIcon className="h-4 w-4" />
+                                        </span>{' '}
+                                        Throne
                                     </a>
                                 </PopoverPanel>
                             </Popover>
-                            <Link href={route('services')} className={'text-gray-500 hover:text-gray-700 dark:text-gray-300'}>
+                            <Link
+                                href={route('services')}
+                                className={`text-gray-500 hover:text-gray-700 dark:text-gray-300 ${url === '/services' ? 'font-bold text-black underline dark:text-white' : ''}`}
+                            >
                                 Services
                             </Link>
                             <Popover className="relative">
-                                <PopoverButton className="text-gray-500 hover:text-gray-700 dark:text-gray-300">Socials</PopoverButton>
+                                <PopoverButton className="text-gray-500 hover:text-gray-700 focus:ring-0 focus:outline-none dark:text-gray-300">
+                                    Socials
+                                </PopoverButton>
                                 <PopoverPanel className={popoverPanelStyles}>
                                     <a href="https://x.com/KohaiiArts" className={popoverLinkStyles}>
-                                        <span className="w-4 flex justify-center"><FaXTwitter size={14} /></span> Twitter / X
+                                        <span className="flex w-4 justify-center">
+                                            <FaXTwitter size={14} />
+                                        </span>{' '}
+                                        Twitter / X
                                     </a>
                                     <a href="https://www.instagram.com/kohaii_arts/" className={popoverLinkStyles}>
-                                        <span className="w-4 flex justify-center"><BsInstagram size={14} /></span> Instagram
+                                        <span className="flex w-4 justify-center">
+                                            <BsInstagram size={14} />
+                                        </span>{' '}
+                                        Instagram
                                     </a>
                                     <a href="https://kohaiiarts.newgrounds.com/art" className={popoverLinkStyles}>
-                                        <span className="w-4 flex justify-center"><NewgroundsIcon className="w-4 h-4" /></span> Newgrounds
+                                        <span className="flex w-4 justify-center">
+                                            <NewgroundsIcon className="h-4 w-4" />
+                                        </span>{' '}
+                                        Newgrounds
                                     </a>
                                     <a href="https://www.threads.net/@kohaii_arts" className={popoverLinkStyles}>
-                                        <span className="w-4 flex justify-center"><SiThreads size={14} /></span> Threads
+                                        <span className="flex w-4 justify-center">
+                                            <SiThreads size={14} />
+                                        </span>{' '}
+                                        Threads
                                     </a>
                                     <a href="#" className={popoverLinkStyles}>
-                                        <span className="w-4 flex justify-center"><FaDiscord size={14} /></span> Discord
+                                        <span className="flex w-4 justify-center">
+                                            <FaDiscord size={14} />
+                                        </span>{' '}
+                                        Discord
                                     </a>
                                 </PopoverPanel>
                             </Popover>
 
-                            <Link href={route('faq')} className={'text-gray-500 hover:text-gray-700 dark:text-gray-300'}>
+                            <Link
+                                href={route('faq')}
+                                className={`text-gray-500 hover:text-gray-700 dark:text-gray-300 ${url === '/faq' ? 'font-bold text-black underline dark:text-white' : ''}`}
+                            >
                                 FAQ
                             </Link>
-                            <Link href={route('contact')} className={'text-gray-500 hover:text-gray-700 dark:text-gray-300'}>
+                            <Link
+                                href={route('contact')}
+                                className={`text-gray-500 hover:text-gray-700 dark:text-gray-300 ${url === '/contact' ? 'font-bold text-black underline dark:text-white' : ''}`}
+                            >
                                 Contact
                             </Link>
                             <div
@@ -121,11 +158,17 @@ export default function NavBar() {
                         <div>
                             <p className={'font-semibold text-gray-700 dark:text-gray-300'}>Support</p>
                             <div className={'ml-4 flex flex-col space-y-1'}>
-                                <a href="https://www.patreon.com/KohaiiArts" className={'text-gray-500 hover:text-gray-700 dark:text-gray-300'}>
-                                    <span className="inline-flex items-center gap-2"><FaPatreon size={14} /> Patreon</span>
+                                <a href="https://www.patreon.com/KohaiiArts" className={popoverLinkStyles}>
+                                    <span className="flex w-4 justify-center">
+                                        <FaPatreon size={14} />
+                                    </span>{' '}
+                                    Patreon
                                 </a>
-                                <a href="https://throne.com/kohaiiarts" className={'text-gray-500 hover:text-gray-700 dark:text-gray-300'}>
-                                    <span className="inline-flex items-center gap-2"><ThroneIcon className="w-4 h-4" /> Throne</span>
+                                <a href="https://throne.com/kohaiiarts" className={popoverLinkStyles}>
+                                    <span className="flex w-4 justify-center">
+                                        <ThroneIcon className="h-4 w-4" />
+                                    </span>{' '}
+                                    Throne
                                 </a>
                             </div>
                         </div>
@@ -135,20 +178,35 @@ export default function NavBar() {
                         <div>
                             <p className={'font-semibold text-gray-700 dark:text-gray-300'}>Socials</p>
                             <div className={'ml-4 flex flex-col space-y-1'}>
-                                <a href="https://x.com/KohaiiArts" className={'text-gray-500 hover:text-gray-700 dark:text-gray-300 '}>
-                                    <span className="inline-flex items-center gap-2 px-1 py-2"><FaXTwitter size={14} /> Twitter / X</span>
+                                <a href="https://x.com/KohaiiArts" className={popoverLinkStyles}>
+                                    <span className="flex w-4 justify-center">
+                                        <FaXTwitter size={14} />
+                                    </span>{' '}
+                                    Twitter / X
                                 </a>
-                                <a href="https://www.instagram.com/kohaii_arts/" className={'text-gray-500 hover:text-gray-700 dark:text-gray-300'}>
-                                    <span className="inline-flex items-center gap-2 px-1 py-2"><BsInstagram size={14} /> Instagram</span>
+                                <a href="https://www.instagram.com/kohaii_arts/" className={popoverLinkStyles}>
+                                    <span className="flex w-4 justify-center">
+                                        <BsInstagram size={14} />
+                                    </span>{' '}
+                                    Instagram
                                 </a>
-                                <a href="https://kohaiiarts.newgrounds.com/art" className={'text-gray-500 hover:text-gray-700 dark:text-gray-300'}>
-                                    <span className="inline-flex items-center gap-2 px-1 py-2"><NewgroundsIcon className="w-4 h-4" /> Newgrounds</span>
+                                <a href="https://kohaiiarts.newgrounds.com/art" className={popoverLinkStyles}>
+                                    <span className="flex w-4 justify-center">
+                                        <NewgroundsIcon className="h-4 w-4" />
+                                    </span>{' '}
+                                    Newgrounds
                                 </a>
-                                <a href="https://www.threads.net/@kohaii_arts" className={'text-gray-500 hover:text-gray-700 dark:text-gray-300'}>
-                                    <span className="inline-flex items-center gap-2 px-1 py-2"><SiThreads size={14} /> Threads</span>
+                                <a href="https://www.threads.net/@kohaii_arts" className={popoverLinkStyles}>
+                                    <span className="flex w-4 justify-center">
+                                        <SiThreads size={14} />
+                                    </span>{' '}
+                                    Threads
                                 </a>
-                                <a href="#" className={'text-gray-500 hover:text-gray-700 dark:text-gray-300'}>
-                                    <span className="inline-flex items-center gap-2 px-1 py-2"><FaDiscord size={14} /> Discord</span>
+                                <a href="#" className={popoverLinkStyles}>
+                                    <span className="flex w-4 justify-center">
+                                        <FaDiscord size={14} />
+                                    </span>{' '}
+                                    Discord
                                 </a>
                             </div>
                         </div>
@@ -164,3 +222,5 @@ export default function NavBar() {
         </div>
     );
 }
+
+NavBar.layout = (page: React.ReactNode) => <DefaultLayout>{page}</DefaultLayout>;

@@ -1,3 +1,5 @@
+import DefaultLayout from '@/layouts/default-layout';
+
 export default function Faq() {
     return (
         <div className="p-4">
@@ -6,3 +8,4 @@ export default function Faq() {
         </div>
     );
 }
+Faq.layout = (page: React.ReactNode) => <DefaultLayout>{page}</DefaultLayout>;

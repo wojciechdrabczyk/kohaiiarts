@@ -1,3 +1,5 @@
+import DefaultLayout from '@/layouts/default-layout';
+
 export default function Illustrations() {
     return (
         <div className="p-4">
@@ -6,3 +8,4 @@ export default function Illustrations() {
         </div>
         )
 }
+Illustrations.layout = (page: React.ReactNode) => <DefaultLayout>{page}</DefaultLayout>;
