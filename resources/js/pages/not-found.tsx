@@ -1,3 +1,5 @@
+import DefaultLayout from '@/layouts/default-layout';
+
 export default function NotFound() {
     return (
         <div>
@@ -23,3 +25,4 @@ export default function NotFound() {
         </div>
     );
 }
+NotFound.layout = (page: React.ReactNode) => <DefaultLayout>{page}</DefaultLayout>;

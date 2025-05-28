@@ -4,6 +4,7 @@ import { FaDiscord } from 'react-icons/fa';
 import NewgroundsIcon from '@/assets/icons/NewgroundsIcon';
 import ThroneIcon from '@/assets/icons/ThroneIcon';
 import InprntIcon from '@/assets/icons/InprntIcon';
+import DefaultLayout from '@/layouts/default-layout';
 
 export default function Footer() {
     const socialLinks = [
@@ -46,3 +47,4 @@ export default function Footer() {
     );
 }
 
+Footer.layout = (page: React.ReactNode) => <DefaultLayout>{page}</DefaultLayout>;
