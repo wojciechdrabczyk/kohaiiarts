@@ -1,6 +1,6 @@
-export default function NewgroundsIcon({ className = 'w-6 h-6' }) {
+export default function NewgroundsIcon({ size = 16 }) {
     return (
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" className={`${className} inline-block`} fill="currentColor">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" style={{ height: `${size}px`, width: `${size}px` }} fill="currentColor">
             <g transform="translate(5, 3) scale(1.05)">
                 <path
                     d="M18.3,22.3c0,4,0,8,0,12c0,0.9-0.2,1.2-1.2,1.2c-1-0.1-2-0.1-3,0c-1,0.1-1.2-0.3-1.2-1.2c0-6.2,0-12.4,0-18.6

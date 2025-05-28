@@ -37,10 +37,10 @@ export default function Contact() {
         { name: 'Threads', url: 'https://www.threads.com/@kohaii_arts', icon: <FaThreads size={32} /> },
         { name: 'Instagram', url: 'https://www.instagram.com/kohaii_arts/', icon: <BsInstagram size={32} className="text-pink-500" /> },
         { name: 'Discord', url: 'invitation link to the discord server?', icon: <FaDiscord size={32} className="text-indigo-500" /> },
-        { name: 'Newgrounds', url: 'https://kohaiiarts.newgrounds.com/art', icon: <NewgroundsIcon className="h-8 w-8 text-orange-500" /> },
+        { name: 'Newgrounds', url: 'https://kohaiiarts.newgrounds.com/art', icon: <NewgroundsIcon size={32} /> },
         { name: 'Patreon', url: 'https://www.patreon.com/KohaiiArts', icon: <FaPatreon size={32} className="text-[#f96854]" /> },
-        { name: 'Throne', url: 'https://throne.com/kohaiiarts', icon: <ThroneIcon className="h-8 w-8" /> },
-        { name: 'Inprnt', url: 'https://www.inprnt.com/gallery/kohaiiarts/', icon: <InprntIcon className="h-8 w-8" /> },
+        { name: 'Throne', url: 'https://throne.com/kohaiiarts', icon: <ThroneIcon size={32} /> },
+        { name: 'Inprnt', url: 'https://www.inprnt.com/gallery/kohaiiarts/', icon: <InprntIcon size={32} /> },
     ];
 
     return (
