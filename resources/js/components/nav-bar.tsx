@@ -32,19 +32,25 @@ export default function NavBar() {
         'flex items-center gap-2 rounded-xl w-full px-4 py-2 text-sm text-left text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700';
 
     return (
-        <div className="top-0 sticky z-1">
-            <nav className={'bg-white shadow-md dark:bg-black'}>
+        <div className="sticky top-0 z-1">
+                <nav className="bg-white shadow-md dark:bg-black" style={{ fontFamily: 'Montserrat, sans-serif' }}>
                 <div className={'mx-auto max-w-7xl px-4 sm:px-6 lg:px-8'}>
                     <div className={'flex h-16 items-center justify-between'}>
-                        <div className={'flex items-center'}>
-                            <Link href={route('home')} className={'text-xl font-black text-gray-800 dark:text-white'}>
-                                Kohaii Arts
-                            </Link>
-                        </div>
-                        <div className={'hidden items-center space-x-8 md:flex font-mono text-lg'}>
+                        <div className="flex flex-col leading-tight">
                             <Link
                                 href={route('home')}
-                                className={`text-gray-500 hover:text-gray-700 dark:text-gray-300 ${url === '/' ? 'font-bold text-black underline dark:text-white' : ''}`}
+                                className="text-2xl font-light text-gray-800 dark:text-white"
+                            >
+                                Kohaii Arts
+                            </Link>
+                            <span className="text-xs font-light tracking-wide text-gray-500 dark:text-gray-400">
+                                Illustrating the soul of stories
+                            </span>
+                        </div>
+                        <div className={'hidden items-center space-x-8 text-lg md:flex'}>
+                            <Link
+                                href={route('home')}
+                                className={`text-gray-500 hover:text-gray-700 dark:text-gray-300 ${url === '/' ? ' text-black underline dark:text-white' : ''}`}
                             >
                                 Illustrations
                             </Link>
@@ -72,7 +78,7 @@ export default function NavBar() {
                             </Popover>
                             <Link
                                 href={route('services')}
-                                className={`text-gray-500 hover:text-gray-700 dark:text-gray-300 ${url === '/services' ? 'font-bold text-black underline dark:text-white' : ''}`}
+                                className={`text-gray-500 hover:text-gray-700 dark:text-gray-300 ${url === '/services' ? ' text-black underline dark:text-white' : ''}`}
                             >
                                 Services
                             </Link>
@@ -116,13 +122,13 @@ export default function NavBar() {
 
                             <Link
                                 href={route('faq')}
-                                className={`text-gray-500 hover:text-gray-700 dark:text-gray-300 ${url === '/faq' ? 'font-bold text-black underline dark:text-white' : ''}`}
+                                className={`text-gray-500 hover:text-gray-700 dark:text-gray-300 ${url === '/faq' ? 'text-black underline dark:text-white' : ''}`}
                             >
                                 FAQ
                             </Link>
                             <Link
                                 href={route('contact')}
-                                className={`text-gray-500 hover:text-gray-700 dark:text-gray-300 ${url === '/contact' ? 'font-bold text-black underline dark:text-white' : ''}`}
+                                className={`text-gray-500 hover:text-gray-700 dark:text-gray-300 ${url === '/contact' ? ' text-black underline dark:text-white' : ''}`}
                             >
                                 Contact
                             </Link>
@@ -130,7 +136,7 @@ export default function NavBar() {
                                 className="hidden w-33 cursor-pointer items-center space-x-2 rounded-full border border-gray-300 px-3 py-1 transition hover:bg-gray-100 md:flex dark:border-gray-600 dark:hover:bg-gray-800"
                                 onClick={toggleTheme}
                             >
-                                <ThemeIcon className="text-gray-700 dark:text-gray-300 w-4 h-4" />
+                                <ThemeIcon className="h-4 w-4 text-gray-700 dark:text-gray-300" />
                                 <span className="text-sm text-gray-700 dark:text-gray-300">{theme === 'dark' ? 'Light Mode' : 'Dark Mode'}</span>
                             </div>
                         </div>
