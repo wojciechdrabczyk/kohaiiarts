@@ -61,7 +61,7 @@ export default function Contact() {
                 <title>Contact</title>
                 <meta name="description" content="Contact me" />
             </Head>
-            <h1 className="mb-6 text-center text-2xl font-light text-gray-800 sm:text-3xl dark:text-gray-200">You can find me on</h1>
+            <h1 className="mb-6 flex justify-center text-2xl tracking-tight  sm:text-3xl text-gray-800 dark:text-gray-200">You can find me on</h1>
 
             <div className="mb-6 flex flex-wrap justify-center gap-4">
                 {socialLinks.map(({ name, url, icon }) => (
