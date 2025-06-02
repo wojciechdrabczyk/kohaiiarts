@@ -67,7 +67,7 @@ export default function Illustrations() {
                 <meta name="description" content="Here are my latest drawings" />
             </Head>
 
-            <div className="grid grid-cols-1 gap-2 sm:grid-cols-3">
+            <div className="grid grid-cols-1 gap-2 sm:grid-cols-3 pb-5">
                 {images.map((src, index) => (
                     <div key={index} className="group h-96 w-full cursor-pointer overflow-hidden rounded-md" onClick={() => setCurrentIndex(index)}>
                         <img
