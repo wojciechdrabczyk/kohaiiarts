@@ -7,22 +7,33 @@ use Inertia\Inertia;
 
 class StaticPageController extends Controller
 {
-    public function welcome() {
+    public function illustrations()
+    {
         return Inertia::render('illustrations');
     }
-    public function services() {
+
+    public function support()
+    {
+        return Inertia::render('support');
+    }
+
+    public function services()
+    {
         return Inertia::render('services');
     }
-    public function faq() {
+
+    public function faq()
+    {
         return Inertia::render('faq');
     }
-    public function contact() {
+
+    public function contact()
+    {
         return Inertia::render('contact');
     }
-    public function illustrations() {
-        return Inertia::render('illustrations');
-    }
-    public function notfound() {
+
+    public function notfound()
+    {
         return Inertia::render('not-found');
     }
 }

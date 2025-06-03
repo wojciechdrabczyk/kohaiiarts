@@ -1,5 +1,6 @@
 import DefaultLayout from '@/layouts/default-layout';
 import { Head } from '@inertiajs/react';
+import React from 'react';
 
 export default function Faq() {
     return (
@@ -13,8 +14,8 @@ export default function Faq() {
                     <h1 className="mb-4 flex justify-center tracking-tight sm:text-3xl text-gray-800 dark:text-gray-200">
                         Frequently asked questions
                     </h1>
-                    <div className="mb-8 px-2 text-center text-sm font-light text-gray-600 dark:text-gray-300">
-                        <p className="mx-auto max-w-xl leading-relaxed">
+                    <div className="mb-8 px-2 text-center text-sm  text-gray-500 dark:text-gray-300">
+                        <p className="text-[14px] mx-auto max-w-2xl leading-relaxed">
                             I’ve put together some answers to questions I often get about my art and commissions.
                             If you still have a question, don’t hesitate to reach out—I'm always happy to chat!
                         </p>

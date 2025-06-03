@@ -4,7 +4,7 @@ import ThroneIcon from '@/assets/icons/ThroneIcon';
 import DefaultLayout from '@/layouts/default-layout';
 import type { PageProps } from '@inertiajs/inertia';
 import { Head, router, usePage } from '@inertiajs/react';
-import { FormEvent, useState } from 'react';
+import React, { FormEvent, useState } from 'react';
 import { BsInstagram } from 'react-icons/bs';
 import { FaDiscord } from 'react-icons/fa';
 import { FaPatreon, FaThreads, FaXTwitter } from 'react-icons/fa6';
@@ -56,12 +56,13 @@ export default function Contact() {
     ];
 
     return (
-        <div className="mt-6 p-4 sm:px-6 md:px-10">
+        <div className="mt-6 p-4 sm:px-6 md:px-10" style={{ fontFamily: 'Montserrat, sans-serif' }}>
             <Head>
                 <title>Contact</title>
                 <meta name="description" content="Contact me" />
             </Head>
-            <h1 className="mb-6 flex justify-center text-2xl tracking-tight  sm:text-3xl text-gray-800 dark:text-gray-200">You can find me on</h1>
+
+            <h1 className="mb-4 flex justify-center tracking-tight text-gray-800 sm:text-3xl dark:text-gray-200">You can find me on</h1>
 
             <div className="mb-6 flex flex-wrap justify-center gap-4">
                 {socialLinks.map(({ name, url, icon }) => (
@@ -82,8 +83,8 @@ export default function Contact() {
                 ))}
             </div>
 
-            <div className="mb-8 px-2 text-center text-sm font-light text-gray-600 dark:text-gray-300">
-                <p className="mx-auto max-w-2xl">
+            <div className="mb-8 px-2 text-center text-sm">
+                <p className="text-[14px] mx-auto max-w-2xl leading-relaxed text-gray-500 dark:text-gray-400">
                     Thank you so much for checking out my art! You can support me through INPRNT, Throne, or Patreon, or just say hi on social media.
                     For commissions or collaborations, feel free to DM me on Instagram, X, Threads, or connect on Discord — I’m happy to chat! You can
                     also just send me a message directly below.
@@ -114,7 +115,7 @@ export default function Contact() {
                             className={`w-full cursor-text rounded border px-4 py-3 text-sm ${
                                 errors[id]
                                     ? 'border-red-600'
-                                    : 'border-gray-300 bg-white text-gray-900 dark:border-gray-600 dark:bg-gray-900 dark:text-gray-100'
+                                    : 'border-gray-300 bg-white text-gray-900 dark:border-gray-600 dark:bg-neutral-800 dark:text-gray-100'
                             }`}
                         />
                         {errors[id] && <p className="text-sm text-red-600 dark:text-red-400">{errors[id]}</p>}
@@ -138,7 +139,7 @@ export default function Contact() {
                         className={`w-full cursor-text rounded border px-4 py-3 text-sm ${
                             errors.message
                                 ? 'border-red-600'
-                                : 'border-gray-300 bg-white text-gray-900 dark:border-gray-600 dark:bg-gray-900 dark:text-gray-100'
+                                : 'border-gray-300 bg-white text-gray-900 dark:border-gray-600 dark:bg-neutral-800 dark:text-gray-100'
                         }`}
                     />
                     {errors.message && <p className="text-sm text-red-600 dark:text-red-400">{errors.message}</p>}

@@ -21,7 +21,7 @@ export default function Footer() {
     ];
 
     return (
-        <footer className="align-center bottom-0 flex w-full flex-col items-center border-t border-gray-200 bg-white px-2 py-4 dark:border-gray-700 dark:bg-gray-900" style={{ fontFamily: 'Montserrat, sans-serif' }}>
+        <footer className="align-center bottom-0 flex w-full flex-col items-center border-t border-gray-200 bg-white px-2 py-4 dark:border-gray-700 dark:bg-black" style={{ fontFamily: 'Montserrat, sans-serif' }}>
             <div className="mx-auto flex max-w-5/6 flex-col items-center justify-center gap-12 sm:flex-row sm:items-center sm:justify-between">
                 <p className="text-sm text-gray-500 sm:self-center dark:text-gray-400">
                     © {new Date().getFullYear()} Kohaii Arts — All rights reserved.
