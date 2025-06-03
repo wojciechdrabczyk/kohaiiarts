@@ -27,58 +27,48 @@ export default function NavBar() {
         localStorage.setItem('theme', theme);
     }, [theme]);
 
-    const popoverPanelStyles = 'absolute top-full mt-2 rounded-xl w-44 rounded-md border border-gray-200 bg-white dark:bg-gray-800 shadow-lg';
+    const popoverPanelStyles = 'absolute top-full mt-2 rounded-xl w-44 rounded-md border border-gray-200 bg-white dark:bg-neutral-900 shadow-lg';
     const popoverLinkStyles =
         'flex items-center gap-2 rounded-xl w-full px-4 py-2 text-sm text-left text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700';
 
     return (
         <div className="sticky top-0 z-1">
-                <nav className="bg-white shadow-md dark:bg-black" style={{ fontFamily: 'Montserrat, sans-serif' }}>
-                <div className={'mx-auto max-w-7xl px-4 sm:px-6 lg:px-8'}>
+            <nav className="bg-white shadow-md dark:bg-black" style={{ fontFamily: 'Montserrat, sans-serif' }}>
+                <div className={'mx-auto max-w-7xl px-4 sm:px-1 lg:px-1'}>
                     <div className={'flex h-16 items-center justify-between'}>
-                        <div className="flex flex-col leading-tight">
+                        <Link href={route('home')} className="flex items-center gap-2 overflow-hidden">
+                            <img
+                                src="https://kohaiiarts.carrd.co/assets/images/image01.png?v=a15c23c2"
+                                alt="Kohaii Arts Logo"
+                                className="hidden h-14 w-auto flex-shrink-0 sm:block"
+                            />
+                            <div className="flex flex-col overflow-hidden leading-tight">
+                                <span className="truncate text-2xl font-light text-gray-800 lg:block dark:text-white">Kohaii Arts</span>
+                                <span className="hidden truncate text-xs font-light tracking-wide text-gray-500 lg:block dark:text-gray-400">
+                                    Illustrating the soul of stories
+                                </span>
+                            </div>
+                        </Link>
+
+                        <div className={'hidden items-center space-x-5 text-lg sm:flex'}>
                             <Link
                                 href={route('home')}
-                                className="text-2xl font-light text-gray-800 dark:text-white"
-                            >
-                                Kohaii Arts
-                            </Link>
-                            <span className="text-xs font-light tracking-wide text-gray-500 dark:text-gray-400">
-                                Illustrating the soul of stories
-                            </span>
-                        </div>
-                        <div className={'hidden items-center space-x-8 text-lg md:flex'}>
-                            <Link
-                                href={route('home')}
-                                className={`text-gray-500 hover:text-gray-700 dark:text-gray-300 ${url === '/' ? ' text-black underline dark:text-white' : ''}`}
+                                className={`text-gray-500 hover:text-gray-700 dark:text-gray-300 ${url === '/' ? 'text-black underline dark:text-white' : ''}`}
                             >
                                 Illustrations
                             </Link>
                             <a href="https://www.inprnt.com/gallery/kohaiiarts/" className={'text-gray-500 hover:text-gray-700 dark:text-gray-300'}>
                                 Shop
                             </a>
-                            <Popover className="relative">
-                                <PopoverButton className="text-gray-500 hover:text-gray-700 focus:ring-0 focus:outline-none dark:text-gray-300">
-                                    Support
-                                </PopoverButton>
-                                <PopoverPanel className={popoverPanelStyles}>
-                                    <a href="https://www.patreon.com/KohaiiArts" className={popoverLinkStyles}>
-                                        <span className="flex w-4 justify-center">
-                                            <FaPatreon size={size} />
-                                        </span>{' '}
-                                        Patreon
-                                    </a>
-                                    <a href="https://throne.com/kohaiiarts" className={popoverLinkStyles}>
-                                        <span className="flex w-4 justify-center">
-                                            <ThroneIcon size={size} />
-                                        </span>{' '}
-                                        Throne
-                                    </a>
-                                </PopoverPanel>
-                            </Popover>
+                            <Link
+                                href={route('support')}
+                                className={`text-gray-500 hover:text-gray-700 dark:text-gray-300 ${url === '/support' ? 'text-black underline dark:text-white' : ''}`}
+                            >
+                                Support
+                            </Link>
                             <Link
                                 href={route('services')}
-                                className={`text-gray-500 hover:text-gray-700 dark:text-gray-300 ${url === '/services' ? ' text-black underline dark:text-white' : ''}`}
+                                className={`text-gray-500 hover:text-gray-700 dark:text-gray-300 ${url === '/services' ? 'text-black underline dark:text-white' : ''}`}
                             >
                                 Services
                             </Link>
@@ -128,12 +118,12 @@ export default function NavBar() {
                             </Link>
                             <Link
                                 href={route('contact')}
-                                className={`text-gray-500 hover:text-gray-700 dark:text-gray-300 ${url === '/contact' ? ' text-black underline dark:text-white' : ''}`}
+                                className={`text-gray-500 hover:text-gray-700 dark:text-gray-300 ${url === '/contact' ? 'text-black underline dark:text-white' : ''}`}
                             >
                                 Contact
                             </Link>
                             <div
-                                className="hidden w-33 cursor-pointer items-center space-x-2 rounded-full border border-gray-300 px-3 py-1 transition hover:bg-gray-100 md:flex dark:border-gray-600 dark:hover:bg-gray-800"
+                                className="hidden w-33 cursor-pointer items-center space-x-2 rounded-full border border-gray-300 px-3 py-1 transition hover:bg-gray-100 md:flex dark:border-gray-600 dark:hover:bg-neutral-800"
                                 onClick={toggleTheme}
                             >
                                 <ThemeIcon className="h-4 w-4 text-gray-700 dark:text-gray-300" />

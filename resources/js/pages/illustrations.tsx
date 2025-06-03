@@ -1,6 +1,6 @@
 import DefaultLayout from '@/layouts/default-layout';
 import { Dialog, DialogPanel, Transition, TransitionChild } from '@headlessui/react';
-import { Fragment, useEffect, useState } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa6';
 import { useSwipeable } from 'react-swipeable';
 import { Head } from '@inertiajs/react';

@@ -1,5 +1,6 @@
 import DefaultLayout from '@/layouts/default-layout';
 import { Head } from '@inertiajs/react';
+import React from 'react';
 
 export default function Services() {
     return (
