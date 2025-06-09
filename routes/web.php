@@ -7,8 +7,9 @@ use Inertia\Inertia;
 use App\Http\Controllers\StaticPageController;
 
 Route::get('/', [StaticPageController::class, 'illustrations'])->name('home');
+Route::get('/store', [StaticPageController::class, 'store'])->name('store');
 Route::get('/support', [StaticPageController::class, 'support'])->name('support');
-Route::get('/services', [StaticPageController::class, 'services'])->name('services');
+Route::get('/commissions', [StaticPageController::class, 'commissions'])->name('commissions');
 Route::get('/faq', [StaticPageController::class, 'faq'])->name('faq');
 Route::get('/contact', [StaticPageController::class, 'contact'])->name('contact');
 Route::get('/not-found', [StaticPageController::class, 'notfound'])->name('notfound');
