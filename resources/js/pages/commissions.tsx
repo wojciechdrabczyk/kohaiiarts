@@ -1,14 +1,12 @@
 import DefaultLayout from '@/layouts/default-layout';
 import { Head } from '@inertiajs/react';
 import React from 'react';
-import { FaPatreon } from 'react-icons/fa6';
-import ThroneIcon from '@/assets/icons/ThroneIcon';
 
-export default function Services() {
+export default function Commissions() {
     return (
         <div>
             <Head>
-                <title>Support</title>
+                <title>Commissions</title>
                 <meta name="support" content="Thank you for supporting me!" />
             </Head>
             <section className="" style={{ fontFamily: 'Montserrat, sans-serif' }}>
@@ -76,4 +74,4 @@ export default function Services() {
     );
 }
 
-Services.layout = (page: React.ReactNode) => <DefaultLayout>{page}</DefaultLayout>;
+Commissions.layout = (page: React.ReactNode) => <DefaultLayout>{page}</DefaultLayout>;
