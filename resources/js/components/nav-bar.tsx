@@ -57,9 +57,11 @@ export default function NavBar() {
                             >
                                 Illustrations
                             </Link>
-                            <a href="https://www.inprnt.com/gallery/kohaiiarts/" className={'text-gray-500 hover:text-gray-700 dark:text-gray-300'}>
-                                Shop
-                            </a>
+
+                            <Link href={route('store')} className={'text-gray-500 hover:text-gray-700 dark:text-gray-300'}>
+                                <span className="inline-flex items-center gap-2">Store</span>
+                            </Link>
+
                             <Link
                                 href={route('support')}
                                 className={`text-gray-500 hover:text-gray-700 dark:text-gray-300 ${url === '/support' ? 'text-black underline dark:text-white' : ''}`}
@@ -67,10 +69,10 @@ export default function NavBar() {
                                 Support
                             </Link>
                             <Link
-                                href={route('services')}
-                                className={`text-gray-500 hover:text-gray-700 dark:text-gray-300 ${url === '/services' ? 'text-black underline dark:text-white' : ''}`}
+                                href={route('commissions')}
+                                className={`text-gray-500 hover:text-gray-700 dark:text-gray-300 ${url === '/commissions' ? 'text-black underline dark:text-white' : ''}`}
                             >
-                                Services
+                                Commissions
                             </Link>
                             <Popover className="relative">
                                 <PopoverButton className="text-gray-500 hover:text-gray-700 focus:ring-0 focus:outline-none dark:text-gray-300">
@@ -149,9 +151,10 @@ export default function NavBar() {
                         <Link href={route('home')} className={'text-gray-500 hover:text-gray-700 dark:text-gray-300'}>
                             <span className="inline-flex items-center gap-2">Illustrations</span>
                         </Link>
-                        <a href="https://www.inprnt.com/gallery/kohaiiarts/" className={'text-gray-500 hover:text-gray-700 dark:text-gray-300'}>
-                            <span className="inline-flex items-center gap-2">Shop</span>
-                        </a>
+
+                        <Link href={route('store')} className={'text-gray-500 hover:text-gray-700 dark:text-gray-300'}>
+                            <span className="inline-flex items-center gap-2">Store</span>
+                        </Link>
                         <div>
                             <p className={'font-semibold text-gray-700 dark:text-gray-300'}>Support</p>
                             <div className={'ml-4 flex flex-col space-y-1'}>
@@ -169,8 +172,8 @@ export default function NavBar() {
                                 </a>
                             </div>
                         </div>
-                        <Link href={route('services')} className={'text-gray-500 hover:text-gray-700 dark:text-gray-300'}>
-                            <span className="inline-flex items-center gap-2">Services</span>
+                        <Link href={route('commissions')} className={'text-gray-500 hover:text-gray-700 dark:text-gray-300'}>
+                            <span className="inline-flex items-center gap-2">Commissions</span>
                         </Link>
                         <div>
                             <p className={'font-semibold text-gray-700 dark:text-gray-300'}>Socials</p>
