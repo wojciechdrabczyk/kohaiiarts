@@ -46,21 +46,41 @@ export default function Support() {
                             </div>
                         </div>
 
-                        <div className="mx-auto flex max-w-xl flex-col items-center gap-4 sm:flex-row sm:justify-center">
+                        <div className="mx-auto grid max-w-3xl grid-cols-1 gap-6 sm:grid-cols-2">
                             <a
                                 href="https://www.patreon.com/KohaiiArts"
                                 target="_blank"
-                                className="flex w-full items-center justify-center gap-3 rounded-lg border border-gray-200 bg-white px-6 py-4 text-base font-medium text-gray-800 shadow-md transition hover:bg-gray-50 dark:border-gray-700 dark:bg-neutral-800 dark:text-white dark:hover:bg-neutral-700 sm:w-auto"
+                                className="group block rounded-lg border border-gray-200 bg-white p-6 shadow-md transition hover:shadow-xl dark:border-gray-700 dark:bg-neutral-800 dark:hover:bg-neutral-700"
                             >
-                                <FaPatreon size={24} /> Support me on Patreon
+                                <div className="flex items-center gap-4">
+                                    <FaPatreon
+                                        className="min-w-[40px] min-h-[40px] flex-shrink-0 text-gray-800 transition-transform group-hover:scale-105 dark:text-white  "
+                                    />
+                                    <div>
+                                        <h3 className="text-lg font-semibold text-gray-800 dark:text-white">Patreon</h3>
+                                        <p className="mt-1 text-sm text-gray-600 dark:text-gray-400">
+                                            Get access to sketches, early previews, and personal updates.
+                                        </p>
+                                    </div>
+                                </div>
                             </a>
 
                             <a
                                 href="https://throne.com/kohaiiarts"
                                 target="_blank"
-                                className="flex w-full items-center justify-center gap-3 rounded-lg border border-gray-200 bg-white px-6 py-4 text-base font-medium text-gray-800 shadow-md transition hover:bg-gray-50 dark:border-gray-700 dark:bg-neutral-800 dark:text-white dark:hover:bg-neutral-700 sm:w-auto"
+                                className="group block rounded-lg border border-gray-200 bg-white p-6 shadow-md transition hover:shadow-xl dark:border-gray-700 dark:bg-neutral-800 dark:hover:bg-neutral-700"
                             >
-                                <ThroneIcon size={24} /> Send a gift on Throne
+                                <div className="flex items-center gap-4">
+                                    <ThroneIcon
+                                        className="min-w-[40px] min-h-[40px] flex-shrink-0 text-gray-800 transition-transform group-hover:scale-105 dark:text-white"
+                                    />
+                                    <div>
+                                        <h3 className="text-lg font-semibold text-gray-800 dark:text-white">Throne</h3>
+                                        <p className="mt-1 text-sm text-gray-600 dark:text-gray-400">
+                                            Send me a thoughtful gift directly — art tools, snacks, and more!
+                                        </p>
+                                    </div>
+                                </div>
                             </a>
                         </div>
                     </div>
