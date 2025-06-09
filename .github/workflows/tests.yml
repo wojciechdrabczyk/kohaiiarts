@@ -18,6 +18,11 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Create SQLite database file
+        run: |
+          mkdir -p database
+          touch database/database.sqlite
+
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
