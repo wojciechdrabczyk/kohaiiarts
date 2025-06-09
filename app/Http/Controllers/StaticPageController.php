@@ -12,14 +12,19 @@ class StaticPageController extends Controller
         return Inertia::render('illustrations');
     }
 
+    public function store()
+    {
+        return Inertia::render('store');
+    }
+
     public function support()
     {
         return Inertia::render('support');
     }
 
-    public function services()
+    public function commissions()
     {
-        return Inertia::render('services');
+        return Inertia::render('commissions');
     }
 
     public function faq()
