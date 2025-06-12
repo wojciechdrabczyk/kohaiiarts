@@ -42,7 +42,7 @@ class ContactController extends Controller
         //Get public URL of the files
 
         //Embed image URL in the mail
-        Mail::to(config('mail.from.address'))->send(new ContactMessage([...$data, 'files' => $urls]));
+        Mail::to(env('KOHAIIS_EMAIL_ADDRESS'))->send(new ContactMessage([...$data, 'files' => $urls]));
 
         return back()->with('success', 'Message sent!');
     }
