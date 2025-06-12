@@ -156,7 +156,7 @@ export default function Contact() {
                         type="file"
                         accept="image/*"
                         multiple
-                        className={`block w-full text-sm text-gray-700 dark:text-gray-200
+                        className={`block w-full text-sm text-gray-500 dark:text-gray-200
             file:mr-4 file:rounded file:border-0
             file:bg-black file:py-2 file:px-4
             file:text-sm file:font-semibold
