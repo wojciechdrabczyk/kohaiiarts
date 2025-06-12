@@ -39,6 +39,7 @@ jobs:
           composer install --no-interaction --prefer-dist --optimize-autoloader --no-dev
           php artisan migrate --force
           php artisan optimize
+          npm ci
           npm run build
           sudo chown -R www-data:www-data /srv/kohaiis.art
         EOF
