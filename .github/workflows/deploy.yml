@@ -38,9 +38,14 @@ jobs:
     - name: Run post-deploy commands
       run: |
         ssh -o StrictHostKeyChecking=no -p 22 root@kohaiis.art << 'EOF'
+          export COMPOSER_ALLOW_SUPERUSER=1
           sudo chown -R www-data:www-data /srv/kohaiis.art
           cd /srv/kohaiis.art
+          # Ensure the database directory exists
+          mkdir -p database
+          # Create the SQLite database file if it doesn't exist
+          [ -f database/database.sqlite ] || touch database/database.sqlite
+          composer install --no-interaction --prefer-dist --optimize-autoloader --no-dev
           php artisan migrate --force
           php artisan optimize
         EOF
-
