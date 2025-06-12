@@ -6,14 +6,17 @@ import { useSwipeable } from 'react-swipeable';
 import { Head } from '@inertiajs/react';
 
 const images = [
-    'https://kohaiiarts.carrd.co/assets/images/gallery01/a9f42484_original.jpg?v=a15c23c2',
-    'https://kohaiiarts.carrd.co/assets/images/gallery01/ea1e073d_original.jpg?v=a15c23c2',
-    'https://kohaiiarts.carrd.co/assets/images/gallery01/c43fd895_original.jpg?v=a15c23c2',
-    'https://kohaiiarts.carrd.co/assets/images/gallery01/191e8b82_original.jpg?v=a15c23c2',
-    'https://kohaiiarts.carrd.co/assets/images/gallery01/802992c9_original.jpg?v=a15c23c2',
-    'https://kohaiiarts.carrd.co/assets/images/gallery01/72cf2573_original.jpg?v=a15c23c2',
-    'https://kohaiiarts.carrd.co/assets/images/gallery01/987a19f9_original.jpg?v=a15c23c2',
-    'https://kohaiiarts.carrd.co/assets/images/gallery01/c31b2e6b_original.jpg?v=a15c23c2',
+    '/img-static/grid1.jpg',
+    '/img-static/grid2.jpg',
+    '/img-static/grid3.jpg',
+    '/img-static/grid4.jpg',
+    '/img-static/grid5.jpg',
+    '/img-static/grid6.jpg',
+    '/img-static/grid7.jpg',
+    '/img-static/grid8.jpg',
+    '/img-static/grid9.jpg',
+    '/img-static/grid10.png',
+    '/img-static/grid11.webp',
 ];
 
 export default function Illustrations() {
