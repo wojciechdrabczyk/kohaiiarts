@@ -112,11 +112,10 @@ export default function Contact() {
                             name={id}
                             type={type ?? 'text'}
                             required={required}
-                            className={`w-full cursor-text rounded border px-4 py-3 text-sm ${
-                                errors[id]
-                                    ? 'border-red-600'
-                                    : 'border-gray-300 bg-white text-gray-900 dark:border-gray-600 dark:bg-neutral-800 dark:text-gray-100'
-                            }`}
+                            className={`w-full cursor-text rounded border px-4 py-3 text-sm ${errors[id]
+                                ? 'border-red-600'
+                                : 'border-gray-300 bg-white text-gray-900 dark:border-gray-600 dark:bg-neutral-800 dark:text-gray-100'
+                                }`}
                         />
                         {errors[id] && <p className="text-sm text-red-600 dark:text-red-400">{errors[id]}</p>}
                     </div>
@@ -136,13 +135,35 @@ export default function Contact() {
                         required
                         rows={5}
                         placeholder="Type something..."
-                        className={`w-full cursor-text rounded border px-4 py-3 text-sm ${
-                            errors.message
-                                ? 'border-red-600'
-                                : 'border-gray-300 bg-white text-gray-900 dark:border-gray-600 dark:bg-neutral-800 dark:text-gray-100'
-                        }`}
+                        className={`w-full cursor-text rounded border px-4 py-3 text-sm ${errors.message
+                            ? 'border-red-600'
+                            : 'border-gray-300 bg-white text-gray-900 dark:border-gray-600 dark:bg-neutral-800 dark:text-gray-100'
+                            }`}
                     />
                     {errors.message && <p className="text-sm text-red-600 dark:text-red-400">{errors.message}</p>}
+                </div>
+                <div className="space-y-1">
+                    <label
+                        htmlFor="images"
+                        className="flex cursor-default items-baseline gap-1 text-sm font-medium text-gray-500 dark:text-gray-300"
+                    >
+                        <span>Attach Images</span>
+                        <span className="text-xs text-gray-400">(optional)</span>
+                    </label>
+                    <input
+                        id="images"
+                        name="files[]"
+                        type="file"
+                        accept="image/*"
+                        multiple
+                        className={`block w-full text-sm text-gray-700 dark:text-gray-200
+            file:mr-4 file:rounded file:border-0
+            file:bg-black file:py-2 file:px-4
+            file:text-sm file:font-semibold
+            hover:file:bg-gray-800 dark:file:bg-white dark:file:text-black dark:hover:file:bg-gray-300
+        `}
+                    />
+                    {errors.images && <p className="text-sm text-red-600 dark:text-red-400">{errors.images}</p>}
                 </div>
 
                 <button
