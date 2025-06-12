@@ -6,8 +6,9 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
-use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Mail\Mailables\Address;
+use Illuminate\Mail\Mailables\Envelope;
 
 class ContactMessage extends Mailable
 {
@@ -28,10 +29,11 @@ class ContactMessage extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Contact Message',
+            from: new Address('commissions@kohaiis.art', 'Kohaiis Art Commissions'),
+            to: [new Address('kohaiiarts@gmail.com', 'Kohaiis Art Commissions')],
+            subject: 'Commission Request from ' . $this->data['name'],
         );
     }
-
     /**
      * Get the message content definition.
      */
