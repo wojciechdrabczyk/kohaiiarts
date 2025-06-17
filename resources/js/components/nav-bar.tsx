@@ -34,11 +34,11 @@ export default function NavBar() {
     return (
         <div className="sticky top-0 z-1">
             <nav className="bg-white shadow-md dark:bg-black" style={{ fontFamily: 'Montserrat, sans-serif' }}>
-                <div className={'mx-auto max-w-7xl px-4 sm:px-1 lg:px-1'}>
+                <div className={'mx-auto max-w-7xl px-4  sm:visible lg:visible'}>
                     <div className={'flex h-16 items-center justify-between'}>
                         <Link href={route('home')} className="flex items-center gap-2 overflow-hidden">
                             <img
-                                src="https://kohaiiarts.carrd.co/assets/images/image01.png?v=a15c23c2"
+                                src="/img-static/kohaii-arts-logo.png"
                                 alt="Kohaii Arts Logo"
                                 className="hidden h-14 w-auto flex-shrink-0 sm:block"
                             />
