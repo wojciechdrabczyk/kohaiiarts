@@ -91,7 +91,7 @@ export default function Contact() {
                 </p>
             </div>
 
-            <form onSubmit={handleSubmit} className="mx-auto max-w-md space-y-6 px-2">
+            <form onSubmit={handleSubmit} id="contactForm" className="mx-auto max-w-md space-y-6 px-2">
                 {[
                     { id: 'name', label: 'Name', required: true },
                     {
