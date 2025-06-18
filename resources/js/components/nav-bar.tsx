@@ -82,31 +82,32 @@ export default function NavBar() {
                                     Socials
                                 </PopoverButton>
                                 <PopoverPanel className={popoverPanelStyles}>
-                                    <a href="https://x.com/KohaiiArts" className={popoverLinkStyles}>
-                                        <span className="flex w-4 justify-center">
+                                    <a href="https://x.com/KohaiiArts" className={popoverLinkStyles} target="_blank">
+                                        <span className="flex w-4 justify-center"
+                                        >
                                             <FaXTwitter size={size} />
                                         </span>{' '}
                                         Twitter / X
                                     </a>
-                                    <a href="https://www.instagram.com/kohaii_arts/" className={popoverLinkStyles}>
+                                    <a href="https://www.instagram.com/kohaii_arts/" className={popoverLinkStyles} target="_blank">
                                         <span className="flex w-4 justify-center">
                                             <BsInstagram size={size} />
                                         </span>{' '}
                                         Instagram
                                     </a>
-                                    <a href="https://kohaiiarts.newgrounds.com/art" className={popoverLinkStyles}>
+                                    <a href="https://kohaiiarts.newgrounds.com/art" className={popoverLinkStyles} target="_blank">
                                         <span className="flex w-4 justify-center">
                                             <NewgroundsIcon size={size} />
                                         </span>{' '}
                                         Newgrounds
                                     </a>
-                                    <a href="https://www.threads.net/@kohaii_arts" className={popoverLinkStyles}>
+                                    <a href="https://www.threads.net/@kohaii_arts" className={popoverLinkStyles} target="_blank">
                                         <span className="flex w-4 justify-center">
                                             <SiThreads size={size} />
                                         </span>{' '}
                                         Threads
                                     </a>
-                                    <a href="#" className={popoverLinkStyles}>
+                                    <a href="#" className={popoverLinkStyles} target="_blank">
                                         <span className="flex w-4 justify-center">
                                             <FaDiscord size={size} />
                                         </span>{' '}
