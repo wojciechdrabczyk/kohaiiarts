@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CommissionController;
 use App\Http\Controllers\ContactController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -23,6 +24,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
 
 Route::post('/contact', [ContactController::class, 'send']);
+Route::post('/commissions', [CommissionController::class, 'submit']);
 
 require __DIR__ . '/settings.php';
 require __DIR__ . '/auth.php';

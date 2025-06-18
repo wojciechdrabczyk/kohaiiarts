@@ -34,9 +34,9 @@ export default function NavBar() {
     return (
         <div className="sticky top-0 z-1">
             <nav className="bg-white shadow-md dark:bg-black" style={{ fontFamily: 'Montserrat, sans-serif' }}>
-                <div className={'mx-auto max-w-7xl px-4  sm:visible lg:visible'}>
+                <div className={'mx-auto max-w-7xl px-4 sm:visible lg:visible'}>
                     <div className={'flex h-16 items-center justify-between'}>
-                        <Link href={route('home')} className="flex items-center gap-2 overflow-hidden">
+                        <Link href={route('home')} className="flex items-center gap-2 overflow-hidden" prefetch>
                             <img
                                 src="/img-static/kohaii-arts-logo.png"
                                 alt="Kohaii Arts Logo"
@@ -54,23 +54,26 @@ export default function NavBar() {
                             <Link
                                 href={route('home')}
                                 className={`text-gray-500 hover:text-gray-700 dark:text-gray-300 ${url === '/' ? 'text-black underline dark:text-white' : ''}`}
+                                prefetch
                             >
                                 Illustrations
                             </Link>
 
-                            <Link href={route('store')} className={'text-gray-500 hover:text-gray-700 dark:text-gray-300'}>
+                            <Link href={route('store')} className="text-gray-500 hover:text-gray-700 dark:text-gray-300" prefetch>
                                 <span className="inline-flex items-center gap-2">Store</span>
                             </Link>
 
                             <Link
                                 href={route('support')}
                                 className={`text-gray-500 hover:text-gray-700 dark:text-gray-300 ${url === '/support' ? 'text-black underline dark:text-white' : ''}`}
+                                prefetch
                             >
                                 Support
                             </Link>
                             <Link
                                 href={route('commissions')}
                                 className={`text-gray-500 hover:text-gray-700 dark:text-gray-300 ${url === '/commissions' ? 'text-black underline dark:text-white' : ''}`}
+                                prefetch
                             >
                                 Commissions
                             </Link>
@@ -115,12 +118,14 @@ export default function NavBar() {
                             <Link
                                 href={route('faq')}
                                 className={`text-gray-500 hover:text-gray-700 dark:text-gray-300 ${url === '/faq' ? 'text-black underline dark:text-white' : ''}`}
+                                prefetch
                             >
                                 FAQ
                             </Link>
                             <Link
                                 href={route('contact')}
                                 className={`text-gray-500 hover:text-gray-700 dark:text-gray-300 ${url === '/contact' ? 'text-black underline dark:text-white' : ''}`}
+                                prefetch
                             >
                                 Contact
                             </Link>
@@ -148,11 +153,11 @@ export default function NavBar() {
                 </div>
                 {isOpen && (
                     <div className="flex flex-col space-y-2 px-4 pb-4 md:hidden">
-                        <Link href={route('home')} className={'text-gray-500 hover:text-gray-700 dark:text-gray-300'}>
+                        <Link href={route('home')} className="text-gray-500 hover:text-gray-700 dark:text-gray-300" prefetch>
                             <span className="inline-flex items-center gap-2">Illustrations</span>
                         </Link>
 
-                        <Link href={route('store')} className={'text-gray-500 hover:text-gray-700 dark:text-gray-300'}>
+                        <Link href={route('store')} className="text-gray-500 hover:text-gray-700 dark:text-gray-300" prefetch>
                             <span className="inline-flex items-center gap-2">Store</span>
                         </Link>
                         <div>
@@ -172,7 +177,7 @@ export default function NavBar() {
                                 </a>
                             </div>
                         </div>
-                        <Link href={route('commissions')} className={'text-gray-500 hover:text-gray-700 dark:text-gray-300'}>
+                        <Link href={route('commissions')} className="text-gray-500 hover:text-gray-700 dark:text-gray-300" prefetch>
                             <span className="inline-flex items-center gap-2">Commissions</span>
                         </Link>
                         <div>
@@ -210,10 +215,10 @@ export default function NavBar() {
                                 </a>
                             </div>
                         </div>
-                        <Link href={route('faq')} className={'text-gray-500 hover:text-gray-700 dark:text-gray-300'}>
+                        <Link href={route('faq')} className="text-gray-500 hover:text-gray-700 dark:text-gray-300" prefetch>
                             <span className="inline-flex items-center gap-2">FAQ</span>
                         </Link>
-                        <Link href={route('contact')} className={'text-gray-500 hover:text-gray-700 dark:text-gray-300'}>
+                        <Link href={route('contact')} className="text-gray-500 hover:text-gray-700 dark:text-gray-300" prefetch>
                             <span className="inline-flex items-center gap-2">Contact</span>
                         </Link>
                     </div>

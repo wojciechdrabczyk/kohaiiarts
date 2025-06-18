@@ -2,6 +2,7 @@ import InprntIcon from '@/assets/icons/InprntIcon';
 import DefaultLayout from '@/layouts/default-layout';
 import { Head } from '@inertiajs/react';
 import React from 'react';
+import { FaPatreon } from 'react-icons/fa6';
 import { SiTeepublic } from 'react-icons/si';
 
 export default function Store() {
@@ -19,7 +20,7 @@ export default function Store() {
                         creating 💖
                     </p>
 
-                    <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
+                    <div className="grid grid-cols-1 gap-6 sm:grid-cols-3">
                         <a
                             href="https://www.teepublic.com/stores/kohaiiarts"
                             target="_blank"
@@ -47,17 +48,29 @@ export default function Store() {
                                 </div>
                             </div>
                         </a>
+
+                        <a
+                            href="https://www.patreon.com/KohaiiArts"
+                            target="_blank"
+                            className="group block rounded-lg border border-gray-200 bg-white p-6 shadow-md transition hover:shadow-xl dark:border-gray-700 dark:bg-neutral-800 dark:hover:bg-neutral-700"
+                        >
+                            <div className="flex items-center gap-4">
+                                <FaPatreon size={40} className="text-gray-800 transition-transform group-hover:scale-105 dark:text-white" />
+                                <div>
+                                    <h3 className="text-lg font-semibold text-gray-800 dark:text-white">Patreon</h3>
+                                    <p className="mt-1 text-sm text-gray-600 dark:text-gray-400">
+                                        Get access to sketches, early previews, and personal updates.
+                                    </p>
+                                </div>
+                            </div>
+                        </a>
                     </div>
 
                     <hr className="my-12 border-t border-gray-200 dark:border-gray-700" />
 
                     <div className="text-center">
-                        <p className="text-sm text-gray-600 dark:text-gray-500">
-                            More platforms and products coming soon.
-                        </p>
-                        <p className="mt-2 text-sm text-gray-600 dark:text-gray-500">
-                            Thank you for your support — it means the world to me!
-                        </p>
+                        <p className="text-sm text-gray-600 dark:text-gray-500">More platforms and products coming soon.</p>
+                        <p className="mt-2 text-sm text-gray-600 dark:text-gray-500">Thank you for your support — it means the world to me!</p>
                     </div>
                 </div>
             </section>

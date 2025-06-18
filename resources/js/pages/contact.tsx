@@ -142,29 +142,6 @@ export default function Contact() {
                     />
                     {errors.message && <p className="text-sm text-red-600 dark:text-red-400">{errors.message}</p>}
                 </div>
-                <div className="space-y-1">
-                    <label
-                        htmlFor="images"
-                        className="flex cursor-default items-baseline gap-1 text-sm font-medium text-gray-500 dark:text-gray-300"
-                    >
-                        <span>Attach Images</span>
-                        <span className="text-xs text-gray-400">(optional)</span>
-                    </label>
-                    <input
-                        id="images"
-                        name="files[]"
-                        type="file"
-                        accept="image/*"
-                        multiple
-                        className={`block w-full text-sm text-gray-500 dark:text-gray-200
-            file:mr-4 file:rounded file:border-0
-            file:bg-black file:py-2 file:px-4
-            file:text-sm file:font-semibold
-            hover:file:bg-gray-800 dark:file:bg-white dark:file:text-black dark:hover:file:bg-gray-300
-        `}
-                    />
-                    {errors.images && <p className="text-sm text-red-600 dark:text-red-400">{errors.images}</p>}
-                </div>
 
                 <button
                     type="submit"

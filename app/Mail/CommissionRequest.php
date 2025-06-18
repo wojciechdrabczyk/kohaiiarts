@@ -9,7 +9,7 @@ use Illuminate\Queue\SerializesModels;
 use Illuminate\Mail\Mailables\Address;
 use Illuminate\Mail\Mailables\Envelope;
 
-class ContactMessage extends Mailable
+class CommissionRequest extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -28,9 +28,9 @@ class ContactMessage extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            from: new Address('contact@kohaiis.art', 'Kohaiis Art Inquiries'),
-            to: [new Address('kohaiiarts@gmail.com', 'Kohaiis Art Inquiries')],
-            subject: 'New Contact Message from ' . $this->data['name'],
+            from: new Address('commissions@kohaiis.art', 'Kohaiis Art Commissions'),
+            to: [new Address('kohaiiarts@gmail.com', 'Kohaiis Art Commissions')],
+            subject: 'Commission Request from ' . $this->data['name'],
         );
     }
     /**
@@ -39,7 +39,7 @@ class ContactMessage extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'emails.contact',
+            view: 'emails.commission',
             with: [
                 'data' => $this->data,
             ]
