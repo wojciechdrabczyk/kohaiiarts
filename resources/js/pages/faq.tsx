@@ -30,13 +30,9 @@ export default function Faq() {
                                 <p className="text-sm text-gray-500 dark:text-gray-400 leading-relaxed">
                                     Yes! I'm currently open for personal commissions.
                                 </p>
-                                <ul className="mt-2 mb-4 list-disc list-inside text-sm text-gray-500 dark:text-gray-400 leading-relaxed">
-                                    <li>Portrait – $88</li>
-                                    <li>Half Body – $108</li>
-                                    <li>Full Body – $128</li>
-                                </ul>
+                                <br/>
                                 <p className="text-sm text-gray-500 dark:text-gray-400 leading-relaxed">
-                                    Additional charges may apply for complex backgrounds, accessories, weapons, pets, or canvas resizing for printing.
+                                    Prices and additional charges may apply for complex backgrounds, accessories, weapons, pets, or canvas resizing for printing.
                                     Turnaround time is usually 2–4 weeks depending on the piece and current queue.
                                 </p>
                             </div>

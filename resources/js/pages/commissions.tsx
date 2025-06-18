@@ -6,6 +6,7 @@ import { FormEvent, useState } from 'react';
 type Status = 'success' | 'error' | null;
 export default function Commissions() {
     const [status, setStatus] = useState<Status>(null);
+    const [filePreviews, setFilePreviews] = useState<File[]>([]);
 
     const { errors } = usePage<PageProps>().props as {
         errors: Record<string, string>;
@@ -18,6 +19,7 @@ export default function Commissions() {
         router.post('/commissions', formData, {
             onSuccess: () => {
                 setStatus('success');
+                setFilePreviews([]);
                 e.currentTarget.reset();
             },
             onError: () => {
@@ -48,12 +50,12 @@ export default function Commissions() {
                         <div className="mb-12">
                             <h2 className="mb-4 text-xl tracking-normal text-black dark:text-white">Base Commission Prices</h2>
                             <div className="mx-auto max-w-2xl text-center">
-                                <ul className="mt-2 mb-4 list-inside list-disc text-sm leading-relaxed text-gray-500 dark:text-gray-400">
+                                <ul className="mt-2 mb-4 list-inside list-disc text-sm leading-relaxed text-gray-600 dark:text-gray-400">
                                     <li>Portrait – $88</li>
                                     <li>Half Body – $108</li>
                                     <li>Full Body – $128</li>
                                 </ul>
-                                <p className="text-sm leading-relaxed text-gray-500 dark:text-gray-400">
+                                <p className="mx-auto mb-12 max-w-2xl space-y-4 text-sm leading-relaxed text-gray-600 dark:text-gray-400">
                                     Complex accessories, weapons, backgrounds, and pets may incur additional charges depending on the request.
                                     Increased canvas size for printing will also add costs due to more detailed work. Turnaround time is typically 2–4
                                     weeks depending on the complexity and queue.
@@ -62,19 +64,27 @@ export default function Commissions() {
                         </div>
 
                         <div>
-                            <h2 className="mb-4 text-xl tracking-normal text-black dark:text-white">Commission Process</h2>
-
-                            <div className="mx-auto mb-12 max-w-2xl space-y-4 text-left text-sm leading-relaxed text-gray-600 dark:text-gray-300">
+                            <h2 className="mb-4 text-xl tracking-normal text-black dark:text-white">How It Works</h2>
+                            <div className="mx-auto mb-12 max-w-2xl space-y-4 text-left text-sm leading-relaxed text-gray-600 dark:text-gray-400">
                                 <p>
-                                    Once I receive your request, I’ll review it and let you know if I can take it on. If accepted, we’ll discuss the
-                                    concept together and I’ll provide a rough sketch along with a deadline.
+                                    <strong>1. Request Review:</strong> Once I receive your form, I’ll review it and confirm whether I can take on the
+                                    commission.
                                 </p>
-                                <p>After your approval of the sketch, I’ll request full payment via PayPal to begin lineart and coloring.</p>
-                                <p>A 5% PayPal fee will be added to the total and is to be covered by the client.</p>
-                                <p>Once payment is received, I’ll finish the artwork and deliver it to you by the agreed deadline.</p>
+                                <p>
+                                    <strong>2. Sketch Phase:</strong> If accepted, we’ll discuss the concept and I’ll send a rough sketch along with
+                                    an estimated deadline.
+                                </p>
+                                <p>
+                                    <strong>3. Payment:</strong> After sketch approval, I’ll request full payment via PayPal to begin lineart and
+                                    coloring. A 5% PayPal fee is added to the final total.
+                                </p>
+                                <p>
+                                    <strong>4. Final Delivery:</strong> Once payment is received, I’ll complete the artwork and send it to you by the
+                                    agreed deadline.
+                                </p>
                             </div>
 
-                            <form onSubmit={handleSubmit} className="mx-auto max-w-lg space-y-6 px-2">
+                            <form onSubmit={handleSubmit} id="commissionForm" className="mx-auto max-w-lg space-y-6 px-2">
                                 {[
                                     { id: 'name', label: 'Name', required: true },
                                     { id: 'email', label: 'Email Address', required: true, type: 'email' },
@@ -122,14 +132,40 @@ export default function Commissions() {
                                                     }`}
                                                 />
                                             ) : type === 'file' ? (
-                                                <input
-                                                    id={id}
-                                                    name="files[]"
-                                                    type="file"
-                                                    accept="image/*"
-                                                    multiple
-                                                    className="block w-full text-sm text-gray-500 file:mr-4 file:rounded file:border-0 file:bg-black file:px-4 file:py-2 file:text-sm file:font-semibold hover:file:bg-gray-800 dark:text-gray-200 dark:file:bg-white dark:file:text-black dark:hover:file:bg-gray-300"
-                                                />
+                                                <div className="space-y-2">
+                                                    <div className="flex items-center gap-3">
+                                                        <input
+                                                            id="files"
+                                                            name="files[]"
+                                                            type="file"
+                                                            accept="image/*"
+                                                            multiple
+                                                            onChange={(e) => setFilePreviews(Array.from(e.target.files || []))}
+                                                            className="hidden"
+                                                        />
+                                                        <label
+                                                            htmlFor="files"
+                                                            className="inline-block cursor-pointer rounded border-0 bg-black px-4 py-3 text-sm font-semibold text-white transition hover:bg-gray-800 dark:bg-white dark:text-black dark:hover:bg-gray-300"
+                                                        >
+                                                            Choose Files
+                                                        </label>
+                                                        <span className="text-sm text-gray-600 dark:text-gray-300">
+                                                            {filePreviews.length} {filePreviews.length === 1 ? 'file' : 'files'} selected
+                                                        </span>
+                                                    </div>
+                                                    {filePreviews.length > 0 && (
+                                                        <div className="flex flex-wrap gap-2">
+                                                            {filePreviews.map((file, i) => (
+                                                                <img
+                                                                    key={i}
+                                                                    src={URL.createObjectURL(file)}
+                                                                    alt={`Preview ${i + 1}`}
+                                                                    className="h-16 w-16 rounded border border-gray-300 object-cover dark:border-gray-600"
+                                                                />
+                                                            ))}
+                                                        </div>
+                                                    )}
+                                                </div>
                                             ) : (
                                                 <input
                                                     id={id}
@@ -152,7 +188,7 @@ export default function Commissions() {
 
                                 <button
                                     type="submit"
-                                    className="w-full rounded bg-black py-3 text-white transition hover:bg-gray-800 dark:bg-white dark:text-black dark:hover:bg-gray-300"
+                                    className="w-full rounded border-0 bg-black px-4 py-3 text-sm font-semibold text-white transition hover:bg-gray-800 dark:bg-white dark:text-black dark:hover:bg-gray-300"
                                 >
                                     Send
                                 </button>
