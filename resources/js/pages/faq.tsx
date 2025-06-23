@@ -17,7 +17,7 @@ export default function Faq() {
                     <div className="mb-8 px-2 text-center text-sm  text-gray-500 dark:text-gray-300">
                         <p className="text-[14px] mx-auto max-w-2xl leading-relaxed">
                             I’ve put together some answers to questions I often get about my art and commissions.
-                            If you still have a question, don’t hesitate to reach out—I'm always happy to chat!
+                            If you still have a question, don’t hesitate to reach out, I'm always happy to chat!
                         </p>
                     </div>
 
@@ -72,7 +72,7 @@ export default function Faq() {
                                     Can I request specific characters or fan art?
                                 </h3>
                                 <p className="text-sm text-gray-500 dark:text-gray-400 leading-relaxed">
-                                    I take themed requests or fan art commissions. Feel free to ask—just note that I may not accept all depending on style or timing.
+                                    I take themed requests or fan art commissions. Feel free to ask, just note that I may not accept all depending on style or timing.
                                 </p>
                             </div>
 

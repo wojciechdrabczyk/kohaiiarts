@@ -102,7 +102,7 @@ export default function Commissions() {
                                         required: true,
                                         type: 'textarea',
                                         placeholder:
-                                            'Please describe your commission request in detail. Include character info, pose ideas, or scene descriptions. If you have references, attach them below — the more details, the better!',
+                                            'Please describe your commission request in detail. Include character info, pose ideas, or scene descriptions. If you have references, attach them below, the more details, the better!',
                                     },
                                     { id: 'files', label: 'Attach image / images', required: false, type: 'file' },
                                 ].map(({ id, label, required, type, placeholder }) => {

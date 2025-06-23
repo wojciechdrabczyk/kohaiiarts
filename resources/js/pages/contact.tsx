@@ -84,9 +84,9 @@ export default function Contact() {
             </div>
 
             <div className="mb-8 px-2 text-center text-sm">
-                <p className="text-[14px] mx-auto max-w-2xl leading-relaxed text-gray-500 dark:text-gray-400">
+                <p className="mx-auto max-w-2xl text-[14px] leading-relaxed text-gray-500 dark:text-gray-400">
                     Thank you so much for checking out my art! You can support me through INPRNT, Throne, or Patreon, or just say hi on social media.
-                    For commissions or collaborations, feel free to DM me on Instagram, X, Threads, or connect on Discord — I’m happy to chat! You can
+                    For commissions or collaborations, feel free to DM me on Instagram, X, Threads, or connect on Discord. I’m happy to chat! You can
                     also just send me a message directly below.
                 </p>
             </div>
@@ -100,6 +100,7 @@ export default function Contact() {
                         required: true,
                         type: 'email',
                     },
+
                     { id: 'subject', label: 'Subject', required: true },
                 ].map(({ id, label, required, type }) => (
                     <div key={id} className="space-y-1">
@@ -112,10 +113,11 @@ export default function Contact() {
                             name={id}
                             type={type ?? 'text'}
                             required={required}
-                            className={`w-full cursor-text rounded border px-4 py-3 text-sm ${errors[id]
-                                ? 'border-red-600'
-                                : 'border-gray-300 bg-white text-gray-900 dark:border-gray-600 dark:bg-neutral-800 dark:text-gray-100'
-                                }`}
+                            className={`w-full cursor-text rounded border px-4 py-3 text-sm ${
+                                errors[id]
+                                    ? 'border-red-600'
+                                    : 'border-gray-300 bg-white text-gray-900 dark:border-gray-600 dark:bg-neutral-800 dark:text-gray-100'
+                            }`}
                         />
                         {errors[id] && <p className="text-sm text-red-600 dark:text-red-400">{errors[id]}</p>}
                     </div>
@@ -135,10 +137,11 @@ export default function Contact() {
                         required
                         rows={5}
                         placeholder="Type something..."
-                        className={`w-full cursor-text rounded border px-4 py-3 text-sm ${errors.message
-                            ? 'border-red-600'
-                            : 'border-gray-300 bg-white text-gray-900 dark:border-gray-600 dark:bg-neutral-800 dark:text-gray-100'
-                            }`}
+                        className={`w-full cursor-text rounded border px-4 py-3 text-sm ${
+                            errors.message
+                                ? 'border-red-600'
+                                : 'border-gray-300 bg-white text-gray-900 dark:border-gray-600 dark:bg-neutral-800 dark:text-gray-100'
+                        }`}
                     />
                     {errors.message && <p className="text-sm text-red-600 dark:text-red-400">{errors.message}</p>}
                 </div>
