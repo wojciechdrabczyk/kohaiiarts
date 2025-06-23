@@ -70,7 +70,7 @@ export default function Store() {
 
                     <div className="text-center">
                         <p className="text-sm text-gray-600 dark:text-gray-500">More platforms and products coming soon.</p>
-                        <p className="mt-2 text-sm text-gray-600 dark:text-gray-500">Thank you for your support — it means the world to me!</p>
+                        <p className="mt-2 text-sm text-gray-600 dark:text-gray-500">Thank you for your support, it means the world to me!</p>
                     </div>
                 </div>
             </section>

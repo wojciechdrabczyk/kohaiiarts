@@ -18,7 +18,7 @@ export default function Support() {
                     </h1>
                     <div className="mb-12 px-2 text-center text-[12px] text-gray-600 dark:text-gray-300">
                         <p className="mx-auto max-w-xl leading-relaxed">
-                            Your support helps me keep doing what I love — making art and sharing it with the world. Whether it's through Patreon, Throne,
+                            Your support helps me keep doing what I love making art and sharing it with the world. Whether it's through Patreon, Throne,
                             or simply sharing my work, your kindness truly means a lot. Thank you for being a part of this journey with me.
                         </p>
                     </div>
@@ -28,7 +28,7 @@ export default function Support() {
                             <h2 className="mb-4 text-xl tracking-normal text-black dark:text-white">Why do I need your help</h2>
                             <div className="mx-auto max-w-2xl text-center">
                                 <p className="text-[15px] leading-[1.75] text-gray-600 dark:text-gray-400">
-                                    Making art full-time comes with a lot of unseen challenges — not just creatively, but practically. Support through
+                                    Making art full-time comes with a lot of unseen challenges. Not just creatively, but practically. Support through
                                     Patreon or Throne helps cover tools, software, and most importantly, time. It gives me the space to focus on
                                     drawing and sharing with you.
                                 </p>
@@ -77,7 +77,7 @@ export default function Support() {
                                     <div>
                                         <h3 className="text-lg font-semibold text-gray-800 dark:text-white">Throne</h3>
                                         <p className="mt-1 text-sm text-gray-600 dark:text-gray-400">
-                                            Send me a thoughtful gift directly — art tools, snacks, and more!
+                                            Send me a thoughtful gift directly - art tools, snacks, and more!
                                         </p>
                                     </div>
                                 </div>
