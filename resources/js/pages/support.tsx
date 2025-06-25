@@ -13,11 +13,11 @@ export default function Support() {
             </Head>
             <section className="" style={{ fontFamily: 'Montserrat, sans-serif' }}>
                 <div className="mx-auto max-w-screen-xl px-4 py-8 sm:py-16 lg:px-6">
-                    <h1 className="mb-4 flex justify-center text-center tracking-normal text-black sm:text-3xl dark:text-gray-200">
-                        Thank you for considering supporting me 💖
+                    <h1 className="mb-4 text-center text-3xl leading-relaxed text-black dark:text-white">
+                        Thank you for considering supporting me
                     </h1>
                     <div className="mb-12 px-2 text-center text-[12px] text-gray-600 dark:text-gray-300">
-                        <p className="mx-auto max-w-xl leading-relaxed">
+                        <p className="mx-auto mb-12 max-w-2xl text-center text-sm text-gray-600 dark:text-gray-300 leading-relaxed">
                             Your support helps me keep doing what I love making art and sharing it with the world. Whether it's through Patreon, Throne,
                             or simply sharing my work, your kindness truly means a lot. Thank you for being a part of this journey with me.
                         </p>
