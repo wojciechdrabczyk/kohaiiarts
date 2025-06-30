@@ -37,7 +37,7 @@ export default function NavBar() {
             <nav className="bg-white shadow-md dark:bg-black" style={{ fontFamily: 'Montserrat, sans-serif' }}>
                 <div className="mx-auto max-w-7xl px-4">
                     <div className="flex h-16 items-center justify-between">
-                        <Link href={route('home')} className="flex flex-shrink-0 items-center gap-3 overflow-hidden" prefetch>
+                        <Link href={route('home')} className="flex items-center gap-4 overflow-hidden" prefetch>
                             <img src="/img-static/kohaii-arts-logo.png" alt="Kohaii Arts Logo" className="h-14 w-auto flex-shrink-0" />
                             <div className="flex min-w-0 flex-col overflow-hidden leading-tight">
                                 <span className="truncate text-2xl font-light text-gray-800 dark:text-white">Kohaii Arts</span>

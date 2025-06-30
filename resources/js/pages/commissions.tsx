@@ -1,7 +1,7 @@
 import DefaultLayout from '@/layouts/default-layout';
 import { PageProps } from '@inertiajs/inertia';
 import { Head, router, usePage } from '@inertiajs/react';
-import { FormEvent, useState } from 'react';
+import React, { FormEvent, useState } from 'react';
 import { FiUpload } from 'react-icons/fi';
 
 type Status = 'success' | 'error' | null;
@@ -48,7 +48,7 @@ export default function Commissions() {
                     <h1 className="mb-4 text-center text-3xl leading-relaxed text-black dark:text-white">
                         Commission Services
                     </h1>
-                    <p className="mx-auto mb-12 max-w-2xl text-center text-sm text-gray-600 dark:text-gray-300 leading-relaxed">
+                    <p className="mx-auto mb-12 max-w-2xl text-[14px] leading-[1.75]  text-gray-600 dark:text-gray-300 text-center">
                         I create custom anime-style illustrations tailored to your ideas. Whether it’s an OC, fanart, or something entirely original,
                         I’d love to bring your vision to life.
                     </p>
@@ -84,7 +84,7 @@ export default function Commissions() {
                         <h2 className="text-xl font-semibold text-gray-800 dark:text-gray-200">Request a Commission</h2>
 
                         {[
-                            { id: 'name', label: 'Name', required: true, type: 'text', placeholder: 'e.g. Bob, KohaiiArtsFan1234, or @yourdiscord#1234' },
+                            { id: 'name', label: 'Name', required: true, type: 'text', placeholder: "" },
                             { id: 'email', label: 'Email Address', required: true, type: 'email', placeholder: 'example@domain.com' },
                             {
                                 id: 'paypal_email',
@@ -201,12 +201,19 @@ export default function Commissions() {
                         </button>
 
                         {status === 'success' && (
-                            <p className="text-center text-green-600 dark:text-green-400">Thank you! Your message has been sent.</p>
+                            <p className="mt-4 text-center text-sm text-green-600 dark:text-green-400">
+                                Thank you! Your message has been sent.
+                            </p>
                         )}
                         {status === 'error' && (
-                            <p className="text-center text-red-600 dark:text-red-400">Oops! Something went wrong. Please try again.</p>
+                            <p className="mt-4 text-center text-sm text-red-600 dark:text-red-400">
+                                Oops! Something went wrong. Please try again.
+                            </p>
                         )}
+
                     </form>
+
+
 
                         <details className="mt-8 min-h-[50px] rounded-lg border border-gray-200 p-4 text-sm text-gray-600 dark:border-gray-600 dark:text-gray-400">
 

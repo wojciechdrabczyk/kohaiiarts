@@ -16,10 +16,10 @@ export default function Support() {
                     <h1 className="mb-4 text-center text-3xl leading-relaxed text-black dark:text-white">
                         Thank you for considering supporting me
                     </h1>
-                    <div className="mb-12 px-2 text-center text-[12px] text-gray-600 dark:text-gray-300">
-                        <p className="mx-auto mb-12 max-w-2xl text-center text-sm text-gray-600 dark:text-gray-300 leading-relaxed">
+                    <div className="text-center">
+                        <p className="mx-auto mb-12 max-w-2xl text-[14px] leading-[1.75]  text-gray-600 dark:text-gray-300">
                             Your support helps me keep doing what I love making art and sharing it with the world. Whether it's through Patreon, Throne,
-                            or simply sharing my work, your kindness truly means a lot. Thank you for being a part of this journey with me.
+                            or simply sharing my work, your kindness truly means a lot.
                         </p>
                     </div>
 
@@ -27,7 +27,7 @@ export default function Support() {
                         <div className="mb-12">
                             <h2 className="mb-4 text-xl tracking-normal text-black dark:text-white">Why do I need your help</h2>
                             <div className="mx-auto max-w-2xl text-center">
-                                <p className="text-[15px] leading-[1.75] text-gray-600 dark:text-gray-400">
+                                <p className="text-[14px] leading-[1.75] text-gray-600 dark:text-gray-400">
                                     Making art full-time comes with a lot of unseen challenges. Not just creatively, but practically. Support through
                                     Patreon or Throne helps cover tools, software, and most importantly, time. It gives me the space to focus on
                                     drawing and sharing with you.
