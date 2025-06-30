@@ -53,7 +53,7 @@ export default function Commissions() {
                         I’d love to bring your vision to life.
                     </p>
 
-                    <div className="rounded-xl bg-white p-6 shadow-md dark:bg-neutral-900">
+                    <div className="mt-12 rounded-xl border border-gray-200 dark:border-neutral-700 bg-white p-6 shadow-md dark:bg-neutral-900">
                         <h2 className="mb-4 text-xl font-semibold text-gray-800 dark:text-gray-200">Base Commission Prices</h2>
                         <ul className="mb-6 list-inside list-disc text-sm text-gray-600 dark:text-gray-400">
                             <li>Portrait – $88</li>
@@ -66,7 +66,9 @@ export default function Commissions() {
                         </p>
                     </div>
 
-                    <div className="mt-12 rounded-xl bg-white p-6 shadow-md dark:bg-neutral-900">
+                    <div className="mt-12 rounded-xl border p-6 border-gray-200 dark:border-neutral-700 shadow-md bg-white dark:bg-neutral-900">
+
+
                         <h2 className="mb-4 text-xl font-semibold text-gray-800 dark:text-gray-200">Commission Process</h2>
                         <ol className="list-decimal space-y-2 pl-4 text-sm text-gray-600 dark:text-gray-400">
                             <li>Submit your request using the form below.</li>
@@ -79,7 +81,7 @@ export default function Commissions() {
                     <form
                         onSubmit={handleSubmit}
                         id="commissionForm"
-                        className="mt-12 rounded-xl bg-white p-6 shadow-md dark:bg-neutral-900 space-y-6 scroll-mt-24"
+                        className="mt-12 rounded-xl border p-6 border-gray-200 dark:border-neutral-700 shadow-md bg-white dark:bg-neutral-900 space-y-6 scroll-mt-24"
                     >
                         <h2 className="text-xl font-semibold text-gray-800 dark:text-gray-200">Request a Commission</h2>
 
@@ -124,11 +126,10 @@ export default function Commissions() {
                                             required={required}
                                             rows={5}
                                             placeholder={placeholder}
-                                            className={`w-full rounded border px-4 py-3 text-sm ${
-                                                error
-                                                    ? 'border-red-600'
-                                                    : 'border-gray-300 bg-white text-gray-900 dark:border-gray-600 dark:bg-neutral-800 dark:text-gray-100'
-                                            }`}
+                                            className={`w-full rounded border px-4 py-3 text-sm ${error
+                                                ? 'border-red-600'
+                                                : 'border-gray-300 bg-white text-gray-900 dark:border-gray-600 dark:bg-neutral-800 dark:text-gray-100'
+                                                }`}
                                         />
                                     ) : (
                                         <input
@@ -137,11 +138,10 @@ export default function Commissions() {
                                             type={type ?? 'text'}
                                             required={required}
                                             placeholder={placeholder}
-                                            className={`w-full rounded border px-4 py-3 text-sm ${
-                                                error
-                                                    ? 'border-red-600'
-                                                    : 'border-gray-300 bg-white text-gray-900 dark:border-gray-600 dark:bg-neutral-800 dark:text-gray-100'
-                                            }`}
+                                            className={`w-full rounded border px-4 py-3 text-sm ${error
+                                                ? 'border-red-600'
+                                                : 'border-gray-300 bg-white text-gray-900 dark:border-gray-600 dark:bg-neutral-800 dark:text-gray-100'
+                                                }`}
                                         />
                                     )}
 
@@ -215,7 +215,7 @@ export default function Commissions() {
 
 
 
-                        <details className="mt-8 min-h-[50px] rounded-lg border border-gray-200 p-4 text-sm text-gray-600 dark:border-gray-600 dark:text-gray-400">
+                    <details className="mt-8 min-h-[50px] rounded-xl border p-4 text-sm text-gray-600 dark:text-gray-400 border-gray-200 dark:border-neutral-700 shadow-md bg-white dark:bg-neutral-900">
 
                         <summary className="cursor-pointer font-semibold text-gray-700 dark:text-gray-200">
                             What can I request?

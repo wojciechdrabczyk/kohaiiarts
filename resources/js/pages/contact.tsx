@@ -93,7 +93,7 @@ export default function Contact() {
             <form
                 onSubmit={handleSubmit}
                 id="contactForm"
-                className="mx-auto mt-12 max-w-xl scroll-mt-24 space-y-6 rounded-xl bg-white p-12 shadow-md dark:bg-neutral-900"
+                className="mx-auto mt-12 max-w-xl scroll-mt-24 space-y-6 rounded-xl border border-gray-200 bg-white p-12 shadow-md dark:border-neutral-700 dark:bg-neutral-900"
             >
                 <h2 className="text-xl font-semibold text-gray-800 dark:text-gray-200">Contact me</h2>
 
@@ -140,11 +140,10 @@ export default function Contact() {
                                     required={required}
                                     rows={5}
                                     placeholder={placeholder}
-                                    className={`w-full rounded border px-4 py-3 text-sm ${
-                                        error
-                                            ? 'border-red-600'
-                                            : 'border-gray-300 bg-white text-gray-900 dark:border-gray-600 dark:bg-neutral-800 dark:text-gray-100'
-                                    }`}
+                                    className={`w-full rounded border px-4 py-3 text-sm ${error
+                                        ? 'border-red-600'
+                                        : 'border-gray-300 bg-white text-gray-900 dark:border-gray-600 dark:bg-neutral-800 dark:text-gray-100'
+                                        }`}
                                 />
                             ) : (
                                 <input
@@ -153,11 +152,10 @@ export default function Contact() {
                                     type={type ?? 'text'}
                                     required={required}
                                     placeholder={placeholder}
-                                    className={`w-full rounded border px-4 py-3 text-sm ${
-                                        error
-                                            ? 'border-red-600'
-                                            : 'border-gray-300 bg-white text-gray-900 dark:border-gray-600 dark:bg-neutral-800 dark:text-gray-100'
-                                    }`}
+                                    className={`w-full rounded border px-4 py-3 text-sm ${error
+                                        ? 'border-red-600'
+                                        : 'border-gray-300 bg-white text-gray-900 dark:border-gray-600 dark:bg-neutral-800 dark:text-gray-100'
+                                        }`}
                                 />
                             )}
 
@@ -172,14 +170,16 @@ export default function Contact() {
                     Send
                 </button>
             </form>
-            <div className="mx-auto mt-5 max-w-xl rounded-xl bg-white px-6 py-4 shadow-md dark:bg-neutral-900">
-                {status === 'success' && (
-                    <p className="text-center text-sm text-green-600 dark:text-green-400">Thank you! Your message has been sent.</p>
-                )}
-                {status === 'error' && (
-                    <p className="text-center text-sm text-red-600 dark:text-red-400">Oops! Something went wrong. Please try again.</p>
-                )}
-            </div>
+            {status && (
+                <div className="mx-auto mt-5 max-w-xl rounded-xl bg-white px-6 py-4 shadow-md dark:bg-neutral-900">
+                    {status === 'success' && (
+                        <p className="text-center text-sm text-green-600 dark:text-green-400">Thank you! Your message has been sent.</p>
+                    )}
+                    {status === 'error' && (
+                        <p className="text-center text-sm text-red-600 dark:text-red-400">Oops! Something went wrong. Please try again.</p>
+                    )}
+                </div>
+            )}
         </div>
     );
 }
