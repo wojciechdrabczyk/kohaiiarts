@@ -2,6 +2,7 @@ import NewgroundsIcon from '@/assets/icons/NewgroundsIcon';
 import DefaultLayout from '@/layouts/default-layout';
 import { Popover, PopoverButton, PopoverPanel } from '@headlessui/react';
 import { Link, usePage } from '@inertiajs/react';
+import { Head } from '@inertiajs/react';
 import { useLayoutEffect, useState } from 'react';
 import { BsInstagram } from 'react-icons/bs';
 import { FaDiscord } from 'react-icons/fa';
@@ -34,11 +35,28 @@ export default function NavBar() {
 
     return (
         <div className="sticky top-0 z-10">
+            <Head>
+                <link rel="preload" href="/img-static/LogoKohii.webp" as="image" />
+                <link rel="preload" href="/img-static/LogoKohiiNight.webp" as="image" />
+            </Head>
             <nav className="bg-white shadow-md dark:bg-black" style={{ fontFamily: 'Montserrat, sans-serif' }}>
                 <div className="mx-auto max-w-7xl px-4">
                     <div className="flex h-16 items-center justify-between">
                         <Link href={route('home')} className="flex items-center gap-4 overflow-hidden" prefetch>
-                            <img src="/img-static/kohaii-arts-logo.png" alt="Kohaii Arts Logo" className="h-14 w-auto flex-shrink-0" />
+                            <div className="relative h-14 w-14 flex-shrink-0">
+                                <img
+                                    src="/img-static/LogoKohii.webp"
+                                    alt="Kohaii Arts Logo Light"
+                                    className={`absolute inset-0 h-full w-auto transition-opacity duration-500 ease-in-out ${theme === 'dark' ? 'opacity-0' : 'opacity-100'}`}
+                                />
+                                <img
+                                    src="/img-static/LogoKohiiNight.webp"
+                                    alt="Kohaii Arts Logo Dark"
+                                    className={`absolute inset-0 h-full w-auto transition-opacity duration-500 ease-in-out ${theme === 'dark' ? 'opacity-100' : 'opacity-0'}`}
+                                />
+                            </div>
+
+
                             <div className="flex min-w-0 flex-col overflow-hidden leading-tight">
                                 <span className="truncate text-2xl font-light text-gray-800 dark:text-white">Kohaii Arts</span>
                                 <span className="truncate text-xs font-light tracking-wide text-gray-500 dark:text-gray-400">
@@ -47,7 +65,6 @@ export default function NavBar() {
                             </div>
                         </Link>
 
-                        {/* Desktop nav */}
                         <div className="hidden items-center space-x-5 text-lg md:flex">
                             <Link
                                 href={route('home')}
@@ -148,7 +165,6 @@ export default function NavBar() {
                             </div>
                         </div>
 
-                        {/* Mobile hamburger */}
                         <div className="flex items-center md:hidden">
                             <button
                                 onClick={() => setIsOpen(!isOpen)}
@@ -169,9 +185,8 @@ export default function NavBar() {
                 </div>
 
                 <div
-                    className={`overflow-hidden transition-all duration-200 ease-out md:hidden ${
-                        isOpen ? 'max-h-screen opacity-100' : 'max-h-0 opacity-0'
-                    }`}
+                    className={`overflow-hidden transition-all duration-200 ease-out md:hidden ${isOpen ? 'max-h-screen opacity-100' : 'max-h-0 opacity-0'
+                        }`}
                 >
                     <div className="flex flex-col space-y-2 border-t bg-white px-4 pb-4 shadow-md dark:border-neutral-800 dark:bg-black">
                         <Link href={route('home')} className={mobileLinkStyles} onClick={closeMenu} prefetch>

@@ -6,17 +6,23 @@ import { useSwipeable } from 'react-swipeable';
 import { Head } from '@inertiajs/react';
 
 const images = [
-    '/img-static/grid1.jpg',
-    '/img-static/grid2.jpg',
-    '/img-static/grid3.jpg',
-    '/img-static/grid4.jpg',
-    '/img-static/grid5.jpg',
-    '/img-static/grid6.jpg',
-    '/img-static/grid7.jpg',
-    '/img-static/grid8.jpg',
-    '/img-static/grid9.jpg',
-    '/img-static/grid10.png',
-    '/img-static/grid11.webp',
+    '/img-static/Esil.webp',
+    '/img-static/PokemonArtChristmas.webp',
+    '/img-static/Rogue.webp',
+    '/img-static/Stormie.webp',
+    '/img-static/Varesa.webp',
+    '/img-static/Halloween2023.webp',
+    '/img-static/ValentinesCapella.webp',
+    '/img-static/Mitsuri.webp',
+    '/img-static/BreakArt2.webp',
+    '/img-static/CoffeeRelax.webp',
+    '/img-static/Fenrys.webp',
+    '/img-static/BrazilianMiku.webp',
+    '/img-static/BreakArt.webp',
+    '/img-static/Narigon.webp',
+    '/img-static/Hornpurple.webp',
+    '/img-static/JuriKisisingWSign.webp',
+    '/img-static/Ultima.webp',
 ];
 
 export default function Illustrations() {
@@ -70,17 +76,31 @@ export default function Illustrations() {
                 <meta name="description" content="Here are my latest drawings" />
             </Head>
 
-            <div className="grid grid-cols-1 gap-2 sm:grid-cols-3 pb-5">
-                {images.map((src, index) => (
-                    <div key={index} className="group h-96 w-full cursor-pointer overflow-hidden rounded-md" onClick={() => setCurrentIndex(index)}>
-                        <img
-                            src={src}
-                            alt={`Artwork ${index + 1}`}
-                            className="h-full w-full transform object-cover transition-transform duration-300 group-hover:scale-105"
-                        />
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 pb-8">
+                {[0, 1, 2, 3].map((colIndex) => (
+                    <div key={colIndex} className="grid gap-4">
+                        {images
+                            .filter((_, i) => i % 4 === colIndex)
+                            .map((src, index) => {
+                                const globalIndex = colIndex + index * 4;
+                                return (
+                                    <div
+                                        key={globalIndex}
+                                        className="group cursor-pointer overflow-hidden rounded-md"
+                                        onClick={() => setCurrentIndex(globalIndex)}
+                                    >
+                                        <img
+                                            src={src}
+                                            alt={`Artwork ${globalIndex + 1}`}
+                                            className="h-full max-w-full rounded-lg object-cover transition-transform duration-300 group-hover:scale-105"
+                                        />
+                                    </div>
+                                );
+                            })}
                     </div>
                 ))}
             </div>
+
 
             <Transition appear show={currentIndex !== null} as={Fragment}>
                 <Dialog as="div" className="relative z-50" onClose={() => setCurrentIndex(null)}>
