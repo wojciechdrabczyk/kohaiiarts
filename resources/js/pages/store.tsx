@@ -16,8 +16,8 @@ export default function Store() {
                 <div className="mx-auto max-w-screen-xl px-4 py-8 sm:py-16 lg:px-6">
                     <h1 className="mb-4 text-center text-3xl text-gray-900 dark:text-white">Where can I purchase your work?</h1>
                     <p className="mx-auto mb-10 max-w-2xl text-center text-gray-600 dark:text-gray-300">
-                        You can purchase my art as prints or products through these platforms. Every order supports my journey and helps me keep
-                        creating 💖
+                        You can purchase my art as prints or products through these platforms. Every order supports me a lot and helps me keep
+                        creating.
                     </p>
 
                     <div className="grid grid-cols-1 gap-6 sm:grid-cols-3">
