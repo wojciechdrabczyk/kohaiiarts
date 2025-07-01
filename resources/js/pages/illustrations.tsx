@@ -76,7 +76,7 @@ export default function Illustrations() {
                 <meta name="description" content="Here are my latest drawings" />
             </Head>
 
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 pb-8">
+            <div className="grid grid-cols-4 md:grid-cols-4 gap-4 pb-8">
                 {[0, 1, 2, 3].map((colIndex) => (
                     <div key={colIndex} className="grid gap-4">
                         {images
