@@ -71,7 +71,7 @@ export default function Contact() {
                             target="_blank"
                             aria-label={name}
                             rel="noopener noreferrer"
-                            className="flex items-center justify-center rounded-full bg-black p-5 text-white transition hover:bg-gray-800 dark:bg-white dark:text-black dark:hover:bg-gray-300"
+                            className="flex items-center justify-center rounded-full bg-black p-5 text-white  hover:bg-gray-800 dark:bg-white dark:text-black dark:hover:bg-gray-300 transition-transform group-hover:scale-105"
                         >
                             {icon}
                         </a>
