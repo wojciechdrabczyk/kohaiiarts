@@ -57,8 +57,8 @@ export default function Commissions() {
 
             <section style={{ fontFamily: 'Montserrat, sans-serif' }} className="relative min-h-screen font-sans">
                 <div
-                    // className="absolute inset-0 z-0 h-full w-full bg-cover bg-center blur-sm"
-                    // style={{ backgroundImage: 'url(/img-static/Mitsuri.webp)' }}
+                // className="absolute inset-0 z-0 h-full w-full bg-cover bg-center blur-sm"
+                // style={{ backgroundImage: 'url(/img-static/Mitsuri.webp)' }}
                 />
                 <div className="mx-auto max-w-4xl px-4 py-10 sm:py-16 lg:px-6">
                     <h1 className="mb-4 text-center text-3xl leading-relaxed text-black dark:text-white">Commission Services</h1>
@@ -188,7 +188,10 @@ export default function Commissions() {
                                         type="file"
                                         accept="image/*"
                                         multiple
-                                        onChange={(e) => setFilePreviews(Array.from(e.target.files || []))}
+                                        onChange={(e) => {
+                                            const newFiles = Array.from(e.target.files || []);
+                                            setFilePreviews((prev) => [...prev, ...newFiles]);
+                                        }}
                                         className="hidden"
                                     />
                                     <label
@@ -205,14 +208,30 @@ export default function Commissions() {
 
                                 {filePreviews.length > 0 && (
                                     <div className="flex flex-wrap gap-2">
-                                        {filePreviews.map((file, i) => (
-                                            <img
-                                                key={i}
-                                                src={URL.createObjectURL(file)}
-                                                alt={`Preview ${i + 1}`}
-                                                className="h-20 w-20 rounded object-cover ring-1 ring-gray-300 dark:ring-gray-600"
-                                            />
-                                        ))}
+                                        {filePreviews.map((file, i) => {
+                                            const url = URL.createObjectURL(file);
+                                            return (
+                                                <div key={i} className="relative">
+                                                    <img
+                                                        key={i}
+                                                        src={URL.createObjectURL(file)}
+                                                        alt={`Preview ${i + 1}`}
+                                                        className="h-20 w-20 rounded object-cover ring-1 ring-gray-300 dark:ring-gray-600"
+                                                    />
+                                                    <button
+                                                        type="button"
+                                                        onClick={() => {
+                                                            setFilePreviews((prev) => prev.filter((_, idx) => idx !== i));
+                                                            URL.revokeObjectURL(url);
+                                                        }}
+                                                        className="bg-opacity-75 absolute top-0 right-0 rounded-full bg-black px-2 py-1 text-xs text-white hover:bg-red-600 dark:bg-white dark:text-black dark:hover:bg-red-600"
+                                                        style={{ fontSize: '14px' }}
+                                                    >
+                                                        ×
+                                                    </button>
+                                                </div>
+                                            );
+                                        })}
                                     </div>
                                 )}
                             </div>
