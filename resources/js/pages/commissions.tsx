@@ -221,7 +221,7 @@ export default function Commissions() {
                                                     <button
                                                         type="button"
                                                         onClick={() => {
-                                                            setFilePreviews((prev) => prev.filter((_, idx) => idx !== i));
+                                                            setFilePreviews((prev) => prev.filter((_, index) => index !== i));
                                                             URL.revokeObjectURL(url);
                                                         }}
                                                         className="bg-opacity-75 absolute top-0 right-0 rounded-full bg-black px-2 py-1 text-xs text-white hover:bg-red-600 dark:bg-white dark:text-black dark:hover:bg-red-600"
