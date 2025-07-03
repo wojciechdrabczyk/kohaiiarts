@@ -41,7 +41,7 @@ export default function Support() {
                                 <p className="text-[14px] leading-[1.75] text-gray-600 dark:text-gray-400">
                                     Supporters get access to behind-the-scenes sketches, progress shots, and personal updates I don’t share anywhere
                                     else. Some tiers also include early access to art, high-res files, or the chance to help guide future work.
-                                    But truly, every bit of support helps me keep going — and I’m grateful for all of it.
+                                    But truly, every bit of support helps me keep going, and I’m grateful for all of it.
                                 </p>
                             </div>
                         </div>
