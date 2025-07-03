@@ -37,7 +37,7 @@ export default function Footer() {
                                 target="_blank"
                                 aria-label={name}
                                 rel="noopener noreferrer"
-                                className="flex items-center justify-center rounded-full bg-black p-2 text-white  hover:bg-gray-800 sm:p-3 dark:bg-white dark:text-black dark:hover:bg-gray-300 transition-transform group-hover:scale-105 "
+                                className="flex items-center justify-center rounded-full bg-black p-2 text-white  hover:bg-gray-800 sm:p-3 dark:bg-white dark:text-black dark:hover:bg-gray-300 transition-transform group-hover:scale-105"
                             >
                                 <Icon {...iconProps} />
                             </a>
