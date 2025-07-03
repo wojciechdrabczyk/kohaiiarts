@@ -103,7 +103,7 @@ export default function Contact() {
                         label: 'Name',
                         required: true,
                         type: 'text',
-                        placeholder: 'Your name, nickname, or @discordhandle',
+                        placeholder: 'Your name, nickname, @discord',
                     },
                     {
                         id: 'email',
@@ -116,8 +116,7 @@ export default function Contact() {
                         id: 'subject',
                         label: 'Subject',
                         required: false,
-                        placeholder: 'e.g. Collaboration, Feedback, General Inquiry',
-                    },
+                        placeholder: 'e.g. Collab, Feedback, Inquiry'                    },
                     {
                         id: 'message',
                         label: 'Message',

@@ -66,7 +66,7 @@ export default function Store() {
                         </a>
                     </div>
 
-                    <hr className="my-12 border-t border-gray-200 dark:border-gray-700" />
+                    <div className="mt-12" />
 
                     <div className="text-center">
                         <p className="text-sm text-gray-600 dark:text-gray-500">More platforms and products coming soon.</p>

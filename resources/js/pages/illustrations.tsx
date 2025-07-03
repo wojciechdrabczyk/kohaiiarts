@@ -76,7 +76,7 @@ export default function Illustrations() {
                 <meta name="description" content="Here are my latest drawings" />
             </Head>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 pb-8 px-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 pb-8 px-4">
 
                 {[0, 1, 2, 3].map((colIndex) => (
                     <div key={colIndex} className="grid gap-4">
@@ -93,7 +93,8 @@ export default function Illustrations() {
                                         <img
                                             src={src}
                                             alt={`Artwork ${globalIndex + 1}`}
-                                            className="h-full max-w-full rounded-lg object-cover transition-transform duration-300 group-hover:scale-105"
+                                            className="w-full h-full rounded-lg object-cover transition-transform duration-300 group-hover:scale-105"
+
                                         />
                                     </div>
                                 );

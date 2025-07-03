@@ -1,7 +1,7 @@
 import DefaultLayout from '@/layouts/default-layout';
 import { PageProps } from '@inertiajs/inertia';
 import { Head, router, usePage } from '@inertiajs/react';
-import React, { FormEvent, useState } from 'react';
+import React, { FormEvent, useRef, useState } from 'react';
 import { FiUpload } from 'react-icons/fi';
 
 type Status = 'success' | 'error' | null;
@@ -9,9 +9,24 @@ type Status = 'success' | 'error' | null;
 export default function Commissions() {
     const [status, setStatus] = useState<Status>(null);
     const [filePreviews, setFilePreviews] = useState<File[]>([]);
-
+    const [showAllFaqs, setShowAllFaqs] = useState<boolean>(false);
+    const faqRef = useRef<HTMLDivElement | null>(null);
     const { errors } = usePage<PageProps>().props as {
         errors: Record<string, string>;
+    };
+
+    const toggleFaqs = () => {
+        setShowAllFaqs((prev) => {
+            const next = !prev;
+            setTimeout(() => {
+                if (!prev && faqRef.current) {
+                    faqRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                } else if (prev && faqRef.current) {
+                    faqRef.current.scrollIntoView({ behavior: 'smooth', block: 'end' });
+                }
+            }, 20);
+            return next;
+        });
     };
 
     const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
@@ -40,20 +55,19 @@ export default function Commissions() {
                 <meta name="support" content="Thank you for supporting me!" />
             </Head>
 
-            <section
-                style={{ fontFamily: 'Montserrat, sans-serif' }}
-                className=""
-            >
+            <section style={{ fontFamily: 'Montserrat, sans-serif' }} className="relative min-h-screen font-sans">
+                <div
+                    // className="absolute inset-0 z-0 h-full w-full bg-cover bg-center blur-sm"
+                    // style={{ backgroundImage: 'url(/img-static/Mitsuri.webp)' }}
+                />
                 <div className="mx-auto max-w-4xl px-4 py-10 sm:py-16 lg:px-6">
-                    <h1 className="mb-4 text-center text-3xl leading-relaxed text-black dark:text-white">
-                        Commission Services
-                    </h1>
-                    <p className="mx-auto mb-12 max-w-2xl text-[14px] leading-[1.75]  text-gray-600 dark:text-gray-300 text-center">
+                    <h1 className="mb-4 text-center text-3xl leading-relaxed text-black dark:text-white">Commission Services</h1>
+                    <p className="mx-auto mb-12 max-w-2xl text-center text-[14px] leading-[1.75] text-gray-600 dark:text-gray-300">
                         I create custom anime-style illustrations tailored to your ideas. Whether it’s an OC, fanart, or something entirely original,
                         I’d love to bring your vision to life.
                     </p>
 
-                    <div className="mt-12 rounded-xl border border-gray-200 dark:border-neutral-700 bg-white p-6 shadow-md dark:bg-neutral-900">
+                    <div className="mt-12 rounded-xl border border-gray-200 bg-white p-6 shadow-md dark:border-neutral-700 dark:bg-neutral-900">
                         <h2 className="mb-4 text-xl font-semibold text-gray-800 dark:text-gray-200">Base Commission Prices</h2>
                         <ul className="mb-6 list-inside list-disc text-sm text-gray-600 dark:text-gray-400">
                             <li>Portrait – $88</li>
@@ -61,14 +75,12 @@ export default function Commissions() {
                             <li>Full Body – $128</li>
                         </ul>
                         <p className="text-sm text-gray-600 dark:text-gray-400">
-                            Additional charges may apply for complex outfits, backgrounds, props, or pets. High-resolution formats for printing are also
-                            available upon request. Turnaround time is 2–4 weeks depending on complexity and queue.
+                            Additional charges may apply for complex outfits, backgrounds, props, or pets. High-resolution formats for printing are
+                            also available upon request.
                         </p>
                     </div>
 
-                    <div className="mt-12 rounded-xl border p-6 border-gray-200 dark:border-neutral-700 shadow-md bg-white dark:bg-neutral-900">
-
-
+                    <div className="mt-12 rounded-xl border border-gray-200 bg-white p-6 shadow-md dark:border-neutral-700 dark:bg-neutral-900">
                         <h2 className="mb-4 text-xl font-semibold text-gray-800 dark:text-gray-200">Commission Process</h2>
                         <ol className="list-decimal space-y-2 pl-4 text-sm text-gray-600 dark:text-gray-400">
                             <li>Submit your request using the form below.</li>
@@ -81,13 +93,25 @@ export default function Commissions() {
                     <form
                         onSubmit={handleSubmit}
                         id="commissionForm"
-                        className="mt-12 rounded-xl border p-6 border-gray-200 dark:border-neutral-700 shadow-md bg-white dark:bg-neutral-900 space-y-6 scroll-mt-24"
+                        className="mt-12 scroll-mt-24 space-y-6 rounded-xl border border-gray-200 bg-white p-6 shadow-md dark:border-neutral-700 dark:bg-neutral-900"
                     >
                         <h2 className="text-xl font-semibold text-gray-800 dark:text-gray-200">Request a Commission</h2>
 
                         {[
-                            { id: 'name', label: 'Name', required: true, type: 'text', placeholder: "" },
-                            { id: 'email', label: 'Email Address', required: true, type: 'email', placeholder: 'example@domain.com' },
+                            {
+                                id: 'name',
+                                label: 'Name',
+                                required: true,
+                                type: 'text',
+                                placeholder: 'Your name, nickname, @discord',
+                            },
+                            {
+                                id: 'email',
+                                label: 'Email Address',
+                                required: true,
+                                type: 'email',
+                                placeholder: 'example@domain.com',
+                            },
                             {
                                 id: 'paypal_email',
                                 label: 'PayPal Email Address',
@@ -99,7 +123,7 @@ export default function Commissions() {
                                 id: 'subject',
                                 label: 'Subject / Type of Commission',
                                 required: true,
-                                placeholder: 'e.g. Half-body of your original character with a calm expression',
+                                placeholder: 'e.g. Half-body OC',
                             },
                             {
                                 id: 'message',
@@ -115,8 +139,7 @@ export default function Commissions() {
                             return (
                                 <div key={id} className="space-y-1">
                                     <label htmlFor={id} className="text-sm font-medium text-gray-600 dark:text-gray-300">
-                                        {label}{' '}
-                                        <span className="text-xs text-gray-400">{required ? '(required)' : '(optional)'}</span>
+                                        {label} <span className="text-xs text-gray-400">{required ? '(required)' : '(optional)'}</span>
                                     </label>
 
                                     {type === 'textarea' ? (
@@ -126,10 +149,11 @@ export default function Commissions() {
                                             required={required}
                                             rows={5}
                                             placeholder={placeholder}
-                                            className={`w-full rounded border px-4 py-3 text-sm ${error
-                                                ? 'border-red-600'
-                                                : 'border-gray-300 bg-white text-gray-900 dark:border-gray-600 dark:bg-neutral-800 dark:text-gray-100'
-                                                }`}
+                                            className={`w-full rounded border px-4 py-3 text-sm ${
+                                                error
+                                                    ? 'border-red-600'
+                                                    : 'border-gray-300 bg-white text-gray-900 dark:border-gray-600 dark:bg-neutral-800 dark:text-gray-100'
+                                            }`}
                                         />
                                     ) : (
                                         <input
@@ -138,10 +162,11 @@ export default function Commissions() {
                                             type={type ?? 'text'}
                                             required={required}
                                             placeholder={placeholder}
-                                            className={`w-full rounded border px-4 py-3 text-sm ${error
-                                                ? 'border-red-600'
-                                                : 'border-gray-300 bg-white text-gray-900 dark:border-gray-600 dark:bg-neutral-800 dark:text-gray-100'
-                                                }`}
+                                            className={`w-full rounded border px-4 py-3 text-sm ${
+                                                error
+                                                    ? 'border-red-600'
+                                                    : 'border-gray-300 bg-white text-gray-900 dark:border-gray-600 dark:bg-neutral-800 dark:text-gray-100'
+                                            }`}
                                         />
                                     )}
 
@@ -151,7 +176,7 @@ export default function Commissions() {
                         })}
 
                         <div className="space-y-1">
-                            <label htmlFor="files" className="text-sm font-medium text-gray-600 dark:text-gray-300">
+                            <label htmlFor="files" className="border-red-500 text-sm font-medium text-gray-600 dark:text-gray-300">
                                 Attach Image References <span className="text-xs text-gray-400">(optional)</span>
                             </label>
 
@@ -168,7 +193,7 @@ export default function Commissions() {
                                     />
                                     <label
                                         htmlFor="files"
-                                        className="flex items-center gap-2 cursor-pointer rounded bg-black px-4 py-2 text-sm font-medium text-white hover:bg-gray-800 dark:bg-white dark:text-black dark:hover:bg-gray-300"
+                                        className="flex cursor-pointer items-center gap-2 rounded bg-black px-4 py-2 text-sm font-medium text-white hover:bg-gray-800 dark:bg-white dark:text-black dark:hover:bg-gray-300"
                                     >
                                         <FiUpload className="text-lg" />
                                         Choose Files
@@ -201,30 +226,178 @@ export default function Commissions() {
                         </button>
 
                         {status === 'success' && (
-                            <p className="mt-4 text-center text-sm text-green-600 dark:text-green-400">
-                                Thank you! Your message has been sent.
-                            </p>
+                            <p className="mt-4 text-center text-sm text-green-600 dark:text-green-400">Thank you! Your message has been sent.</p>
                         )}
                         {status === 'error' && (
-                            <p className="mt-4 text-center text-sm text-red-600 dark:text-red-400">
-                                Oops! Something went wrong. Please try again.
-                            </p>
+                            <p className="mt-4 text-center text-sm text-red-600 dark:text-red-400">Oops! Something went wrong. Please try again.</p>
                         )}
-
                     </form>
 
+                    <div ref={faqRef} className="mt-8 space-y-4">
+                        <details className="min-h-[50px] rounded-xl border border-gray-200 bg-white p-4 text-sm text-gray-600 shadow-md dark:border-neutral-700 dark:bg-neutral-900 dark:text-gray-400">
+                            <summary className="cursor-pointer font-semibold text-gray-700 dark:text-gray-200">What can I request?</summary>
+                            <p className="mt-2">
+                                I accept most character-based commissions, including original characters, fanart, and adult-themed works. If you’re
+                                unsure, feel free to ask!
+                            </p>
+                        </details>
 
+                        <details className="min-h-[50px] rounded-xl border border-gray-200 bg-white p-4 text-sm text-gray-600 shadow-md dark:border-neutral-700 dark:bg-neutral-900 dark:text-gray-400">
+                            <summary className="cursor-pointer font-semibold text-gray-700 dark:text-gray-200">
+                                What references should I include?
+                            </summary>
+                            <p className="mt-2">
+                                Please include any visual references that help describe your idea — character sheets, poses, color palettes, outfits,
+                                or moodboards. Even rough sketches or Pinterest boards are welcome.
+                            </p>
+                        </details>
 
-                    <details className="mt-8 min-h-[50px] rounded-xl border p-4 text-sm text-gray-600 dark:text-gray-400 border-gray-200 dark:border-neutral-700 shadow-md bg-white dark:bg-neutral-900">
+                        <details className="min-h-[50px] rounded-xl border border-gray-200 bg-white p-4 text-sm text-gray-600 shadow-md dark:border-neutral-700 dark:bg-neutral-900 dark:text-gray-400">
+                            <summary className="cursor-pointer font-semibold text-gray-700 dark:text-gray-200">
+                                Do you draw NSFW or suggestive content?
+                            </summary>
+                            <p className="mt-2">
+                                Yes, I accept adult-themed work within reason. If you're unsure about the content, feel free to ask privately before
+                                submitting a request.
+                            </p>
+                        </details>
 
-                        <summary className="cursor-pointer font-semibold text-gray-700 dark:text-gray-200">
-                            What can I request?
-                        </summary>
-                        <p className="mt-2">
-                            I accept most character-based commissions, including original characters, fanart, and adult-themed works. If you’re unsure,
-                            feel free to ask!
-                        </p>
-                    </details>
+                        <details className="min-h-[50px] rounded-xl border border-gray-200 bg-white p-4 text-sm text-gray-600 shadow-md dark:border-neutral-700 dark:bg-neutral-900 dark:text-gray-400">
+                            <summary className="cursor-pointer font-semibold text-gray-700 dark:text-gray-200">
+                                What’s the expected turnaround time?
+                            </summary>
+                            <p className="mt-2">
+                                Usually 1-3 weeks depending on complexity and queue. If I expect any delays, I’ll let you know right away.
+                            </p>
+                        </details>
+
+                        {showAllFaqs && (
+                            <>
+                                <details className="min-h-[50px] rounded-xl border border-gray-200 bg-white p-4 text-sm text-gray-600 shadow-md dark:border-neutral-700 dark:bg-neutral-900 dark:text-gray-400">
+                                    <summary className="cursor-pointer font-semibold text-gray-700 dark:text-gray-200">
+                                        Can I request a faster delivery?
+                                    </summary>
+                                    <p className="mt-2">
+                                        If you need your commission completed within a shorter timeframe (typically 2–5 business days), priority
+                                        scheduling may be available depending on current workload and the complexity of the piece.
+                                    </p>
+                                    <p className="mt-2">
+                                        To request faster delivery, please mention it in your message or subject line. Priority commissions include an
+                                        additional fee of 75% of the total cost. For example, a $70 order would total $123 USD plus tax when
+                                        expedited.
+                                    </p>
+                                </details>
+                                <details className="min-h-[50px] rounded-xl border border-gray-200 bg-white p-4 text-sm text-gray-600 shadow-md dark:border-neutral-700 dark:bg-neutral-900 dark:text-gray-400">
+                                    <summary className="cursor-pointer font-semibold text-gray-700 dark:text-gray-200">
+                                        Can I request a private commission?
+                                    </summary>
+                                    <p className="mt-2">
+                                        Yes, you may request for your commission to remain private, meaning it will not be posted online, included in
+                                        my portfolio, or used for promotional purposes. If you would like your piece to remain private, please mention
+                                        this in your request.
+                                    </p>
+                                    <p className="mt-2">
+                                        By default, I reserve the right to showcase commissioned artwork for the purpose of promoting my brand. This
+                                        includes sharing it online, using it on merchandise, or featuring it in publications, unless explicitly
+                                        requested otherwise.
+                                    </p>
+                                    <p className="mt-2">
+                                        If a commission is to remain fully private, a <strong>35% increase in the total price</strong> will apply to
+                                        account for the loss of promotional value.
+                                    </p>
+                                </details>
+
+                                <details className="min-h-[50px] rounded-xl border border-gray-200 bg-white p-4 text-sm text-gray-600 shadow-md dark:border-neutral-700 dark:bg-neutral-900 dark:text-gray-400">
+                                    <summary className="cursor-pointer font-semibold text-gray-700 dark:text-gray-200">
+                                        Can I use the artwork on Twitch, YouTube, or social media?
+                                    </summary>
+                                    <p className="mt-2">
+                                        Yes! You're welcome to use the commission for personal use online. Please credit me when possible. For
+                                        commercial use, a separate license is required.
+                                    </p>
+                                </details>
+
+                                <details className="min-h-[50px] rounded-xl border border-gray-200 bg-white p-4 text-sm text-gray-600 shadow-md dark:border-neutral-700 dark:bg-neutral-900 dark:text-gray-400">
+                                    <summary className="cursor-pointer font-semibold text-gray-700 dark:text-gray-200">
+                                        How is payment handled?
+                                    </summary>
+                                    <p className="mt-2">
+                                        Payments are processed through PayPal. I’ll send you an invoice once the sketch is approved. Full payment is
+                                        required before finalizing the artwork.
+                                    </p>
+                                </details>
+
+                                <details className="min-h-[50px] rounded-xl border border-gray-200 bg-white p-4 text-sm text-gray-600 shadow-md dark:border-neutral-700 dark:bg-neutral-900 dark:text-gray-400">
+                                    <summary className="cursor-pointer font-semibold text-gray-700 dark:text-gray-200">
+                                        Can I use the artwork commercially?
+                                    </summary>
+                                    <p className="mt-2">
+                                        Commissions are intended for personal use only. If you plan to use the artwork in a way that earns money, such
+                                        as printing and selling merchandise, including it in a published book, or using it in promotional materials,
+                                        you will need to purchase a commercial license.
+                                    </p>
+                                    <p className="mt-2">
+                                        Commercial licenses typically require a 300% fee increase based on the total price of the artwork. This helps
+                                        account for the extended value and reach of the work.
+                                    </p>
+                                    <p className="mt-2">
+                                        If you are not sure whether your intended use is considered commercial, just let me know in your request and I
+                                        will be happy to clarify.
+                                    </p>
+                                </details>
+                                <details className="min-h-[50px] rounded-xl border border-gray-200 bg-white p-4 text-sm text-gray-600 shadow-md dark:border-neutral-700 dark:bg-neutral-900 dark:text-gray-400">
+                                    <summary className="cursor-pointer font-semibold text-gray-700 dark:text-gray-200">
+                                        What types of licenses do you offer?
+                                    </summary>
+                                    <ul className="mt-2 list-inside list-disc space-y-1">
+                                        <li>
+                                            <strong>Personal Use:</strong> Use the artwork on your social media, as an avatar, desktop background, or
+                                            for personal printing. No additional charge.
+                                        </li>
+                                        <li>
+                                            <strong>Small Commercial:</strong> Use in monetized YouTube videos, Twitch streams, or small merchandise
+                                            runs. +100% fee.
+                                        </li>
+                                        <li>
+                                            <strong>Full Commercial:</strong> Includes resale rights, publication in books, large-scale product lines,
+                                            or exclusive usage. +300% fee.
+                                        </li>
+                                    </ul>
+                                    <p className="mt-2">
+                                        All commercial licenses are non-exclusive unless otherwise discussed. Please mention your intended use in your
+                                        request.
+                                    </p>
+                                </details>
+
+                                <details className="min-h-[50px] rounded-xl border border-gray-200 bg-white p-4 text-sm text-gray-600 shadow-md dark:border-neutral-700 dark:bg-neutral-900 dark:text-gray-400">
+                                    <summary className="cursor-pointer font-semibold text-gray-700 dark:text-gray-200">
+                                        Can I get my artwork as a print or on merch?
+                                    </summary>
+                                    <p className="mt-2">
+                                        I don’t offer physical prints directly through commissions, but you can purchase selected artworks as prints
+                                        or merchandise through my INPRNT and TeePublic shops.
+                                    </p>
+                                </details>
+
+                                <details className="min-h-[50px] rounded-xl border border-gray-200 bg-white p-4 text-sm text-gray-600 shadow-md dark:border-neutral-700 dark:bg-neutral-900 dark:text-gray-400">
+                                    <summary className="cursor-pointer font-semibold text-gray-700 dark:text-gray-200">Do you offer refunds?</summary>
+                                    <p className="mt-2">
+                                        Refunds are only available if I haven’t started working on your piece yet. After the sketch is sent, refunds
+                                        are no longer possible.
+                                    </p>
+                                </details>
+                            </>
+                        )}
+                        <div className="mt-4 flex justify-end">
+                            <button
+                                type="button"
+                                onClick={toggleFaqs}
+                                className="rounded bg-black px-4 py-2 text-sm font-medium text-white transition hover:bg-gray-800 dark:bg-white dark:text-black dark:hover:bg-gray-300"
+                            >
+                                {showAllFaqs ? 'Show less' : 'Show more'}
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </section>
         </>
