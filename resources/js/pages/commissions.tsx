@@ -56,10 +56,6 @@ export default function Commissions() {
             </Head>
 
             <section style={{ fontFamily: 'Montserrat, sans-serif' }} className="relative min-h-screen font-sans">
-                <div
-                // className="absolute inset-0 z-0 h-full w-full bg-cover bg-center blur-sm"
-                // style={{ backgroundImage: 'url(/img-static/Mitsuri.webp)' }}
-                />
                 <div className="mx-auto max-w-4xl px-4 py-10 sm:py-16 lg:px-6">
                     <h1 className="mb-4 text-center text-3xl leading-relaxed text-black dark:text-white">Commission Services</h1>
                     <p className="mx-auto mb-12 max-w-2xl text-center text-[14px] leading-[1.75] text-gray-600 dark:text-gray-300">
@@ -67,7 +63,7 @@ export default function Commissions() {
                         I’d love to bring your vision to life.
                     </p>
 
-                    <div className="mt-12 rounded-xl border border-gray-200 bg-white p-6 shadow-md dark:border-neutral-700 dark:bg-neutral-900">
+                    <div className="mt-12 rounded-xl border-2 border-[#822a59] bg-white p-6 shadow-md dark:bg-neutral-900">
                         <h2 className="mb-4 text-xl font-semibold text-gray-800 dark:text-gray-200">Base Commission Prices</h2>
                         <ul className="mb-6 list-inside list-disc text-sm text-gray-600 dark:text-gray-400">
                             <li>Portrait – $88</li>
@@ -80,7 +76,7 @@ export default function Commissions() {
                         </p>
                     </div>
 
-                    <div className="mt-12 rounded-xl border border-gray-200 bg-white p-6 shadow-md dark:border-neutral-700 dark:bg-neutral-900">
+                    <div className="mt-12 rounded-xl border-2 border-[#822a59] bg-white p-6 shadow-md dark:bg-neutral-900">
                         <h2 className="mb-4 text-xl font-semibold text-gray-800 dark:text-gray-200">Commission Process</h2>
                         <ol className="list-decimal space-y-2 pl-4 text-sm text-gray-600 dark:text-gray-400">
                             <li>Submit your request using the form below.</li>
@@ -93,7 +89,7 @@ export default function Commissions() {
                     <form
                         onSubmit={handleSubmit}
                         id="commissionForm"
-                        className="mt-12 scroll-mt-24 space-y-6 rounded-xl border border-gray-200 bg-white p-6 shadow-md dark:border-neutral-700 dark:bg-neutral-900"
+                        className="mt-12 scroll-mt-24 space-y-6 rounded-xl border-2 border-[#822a59] bg-white p-6 shadow-md dark:bg-neutral-900"
                     >
                         <h2 className="text-xl font-semibold text-gray-800 dark:text-gray-200">Request a Commission</h2>
 
@@ -149,7 +145,7 @@ export default function Commissions() {
                                             required={required}
                                             rows={5}
                                             placeholder={placeholder}
-                                            className={`w-full rounded border px-4 py-3 text-sm ${
+                                            className={`w-full rounded border px-4 py-3 text-sm transition focus:border-[#822a59] focus:ring-1 focus:ring-[#822a59] focus:outline-none ${
                                                 error
                                                     ? 'border-red-600'
                                                     : 'border-gray-300 bg-white text-gray-900 dark:border-gray-600 dark:bg-neutral-800 dark:text-gray-100'
@@ -162,7 +158,7 @@ export default function Commissions() {
                                             type={type ?? 'text'}
                                             required={required}
                                             placeholder={placeholder}
-                                            className={`w-full rounded border px-4 py-3 text-sm ${
+                                            className={`w-full rounded border px-4 py-3 text-sm transition focus:border-[#822a59] focus:ring-1 focus:ring-[#822a59] focus:outline-none ${
                                                 error
                                                     ? 'border-red-600'
                                                     : 'border-gray-300 bg-white text-gray-900 dark:border-gray-600 dark:bg-neutral-800 dark:text-gray-100'
@@ -175,71 +171,68 @@ export default function Commissions() {
                             );
                         })}
 
-                        <div className="space-y-1">
-                            <label htmlFor="files" className="border-red-500 text-sm font-medium text-gray-600 dark:text-gray-300">
+                        <div className="">
+                            <label htmlFor="files" className="mb-2 block text-sm font-medium text-gray-600 dark:text-gray-300">
                                 Attach Image References <span className="text-xs text-gray-400">(optional)</span>
                             </label>
 
-                            <div className="space-y-2">
-                                <div className="flex items-center gap-3">
-                                    <input
-                                        id="files"
-                                        name="files[]"
-                                        type="file"
-                                        accept="image/*"
-                                        multiple
-                                        onChange={(e) => {
-                                            const newFiles = Array.from(e.target.files || []);
-                                            setFilePreviews((prev) => [...prev, ...newFiles]);
-                                        }}
-                                        className="hidden"
-                                    />
-                                    <label
-                                        htmlFor="files"
-                                        className="flex cursor-pointer items-center gap-2 rounded bg-black px-4 py-2 text-sm font-medium text-white hover:bg-gray-800 dark:bg-white dark:text-black dark:hover:bg-gray-300"
-                                    >
-                                        <FiUpload className="text-lg" />
-                                        Choose Files
-                                    </label>
-                                    <span className="text-sm text-gray-600 dark:text-gray-300">
-                                        {filePreviews.length} {filePreviews.length === 1 ? 'file' : 'files'} selected
-                                    </span>
-                                </div>
-
-                                {filePreviews.length > 0 && (
-                                    <div className="flex flex-wrap gap-2">
-                                        {filePreviews.map((file, i) => {
-                                            const url = URL.createObjectURL(file);
-                                            return (
-                                                <div key={i} className="relative">
-                                                    <img
-                                                        key={i}
-                                                        src={URL.createObjectURL(file)}
-                                                        alt={`Preview ${i + 1}`}
-                                                        className="h-20 w-20 rounded object-cover ring-1 ring-gray-300 dark:ring-gray-600"
-                                                    />
-                                                    <button
-                                                        type="button"
-                                                        onClick={() => {
-                                                            setFilePreviews((prev) => prev.filter((_, index) => index !== i));
-                                                            URL.revokeObjectURL(url);
-                                                        }}
-                                                        className="bg-opacity-75 absolute top-0 right-0 rounded-full bg-black px-2 py-1 text-xs text-white hover:bg-red-600 dark:bg-white dark:text-black dark:hover:bg-red-600"
-                                                        style={{ fontSize: '14px' }}
-                                                    >
-                                                        ×
-                                                    </button>
-                                                </div>
-                                            );
-                                        })}
-                                    </div>
-                                )}
+                            <div className="flex items-center gap-3">
+                                <input
+                                    id="files"
+                                    name="files[]"
+                                    type="file"
+                                    accept="image/*"
+                                    multiple
+                                    onChange={(e) => {
+                                        const newFiles = Array.from(e.target.files || []);
+                                        setFilePreviews((prev) => [...prev, ...newFiles]);
+                                    }}
+                                    className="hidden"
+                                />
+                                <label
+                                    htmlFor="files"
+                                    className="flex cursor-pointer items-center gap-2 rounded bg-[#822a59] px-4 py-2 text-sm font-medium text-white hover:bg-[#6e1f48] dark:bg-[#822a59] dark:text-white dark:hover:bg-[#6e1f48]"
+                                >
+                                    <FiUpload className="text-lg" />
+                                    Choose Files
+                                </label>
+                                <span className="text-sm text-gray-600 dark:text-gray-300">
+                                    {filePreviews.length} {filePreviews.length === 1 ? 'file' : 'files'} selected
+                                </span>
                             </div>
+
+                            {filePreviews.length > 0 && (
+                                <div className="flex flex-wrap gap-2">
+                                    {filePreviews.map((file, i) => {
+                                        const url = URL.createObjectURL(file);
+                                        return (
+                                            <div key={i} className="relative">
+                                                <img
+                                                    src={url}
+                                                    alt={`Preview ${i + 1}`}
+                                                    className="h-20 w-20 rounded object-cover ring-1 ring-gray-300 dark:ring-gray-600"
+                                                />
+                                                <button
+                                                    type="button"
+                                                    onClick={() => {
+                                                        setFilePreviews((prev) => prev.filter((_, index) => index !== i));
+                                                        URL.revokeObjectURL(url);
+                                                    }}
+                                                    className="bg-opacity-75 absolute top-0 right-0 rounded-full bg-black px-2 py-1 text-xs text-white hover:bg-red-600 dark:bg-white dark:text-black dark:hover:bg-red-600"
+                                                    style={{ fontSize: '14px' }}
+                                                >
+                                                    ×
+                                                </button>
+                                            </div>
+                                        );
+                                    })}
+                                </div>
+                            )}
                         </div>
 
                         <button
                             type="submit"
-                            className="w-full rounded bg-black px-4 py-3 text-sm font-semibold text-white transition hover:bg-gray-800 dark:bg-white dark:text-black dark:hover:bg-gray-300"
+                            className="w-full rounded bg-[#822a59] px-4 py-3 text-sm font-semibold text-white transition hover:bg-[#6e1f48] dark:bg-[#822a59] dark:text-white dark:hover:bg-[#6e1f48]"
                         >
                             Send Commission Request
                         </button>
@@ -253,16 +246,18 @@ export default function Commissions() {
                     </form>
 
                     <div ref={faqRef} className="mt-8 space-y-4">
-                        <details className="min-h-[50px] rounded-xl border border-gray-200 bg-white p-4 text-sm text-gray-600 shadow-md dark:border-neutral-700 dark:bg-neutral-900 dark:text-gray-400">
-                            <summary className="cursor-pointer font-semibold text-gray-700 dark:text-gray-200">What can I request?</summary>
+                        <details className="min-h-[50px] rounded-xl border-2 border-[#822a59] bg-white p-4 text-sm text-gray-600 shadow-md dark:bg-neutral-900 dark:text-gray-400">
+                            <summary className="cursor-pointer font-semibold text-gray-700 dark:text-gray-200 [&::marker]:text-[#c59d36]">
+                                What can I request?
+                            </summary>
                             <p className="mt-2">
                                 I accept most character-based commissions, including original characters, fanart, and adult-themed works. If you’re
                                 unsure, feel free to ask!
                             </p>
                         </details>
 
-                        <details className="min-h-[50px] rounded-xl border border-gray-200 bg-white p-4 text-sm text-gray-600 shadow-md dark:border-neutral-700 dark:bg-neutral-900 dark:text-gray-400">
-                            <summary className="cursor-pointer font-semibold text-gray-700 dark:text-gray-200">
+                        <details className="min-h-[50px] rounded-xl border-2 border-[#822a59] bg-white p-4 text-sm text-gray-600 shadow-md dark:bg-neutral-900 dark:text-gray-400">
+                            <summary className="cursor-pointer font-semibold text-gray-700 dark:text-gray-200 [&::marker]:text-[#c59d36]">
                                 What references should I include?
                             </summary>
                             <p className="mt-2">
@@ -271,8 +266,8 @@ export default function Commissions() {
                             </p>
                         </details>
 
-                        <details className="min-h-[50px] rounded-xl border border-gray-200 bg-white p-4 text-sm text-gray-600 shadow-md dark:border-neutral-700 dark:bg-neutral-900 dark:text-gray-400">
-                            <summary className="cursor-pointer font-semibold text-gray-700 dark:text-gray-200">
+                        <details className="min-h-[50px] rounded-xl border-2 border-[#822a59] bg-white p-4 text-sm text-gray-600 shadow-md dark:bg-neutral-900 dark:text-gray-400">
+                            <summary className="cursor-pointer font-semibold text-gray-700 dark:text-gray-200 [&::marker]:text-[#c59d36]">
                                 Do you draw NSFW or suggestive content?
                             </summary>
                             <p className="mt-2">
@@ -281,8 +276,8 @@ export default function Commissions() {
                             </p>
                         </details>
 
-                        <details className="min-h-[50px] rounded-xl border border-gray-200 bg-white p-4 text-sm text-gray-600 shadow-md dark:border-neutral-700 dark:bg-neutral-900 dark:text-gray-400">
-                            <summary className="cursor-pointer font-semibold text-gray-700 dark:text-gray-200">
+                        <details className="min-h-[50px] rounded-xl border-2 border-[#822a59] bg-white p-4 text-sm text-gray-600 shadow-md dark:bg-neutral-900 dark:text-gray-400">
+                            <summary className="cursor-pointer font-semibold text-gray-700 dark:text-gray-200 [&::marker]:text-[#c59d36]">
                                 What’s the expected turnaround time?
                             </summary>
                             <p className="mt-2">
@@ -292,8 +287,8 @@ export default function Commissions() {
 
                         {showAllFaqs && (
                             <>
-                                <details className="min-h-[50px] rounded-xl border border-gray-200 bg-white p-4 text-sm text-gray-600 shadow-md dark:border-neutral-700 dark:bg-neutral-900 dark:text-gray-400">
-                                    <summary className="cursor-pointer font-semibold text-gray-700 dark:text-gray-200">
+                                <details className="min-h-[50px] rounded-xl border-2 border-[#822a59] bg-white p-4 text-sm text-gray-600 shadow-md dark:bg-neutral-900 dark:text-gray-400">
+                                    <summary className="cursor-pointer font-semibold text-gray-700 dark:text-gray-200 [&::marker]:text-[#c59d36]">
                                         Can I request a faster delivery?
                                     </summary>
                                     <p className="mt-2">
@@ -306,8 +301,8 @@ export default function Commissions() {
                                         expedited.
                                     </p>
                                 </details>
-                                <details className="min-h-[50px] rounded-xl border border-gray-200 bg-white p-4 text-sm text-gray-600 shadow-md dark:border-neutral-700 dark:bg-neutral-900 dark:text-gray-400">
-                                    <summary className="cursor-pointer font-semibold text-gray-700 dark:text-gray-200">
+                                <details className="min-h-[50px] rounded-xl border-2 border-[#822a59] bg-white p-4 text-sm text-gray-600 shadow-md dark:bg-neutral-900 dark:text-gray-400">
+                                    <summary className="cursor-pointer font-semibold text-gray-700 dark:text-gray-200 [&::marker]:text-[#c59d36]">
                                         Can I request a private commission?
                                     </summary>
                                     <p className="mt-2">
@@ -325,9 +320,8 @@ export default function Commissions() {
                                         account for the loss of promotional value.
                                     </p>
                                 </details>
-
-                                <details className="min-h-[50px] rounded-xl border border-gray-200 bg-white p-4 text-sm text-gray-600 shadow-md dark:border-neutral-700 dark:bg-neutral-900 dark:text-gray-400">
-                                    <summary className="cursor-pointer font-semibold text-gray-700 dark:text-gray-200">
+                                <details className="min-h-[50px] rounded-xl border-2 border-[#822a59] bg-white p-4 text-sm text-gray-600 shadow-md dark:bg-neutral-900 dark:text-gray-400">
+                                    <summary className="cursor-pointer font-semibold text-gray-700 dark:text-gray-200 [&::marker]:text-[#c59d36]">
                                         Can I use the artwork on Twitch, YouTube, or social media?
                                     </summary>
                                     <p className="mt-2">
@@ -335,9 +329,8 @@ export default function Commissions() {
                                         commercial use, a separate license is required.
                                     </p>
                                 </details>
-
-                                <details className="min-h-[50px] rounded-xl border border-gray-200 bg-white p-4 text-sm text-gray-600 shadow-md dark:border-neutral-700 dark:bg-neutral-900 dark:text-gray-400">
-                                    <summary className="cursor-pointer font-semibold text-gray-700 dark:text-gray-200">
+                                <details className="min-h-[50px] rounded-xl border-2 border-[#822a59] bg-white p-4 text-sm text-gray-600 shadow-md dark:bg-neutral-900 dark:text-gray-400">
+                                    <summary className="cursor-pointer font-semibold text-gray-700 dark:text-gray-200 [&::marker]:text-[#c59d36]">
                                         How is payment handled?
                                     </summary>
                                     <p className="mt-2">
@@ -345,9 +338,8 @@ export default function Commissions() {
                                         required before finalizing the artwork.
                                     </p>
                                 </details>
-
-                                <details className="min-h-[50px] rounded-xl border border-gray-200 bg-white p-4 text-sm text-gray-600 shadow-md dark:border-neutral-700 dark:bg-neutral-900 dark:text-gray-400">
-                                    <summary className="cursor-pointer font-semibold text-gray-700 dark:text-gray-200">
+                                <details className="min-h-[50px] rounded-xl border-2 border-[#822a59] bg-white p-4 text-sm text-gray-600 shadow-md dark:bg-neutral-900 dark:text-gray-400">
+                                    <summary className="cursor-pointer font-semibold text-gray-700 dark:text-gray-200 [&::marker]:text-[#c59d36]">
                                         Can I use the artwork commercially?
                                     </summary>
                                     <p className="mt-2">
@@ -364,8 +356,8 @@ export default function Commissions() {
                                         will be happy to clarify.
                                     </p>
                                 </details>
-                                <details className="min-h-[50px] rounded-xl border border-gray-200 bg-white p-4 text-sm text-gray-600 shadow-md dark:border-neutral-700 dark:bg-neutral-900 dark:text-gray-400">
-                                    <summary className="cursor-pointer font-semibold text-gray-700 dark:text-gray-200">
+                                <details className="min-h-[50px] rounded-xl border-2 border-[#822a59] bg-white p-4 text-sm text-gray-600 shadow-md dark:bg-neutral-900 dark:text-gray-400">
+                                    <summary className="cursor-pointer font-semibold text-gray-700 dark:text-gray-200 [&::marker]:text-[#c59d36]">
                                         What types of licenses do you offer?
                                     </summary>
                                     <ul className="mt-2 list-inside list-disc space-y-1">
@@ -387,9 +379,8 @@ export default function Commissions() {
                                         request.
                                     </p>
                                 </details>
-
-                                <details className="min-h-[50px] rounded-xl border border-gray-200 bg-white p-4 text-sm text-gray-600 shadow-md dark:border-neutral-700 dark:bg-neutral-900 dark:text-gray-400">
-                                    <summary className="cursor-pointer font-semibold text-gray-700 dark:text-gray-200">
+                                <details className="min-h-[50px] rounded-xl border-2 border-[#822a59] bg-white p-4 text-sm text-gray-600 shadow-md dark:bg-neutral-900 dark:text-gray-400">
+                                    <summary className="cursor-pointer font-semibold text-gray-700 dark:text-gray-200 [&::marker]:text-[#c59d36]">
                                         Can I get my artwork as a print or on merch?
                                     </summary>
                                     <p className="mt-2">
@@ -397,9 +388,10 @@ export default function Commissions() {
                                         or merchandise through my INPRNT and TeePublic shops.
                                     </p>
                                 </details>
-
-                                <details className="min-h-[50px] rounded-xl border border-gray-200 bg-white p-4 text-sm text-gray-600 shadow-md dark:border-neutral-700 dark:bg-neutral-900 dark:text-gray-400">
-                                    <summary className="cursor-pointer font-semibold text-gray-700 dark:text-gray-200">Do you offer refunds?</summary>
+                                <details className="min-h-[50px] rounded-xl border-2 border-[#822a59] bg-white p-4 text-sm text-gray-600 shadow-md dark:bg-neutral-900 dark:text-gray-400">
+                                    <summary className="cursor-pointer font-semibold text-gray-700 dark:text-gray-200 [&::marker]:text-[#c59d36]">
+                                        Do you offer refunds?
+                                    </summary>
                                     <p className="mt-2">
                                         Refunds are only available if I haven’t started working on your piece yet. After the sketch is sent, refunds
                                         are no longer possible.
@@ -407,11 +399,12 @@ export default function Commissions() {
                                 </details>
                             </>
                         )}
+
                         <div className="mt-4 flex justify-end">
                             <button
                                 type="button"
                                 onClick={toggleFaqs}
-                                className="rounded bg-black px-4 py-2 text-sm font-medium text-white transition hover:bg-gray-800 dark:bg-white dark:text-black dark:hover:bg-gray-300"
+                                className="rounded bg-[#822a59] px-4 py-2 text-sm font-medium text-white transition hover:bg-[#6e1f48] dark:bg-[#822a59] dark:text-white dark:hover:bg-[#6e1f48]"
                             >
                                 {showAllFaqs ? 'Show less' : 'Show more'}
                             </button>

@@ -7,10 +7,10 @@ import { FaDiscord } from 'react-icons/fa';
 import { FaPatreon, FaThreads, FaXTwitter } from 'react-icons/fa6';
 
 export default function Footer() {
-    const iconProps = { size: 14 };
+    const iconProps = { size: 24 };
 
     const socialLinks2 = [
-        { name: 'X', url: 'https://x.com/KohaiiArts', Icon: FaXTwitter },
+        { name: 'X', url: 'https://x.com/KohaiiArts', Icon: FaXTwitter, },
         { name: 'Threads', url: 'https://www.threads.com/@kohaii_arts', Icon: FaThreads },
         { name: 'Instagram', url: 'https://www.instagram.com/kohaii_arts/', Icon: BsInstagram },
         { name: 'Discord', url: 'invitation link to the discord server?', Icon: FaDiscord },
@@ -22,13 +22,10 @@ export default function Footer() {
 
     return (
         <footer
-            className="align-center bottom-0 flex w-full flex-col items-center border-t border-gray-200 bg-white px-2 py-4 dark:border-gray-700 dark:bg-black"
+            className="align-center bottom-0 flex w-full flex-col items-center px-2 py-4"
             style={{ fontFamily: 'Montserrat, sans-serif' }}
         >
             <div className="mx-auto flex max-w-5/6 flex-col items-center justify-center gap-12 sm:flex-row sm:items-center sm:justify-between">
-                <p className="text-sm text-gray-500 sm:self-center dark:text-gray-400">
-                    © {new Date().getFullYear()} Kohaii Arts — All rights reserved.
-                </p>
                 <div className="flex flex-wrap justify-center gap-4">
                     {socialLinks2.map(({ name, url, Icon }) => (
                         <div key={url} className="group relative flex flex-col items-center ">
@@ -37,14 +34,17 @@ export default function Footer() {
                                 target="_blank"
                                 aria-label={name}
                                 rel="noopener noreferrer"
-                                className="flex items-center justify-center rounded-full bg-black p-2 text-white  hover:bg-gray-800 sm:p-3 dark:bg-white dark:text-black dark:hover:bg-gray-300 transition-transform group-hover:scale-105"
+                                className="flex items-center justify-center   p-2 text-[#822a59]   sm:p-3  dark:text-[#822a59]  transition-transform group-hover:scale-120"
                             >
-                                <Icon {...iconProps} />
+                                <Icon {...iconProps} style={{color: '#822a59'}} />
                             </a>
                         </div>
                     ))}
                 </div>
             </div>
+            <p className="text-sm pt-4 text-gray-500 sm:self-center dark:text-gray-400">
+                © {new Date().getFullYear()} Kohaii Arts — All rights reserved.
+            </p>
         </footer>
     );
 }

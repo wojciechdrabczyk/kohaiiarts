@@ -33,8 +33,16 @@ export default function Contact() {
     };
 
     const socialLinks = [
-        { name: 'X', url: 'https://x.com/KohaiiArts', icon: <FaXTwitter size={32} /> },
-        { name: 'Threads', url: 'https://www.threads.com/@kohaii_arts', icon: <FaThreads size={32} /> },
+        {
+            name: 'X',
+            url: 'https://x.com/KohaiiArts',
+            icon: <FaXTwitter size={32} />,
+        },
+        {
+            name: 'Threads',
+            url: 'https://www.threads.com/@kohaii_arts',
+            icon: <FaThreads size={32} />,
+        },
         {
             name: 'Instagram',
             url: 'https://www.instagram.com/kohaii_arts/',
@@ -45,14 +53,26 @@ export default function Contact() {
             url: 'invitation link to the discord server?',
             icon: <FaDiscord size={32} className="text-indigo-500" />,
         },
-        { name: 'Newgrounds', url: 'https://kohaiiarts.newgrounds.com/art', icon: <NewgroundsIcon size={32} /> },
+        {
+            name: 'Newgrounds',
+            url: 'https://kohaiiarts.newgrounds.com/art',
+            icon: <NewgroundsIcon size={32} />,
+        },
         {
             name: 'Patreon',
             url: 'https://www.patreon.com/KohaiiArts',
             icon: <FaPatreon size={32} className="text-[#f96854]" />,
         },
-        { name: 'Throne', url: 'https://throne.com/kohaiiarts', icon: <ThroneIcon size={32} /> },
-        { name: 'Inprnt', url: 'https://www.inprnt.com/gallery/kohaiiarts/', icon: <InprntIcon size={32} /> },
+        {
+            name: 'Throne',
+            url: 'https://throne.com/kohaiiarts',
+            icon: <ThroneIcon size={32} />,
+        },
+        {
+            name: 'Inprnt',
+            url: 'https://www.inprnt.com/gallery/kohaiiarts/',
+            icon: <InprntIcon size={32} />,
+        },
     ];
 
     return (
@@ -71,13 +91,10 @@ export default function Contact() {
                             target="_blank"
                             aria-label={name}
                             rel="noopener noreferrer"
-                            className="flex items-center justify-center rounded-full bg-black p-5 text-white  hover:bg-gray-800 dark:bg-white dark:text-black dark:hover:bg-gray-300 transition-transform group-hover:scale-105"
+                            className="flex items-center justify-center rounded-full border-2 border-[#822a59] bg-white p-5 shadow-md transition hover:shadow-md dark:bg-neutral-800 dark:hover:bg-neutral-700"
                         >
-                            {icon}
+                            <span className="transition-transform group-hover:scale-110">{icon}</span>
                         </a>
-                        <span className="text-xs text-gray-600 sm:absolute sm:-top-3 sm:left-1/2 sm:-translate-x-1/2 sm:-translate-y-full sm:rounded sm:bg-gray-700 sm:px-2 sm:py-1 sm:text-white sm:opacity-0 sm:transition sm:duration-200 group-hover:sm:opacity-100 dark:text-gray-300 dark:sm:bg-gray-200 dark:sm:text-black">
-                            {name}
-                        </span>
                     </div>
                 ))}
             </div>
@@ -93,7 +110,7 @@ export default function Contact() {
             <form
                 onSubmit={handleSubmit}
                 id="contactForm"
-                className="mx-auto mt-12 max-w-xl scroll-mt-24 space-y-6 rounded-xl border border-gray-200 bg-white p-12 shadow-md dark:border-neutral-700 dark:bg-neutral-900"
+                className="mx-auto mt-12 max-w-xl scroll-mt-24 space-y-6 rounded-xl border-2 border-[#822a59] bg-white p-12 shadow-md dark:bg-neutral-900"
             >
                 <h2 className="text-xl font-semibold text-gray-800 dark:text-gray-200">Contact me</h2>
 
@@ -116,7 +133,8 @@ export default function Contact() {
                         id: 'subject',
                         label: 'Subject',
                         required: false,
-                        placeholder: 'e.g. Collab, Feedback, Inquiry'                    },
+                        placeholder: 'e.g. Collab, Feedback, Inquiry',
+                    },
                     {
                         id: 'message',
                         label: 'Message',
@@ -139,10 +157,11 @@ export default function Contact() {
                                     required={required}
                                     rows={5}
                                     placeholder={placeholder}
-                                    className={`w-full rounded border px-4 py-3 text-sm ${error
-                                        ? 'border-red-600'
-                                        : 'border-gray-300 bg-white text-gray-900 dark:border-gray-600 dark:bg-neutral-800 dark:text-gray-100'
-                                        }`}
+                                    className={`w-full rounded border px-4 py-3 text-sm transition focus:border-[#822a59] focus:ring-1 focus:ring-[#822a59] focus:outline-none ${
+                                        error
+                                            ? 'border-red-600'
+                                            : 'border-gray-300 bg-white text-gray-900 dark:border-gray-600 dark:bg-neutral-800 dark:text-gray-100'
+                                    }`}
                                 />
                             ) : (
                                 <input
@@ -151,10 +170,11 @@ export default function Contact() {
                                     type={type ?? 'text'}
                                     required={required}
                                     placeholder={placeholder}
-                                    className={`w-full rounded border px-4 py-3 text-sm ${error
-                                        ? 'border-red-600'
-                                        : 'border-gray-300 bg-white text-gray-900 dark:border-gray-600 dark:bg-neutral-800 dark:text-gray-100'
-                                        }`}
+                                    className={`w-full rounded border px-4 py-3 text-sm transition focus:border-[#822a59] focus:ring-1 focus:ring-[#822a59] focus:outline-none ${
+                                        error
+                                            ? 'border-red-600'
+                                            : 'border-gray-300 bg-white text-gray-900 dark:border-gray-600 dark:bg-neutral-800 dark:text-gray-100'
+                                    }`}
                                 />
                             )}
 
@@ -162,13 +182,15 @@ export default function Contact() {
                         </div>
                     );
                 })}
+
                 <button
                     type="submit"
-                    className="w-full rounded bg-black px-4 py-3 text-sm font-semibold text-white transition hover:bg-gray-800 dark:bg-white dark:text-black dark:hover:bg-gray-300"
+                    className="w-full rounded bg-[#822a59] px-4 py-3 text-sm font-semibold text-white transition hover:bg-[#6e1f48] dark:bg-[#822a59] dark:text-white dark:hover:bg-[#6e1f48]"
                 >
                     Send
                 </button>
             </form>
+
             {status && (
                 <div className="mx-auto mt-5 max-w-xl rounded-xl bg-white px-6 py-4 shadow-md dark:bg-neutral-900">
                     {status === 'success' && (

@@ -76,10 +76,10 @@ export default function Illustrations() {
                 <meta name="description" content="Here are my latest drawings" />
             </Head>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 pb-8 px-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 pb-8 px-4">
 
                 {[0, 1, 2, 3].map((colIndex) => (
-                    <div key={colIndex} className="grid gap-4">
+                    <div key={colIndex} className="grid gap-5">
                         {images
                             .filter((_, i) => i % 4 === colIndex)
                             .map((src, index) => {
@@ -87,13 +87,13 @@ export default function Illustrations() {
                                 return (
                                     <div
                                         key={globalIndex}
-                                        className="group cursor-pointer overflow-hidden rounded-md"
+                                        className="group cursor-pointer overflow-hidden"
                                         onClick={() => setCurrentIndex(globalIndex)}
                                     >
                                         <img
                                             src={src}
                                             alt={`Artwork ${globalIndex + 1}`}
-                                            className="w-full h-full rounded-lg object-cover transition-transform duration-300 group-hover:scale-105"
+                                            className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
 
                                         />
                                     </div>
@@ -146,7 +146,7 @@ export default function Illustrations() {
                                             <img
                                                 src={images[currentIndex]}
                                                 alt={`Artwork ${currentIndex + 1}`}
-                                                className="max-h-[80vh] max-w-full rounded object-contain shadow-lg"
+                                                className="max-h-full max-w-full rounded object-contain shadow-lg"
                                             />
 
                                             <button
