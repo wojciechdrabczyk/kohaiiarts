@@ -28,8 +28,8 @@ class CommissionRequest extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            from: new Address('commissions@kohaiis.art', 'Kohaiis Art Commissions'),
-            to: [new Address('kohaiiarts@gmail.com', 'Kohaiis Art Commissions')],
+            from: new Address('commissions@' . env('MAILGUN_DOMAIN'), 'Kohaiis Art Commissions'),
+            to: [new Address(env('KOHAIIS_EMAIL_ADDRESS'), 'Kohaiis Art Commissions')],
             subject: 'Commission Request from ' . $this->data['name'],
         );
     }
