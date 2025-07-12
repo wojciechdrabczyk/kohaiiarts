@@ -17,7 +17,7 @@ class ContactController extends Controller
             'message' => 'required|string|min:5|max:1000',
         ]);
 
-        Mail::to('kohaiiarts@gmail.com')->send(new ContactMessage($data));
+        Mail::to(env('KOHAIIS_EMAIL_ADDRESS'))->send(new ContactMessage($data));
 
         return back()->with('success', 'Message sent!');
     }
