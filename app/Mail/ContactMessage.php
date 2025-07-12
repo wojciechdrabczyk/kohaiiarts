@@ -28,8 +28,8 @@ class ContactMessage extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            from: new Address('contact@kohaiis.art', 'Kohaiis Art Inquiries'),
-            to: [new Address('kohaiiarts@gmail.com', 'Kohaiis Art Inquiries')],
+            from: new Address('contact@' . env('MAILGUN_DOMAIN'), 'Kohaiis Art Inquiries'),
+            to: [new Address(env('KOHAIIS_EMAIL_ADDRESS'), 'Kohaiis Art Inquiries')],
             subject: 'New Contact Message from ' . $this->data['name'],
         );
     }
