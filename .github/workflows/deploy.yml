@@ -25,11 +25,11 @@ jobs:
       run: |
         rsync -avz \
           -e "ssh -o StrictHostKeyChecking=no -p 22" \
-          ./ root@kohaiis.art:/srv/kohaiis.art
+          ./ root@kohaiiarts.com:/srv/kohaiis.art
 
     - name: Run post-deploy commands
       run: |
-        ssh -o StrictHostKeyChecking=no -p 22 root@kohaiis.art << 'EOF'
+        ssh -o StrictHostKeyChecking=no -p 22 root@kohaiiarts.com << 'EOF'
           export COMPOSER_ALLOW_SUPERUSER=1
           cd /srv/kohaiis.art
           # Ensure the database directory exists
