@@ -21,7 +21,7 @@ export default function ThumbnailImage({ src, alt, onClick }: Props) {
                 />
             </div>
             <div className="absolute inset-0 flex items-center justify-center bg-black/50 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-                <p className="px-2 text-center text-2xl text-white" style={{ fontFamily: 'Inter, sans-serif' }}>
+                <p className="px-2 text-center text-2xl text-white drop-shadow-md" style={{ fontFamily: 'Inter, sans-serif' }}>
                     {alt}
                 </p>
             </div>

@@ -111,7 +111,7 @@ export default function Illustrations() {
                         leaveFrom="opacity-100"
                         leaveTo="opacity-0"
                     >
-                        <div className="fixed inset-0 bg-white/50 backdrop-blur-sm" />
+                        <div className="fixed inset-0 bg-white/40 backdrop-blur-sm" />
                     </TransitionChild>
 
                     <div className="fixed inset-0 flex items-center justify-center p-4">
@@ -161,14 +161,23 @@ export default function Illustrations() {
                                     >
                                         {currentIndex !== null && (
                                             <>
-                                                <figure className="z-20 max-h-[90vh] max-w-[95vw] overflow-auto" data-no-click-zone>
+                                                <figure
+                                                    className="z-20 max-h-[90vh] max-w-[95vw] overflow-auto"
+                                                    data-no-click-zone
+                                                    role="group"
+                                                    aria-labelledby="caption"
+                                                >
                                                     <img
                                                         src={images[currentIndex].src}
                                                         alt={images[currentIndex].caption || 'Artwork image'}
                                                         className="mx-auto h-auto max-h-[90vh] w-auto object-contain shadow-lg"
                                                     />
                                                     {images[currentIndex].caption && (
-                                                        <figcaption className="mt-4 text-center text-sm text-gray-200">
+                                                        <figcaption
+                                                            id="caption"
+                                                            className="mt-4 text-center text-3xl bg-black/5 rounded-xl px-3 py-3 text-white drop-shadow-md"
+                                                            style={{ fontFamily: 'Inter, sans-serif' }}
+                                                        >
                                                             {images[currentIndex].caption}
                                                         </figcaption>
                                                     )}
