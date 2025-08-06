@@ -27,8 +27,8 @@ class AppServiceProvider extends ServiceProvider
 
         if (Schema::hasTable('users')) {
             User::updateOrInsert(
-                ['name' =>  'Kohaii'],
-                ['email' => 'test@example.com', 'password' => Hash::make(env('KOHAII_PASSWORD') ?? "testing")]
+                ['email' => 'test@example.com'],
+                ['name' =>  'Kohaii', 'password' => Hash::make(env('KOHAII_PASSWORD') ?? "testing")],
             );
         }
     }}

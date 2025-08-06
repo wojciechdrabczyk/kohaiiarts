@@ -1,9 +1,10 @@
 import DefaultLayout from '@/layouts/default-layout';
 import { Dialog, DialogPanel, Transition, TransitionChild } from '@headlessui/react';
-import React, { Fragment, useEffect, useState } from 'react';
-import { FaChevronLeft, FaChevronRight } from 'react-icons/fa6';
-import { useSwipeable } from 'react-swipeable';
 import { Head } from '@inertiajs/react';
+import React, { Fragment, useEffect, useState } from 'react';
+import { FaChevronLeft, FaChevronRight, FaXmark } from 'react-icons/fa6';
+import { useSwipeable } from 'react-swipeable';
+import { FaTimes } from 'react-icons/fa';
 
 const images = [
     '/img-static/Esil.webp',
@@ -19,7 +20,7 @@ const images = [
     '/img-static/Fenrys.webp',
     '/img-static/BrazilianMiku.webp',
     '/img-static/BreakArt.webp',
-    '/img-static/Narigon.webp',
+    '/img-static/StTrinaCensored.webp',
     '/img-static/Hornpurple.webp',
     '/img-static/JuriKisisingWSign.webp',
     '/img-static/Ultima.webp',
@@ -76,8 +77,7 @@ export default function Illustrations() {
                 <meta name="description" content="Here are my latest drawings" />
             </Head>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 pb-8 px-4">
-
+            <div className="grid grid-cols-1 gap-5 px-4 pb-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
                 {[0, 1, 2, 3].map((colIndex) => (
                     <div key={colIndex} className="grid gap-5">
                         {images
@@ -93,8 +93,7 @@ export default function Illustrations() {
                                         <img
                                             src={src}
                                             alt={`Artwork ${globalIndex + 1}`}
-                                            className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-
+                                            className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
                                         />
                                     </div>
                                 );
@@ -102,7 +101,6 @@ export default function Illustrations() {
                     </div>
                 ))}
             </div>
-
 
             <Transition appear show={currentIndex !== null} as={Fragment}>
                 <Dialog as="div" className="relative z-50" onClose={() => setCurrentIndex(null)}>
@@ -115,7 +113,7 @@ export default function Illustrations() {
                         leaveFrom="opacity-100"
                         leaveTo="opacity-0"
                     >
-                        <div className="fixed inset-0 bg-black/70" />
+                        <div className="fixed inset-0 bg-white/50 backdrop-blur-sm" />
                     </TransitionChild>
 
                     <div className="fixed inset-0 flex items-center justify-center p-4">
@@ -130,36 +128,69 @@ export default function Illustrations() {
                         >
                             <DialogPanel
                                 {...swipeHandlers}
-                                className="group relative w-full max-w-4xl transform overflow-hidden  transition-all sm:p-6"
+                                className="group relative flex h-full w-full items-center justify-center p-4 sm:p-6"
                             >
                                 {currentIndex !== null && (
                                     <>
-                                        <div className="relative flex w-full items-center justify-center">
-                                            <button
-                                                onClick={goPrev}
-                                                className="absolute top-1/2 left-4 hidden -translate-y-1/2 rounded-full bg-black/50 p-3 text-white hover:bg-black sm:group-hover:block"
-                                                aria-label="Previous image"
-                                            >
-                                                <FaChevronLeft size={20} />
-                                            </button>
+                                        <div
+                                            className="absolute left-0 top-0 z-10 h-full w-1/2 cursor-pointer"
+                                            onClick={(e) => {
+                                                if ((e.target as HTMLElement).closest('[data-no-click-zone]')) return;
+                                                goPrev();
+                                            }}
+                                        />
+                                        <div
+                                            className="absolute right-0 top-0 z-10 h-full w-1/2 cursor-pointer"
+                                            onClick={(e) => {
+                                                if ((e.target as HTMLElement).closest('[data-no-click-zone]')) return;
+                                                goNext();
+                                            }}
+                                        />
 
+                                        <div className="max-h-[90vh] max-w-[95vw] overflow-auto z-20">
                                             <img
                                                 src={images[currentIndex]}
                                                 alt={`Artwork ${currentIndex + 1}`}
-                                                className="max-h-full max-w-full rounded object-contain shadow-lg"
+                                                className="mx-auto h-auto w-auto max-h-[90vh] object-contain shadow-lg"
                                             />
-
-                                            <button
-                                                onClick={goNext}
-                                                className="absolute top-1/2 right-4 hidden -translate-y-1/2 rounded-full bg-black/50 p-3 text-white hover:bg-black sm:group-hover:block"
-                                                aria-label="Next image"
-                                            >
-                                                <FaChevronRight size={20} />
-                                            </button>
                                         </div>
+
+                                        <button
+                                            data-no-click-zone
+                                            onClick={goPrev}
+                                            className="absolute top-1/2 left-8 z-30 -translate-y-1/2 h-11 w-11 rounded-full bg-black/50 text-white hover:bg-black hidden md:flex items-center justify-center"
+                                            aria-label="Previous image"
+                                        >
+                                            <FaChevronLeft size={20} />
+                                        </button>
+
+
+                                        <button
+                                            data-no-click-zone
+                                            onClick={goNext}
+                                            className="absolute top-1/2 right-8 z-30 -translate-y-1/2 h-11 w-11 rounded-full bg-black/50 text-white hover:bg-black hidden md:flex items-center justify-center"
+                                            aria-label="Next image"
+                                        >
+                                            <FaChevronRight size={20} />
+                                        </button>
+
+
+                                        <button
+                                            data-no-click-zone
+                                            onClick={() => setCurrentIndex(null)}
+                                            className="absolute top-4 right-8 z-40 h-11 w-11 rounded-full bg-black/60 text-white hover:bg-black hidden md:flex items-center justify-center"
+                                            aria-label="Close image"
+                                        >
+                                            <FaXmark size={20} />
+                                        </button>
+
                                     </>
                                 )}
                             </DialogPanel>
+
+
+
+
                         </TransitionChild>
                     </div>
                 </Dialog>
