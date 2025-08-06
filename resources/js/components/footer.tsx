@@ -43,7 +43,7 @@ export default function Footer() {
                 </div>
             </div>
             <p className="text-sm pt-4 text-gray-500 sm:self-center dark:text-gray-400">
-                © {new Date().getFullYear()} Kohaii Arts — All rights reserved.
+                © {new Date().getFullYear()} Kohaii Arts - All rights reserved.
             </p>
         </footer>
     );
