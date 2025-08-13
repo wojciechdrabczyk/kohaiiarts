@@ -71,7 +71,7 @@ export default function SocialLinks({ size = 24, className = '', brandColor = '#
             </div>
 
             <div className="group">
-                <a href="#" aria-label="Discord" className={`${linkBase} ${hoverAnim}`} style={{ color: brandColor }}>
+                <a href="https://discord.gg/hqGs4fGQXm" aria-label="Discord" className={`${linkBase} ${hoverAnim}`} style={{ color: brandColor }}>
                     <FaDiscord size={size} />
                 </a>
             </div>

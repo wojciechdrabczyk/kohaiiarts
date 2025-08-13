@@ -166,7 +166,7 @@ export default function MobileMenu({ links, brandColor = '#822a59' }: Props) {
                                     >
                                         <SiThreads size={20} />
                                     </a>
-                                    <a href="#" aria-label="Discord" className="p-2 transition-transform active:scale-95">
+                                    <a href="https://discord.gg/hqGs4fGQXm" aria-label="Discord" className="p-2 transition-transform active:scale-95">
                                         <FaDiscord size={20} />
                                     </a>
                                 </div>

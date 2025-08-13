@@ -113,7 +113,7 @@ export default function HeroSection() {
                         >
                             <SiThreads size={20} className="text-[#822a59] dark:text-[#822a59]" />
                         </a>
-                        <a href="#" aria-label="Discord" className="transition-transform duration-200 hover:scale-110">
+                        <a href="https://discord.gg/hqGs4fGQXm" aria-label="Discord" className="transition-transform duration-200 hover:scale-110">
                             <FaDiscord size={20} className="text-[#822a59] dark:text-[#822a59]" />
                         </a>
                     </div>
