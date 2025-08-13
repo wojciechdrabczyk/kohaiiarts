@@ -1,17 +1,18 @@
+import ThumbnailImage from '@/components/thumbnail-image';
 import DefaultLayout from '@/layouts/default-layout';
 import { Dialog, DialogPanel, Transition, TransitionChild } from '@headlessui/react';
 import { Head } from '@inertiajs/react';
 import React, { Fragment, useCallback, useEffect, useState } from 'react';
 import { FaChevronLeft, FaChevronRight, FaXmark } from 'react-icons/fa6';
 import { useSwipeable } from 'react-swipeable';
-import ThumbnailImage from '@/components/thumbnail-image';
 
 const images = [
     { src: '/img-static/Esil.webp', caption: 'ESIL (Solo Leveling)' },
-    { src: '/img-static/PokemonArtChristmas.webp', caption: 'Pokémon Christmas' },
-    { src: '/img-static/Rogue.webp', caption: 'ROGUE (Character Concept)' },
+    { src: '/img-static/StTrinaCensored.webp', caption: 'SAINT TRINA (Elden Ring)' },
     { src: '/img-static/Stormie.webp', caption: 'STORMIE' },
     { src: '/img-static/Varesa.webp', caption: 'VARESA (Genshin Impact)' },
+    { src: '/img-static/Rogue.webp', caption: 'ROGUE (Character Concept)' },
+    { src: '/img-static/PokemonArtChristmas.webp', caption: 'Pokémon Christmas' },
     { src: '/img-static/Halloween2023.webp', caption: 'Halloween 2023 Special' },
     { src: '/img-static/ValentinesCapella.webp', caption: 'CAPELLA (Re:Zero − Starting Life in Another World)' },
     { src: '/img-static/Mitsuri.webp', caption: 'MITSURI KANROJI (Demon Slayer)' },
@@ -20,7 +21,6 @@ const images = [
     { src: '/img-static/Fenrys.webp', caption: "FENRYS (Chillin' in Another World with Level 2 Super Cheat Powers)" },
     { src: '/img-static/BrazilianMiku.webp', caption: 'Brazilian Miku (Cultural Fan Art)' },
     { src: '/img-static/BreakArt.webp', caption: '' },
-    { src: '/img-static/StTrinaCensored.webp', caption: 'SAINT TRINA (Elden Ring)' },
     { src: '/img-static/Hornpurple.webp', caption: '' },
     { src: '/img-static/JuriKisisingWSign.webp', caption: 'JURI HAN (Street Fighter)' },
     { src: '/img-static/Ultima.webp', caption: 'ULTIMA (Final Fantasy)' },
@@ -69,7 +69,7 @@ export default function Illustrations() {
         preventScrollOnSwipe: true,
         trackTouch: true,
         trackMouse: true,
-        delta: 30, // higher = less sensitive
+        delta: 30,
     });
 
     return (
@@ -92,7 +92,6 @@ export default function Illustrations() {
                                         src={image.src}
                                         alt={image.caption}
                                         onClick={() => setCurrentIndex(globalIndex)}
-
                                     />
                                 );
                             })}
@@ -128,10 +127,7 @@ export default function Illustrations() {
                                 className="fixed inset-0 z-50 flex items-center justify-center p-4"
                                 onClick={(e) => {
                                     const target = e.target as HTMLElement;
-                                    if (
-                                        target.closest('[data-no-click-zone]') ||
-                                        target.tagName === 'IMG'
-                                    ) return;
+                                    if (target.closest('[data-no-click-zone]') || target.tagName === 'IMG') return;
 
                                     setCurrentIndex(null);
                                 }}
@@ -150,14 +146,10 @@ export default function Illustrations() {
                                         className="group relative flex h-full w-full items-center justify-center p-4 sm:p-6"
                                         onClick={(e) => {
                                             const target = e.target as HTMLElement;
-                                            if (
-                                                target.closest('[data-no-click-zone]') ||
-                                                target.tagName === 'IMG'
-                                            ) return;
+                                            if (target.closest('[data-no-click-zone]') || target.tagName === 'IMG') return;
 
                                             setCurrentIndex(null);
                                         }}
-
                                     >
                                         {currentIndex !== null && (
                                             <>
@@ -168,14 +160,21 @@ export default function Illustrations() {
                                                     aria-labelledby="caption"
                                                 >
                                                     <img
+                                                        key={images[currentIndex].src}
                                                         src={images[currentIndex].src}
                                                         alt={images[currentIndex].caption || 'Artwork image'}
-                                                        className="mx-auto h-auto max-h-[90vh] w-auto object-contain shadow-lg"
+                                                        className="mx-auto h-auto max-h-[90vh] w-auto object-contain opacity-60 shadow-lg blur-lg transition-all duration-[300ms] ease-in-out"
+                                                        onLoad={(e) => {
+                                                            const img = e.currentTarget;
+                                                            img.classList.remove('blur-lg', 'opacity-60');
+                                                            img.classList.add('blur-0', 'opacity-100');
+                                                        }}
                                                     />
+
                                                     {images[currentIndex].caption && (
                                                         <figcaption
                                                             id="caption"
-                                                            className="mt-4 text-center text-3xl bg-black/5 rounded-xl px-3 py-3 text-white drop-shadow-md"
+                                                            className="mt-4 rounded-xl px-3 py-3 text-center text-3xl text-white drop-shadow-md sm:hidden"
                                                             style={{ fontFamily: 'Inter, sans-serif' }}
                                                         >
                                                             {images[currentIndex].caption}
@@ -222,9 +221,7 @@ export default function Illustrations() {
                                         )}
                                     </DialogPanel>
                                 </TransitionChild>
-
                             </div>
-
                         </TransitionChild>
                     </div>
                 </Dialog>

@@ -37,41 +37,50 @@ export default function Contact() {
             name: 'X',
             url: 'https://x.com/KohaiiArts',
             icon: <FaXTwitter size={32} />,
+            title: 'X',
+
         },
         {
             name: 'Threads',
             url: 'https://www.threads.com/@kohaii_arts',
             icon: <FaThreads size={32} />,
+            title: 'Threads',
         },
         {
             name: 'Instagram',
             url: 'https://www.instagram.com/kohaii_arts/',
             icon: <BsInstagram size={32} className="text-pink-500" />,
+            title: 'Instagram',
         },
         {
             name: 'Discord',
             url: 'invitation link to the discord server?',
             icon: <FaDiscord size={32} className="text-indigo-500" />,
+            title: 'Discord',
         },
         {
             name: 'Newgrounds',
             url: 'https://kohaiiarts.newgrounds.com/art',
             icon: <NewgroundsIcon size={32} />,
+            title: 'Newgrounds',
         },
         {
             name: 'Patreon',
             url: 'https://www.patreon.com/KohaiiArts',
             icon: <FaPatreon size={32} className="text-[#f96854]" />,
+            title: 'Patreon',
         },
         {
             name: 'Throne',
             url: 'https://throne.com/kohaiiarts',
             icon: <ThroneIcon size={32} />,
+            title: 'Throne',
         },
         {
             name: 'Inprnt',
             url: 'https://www.inprnt.com/gallery/kohaiiarts/',
             icon: <InprntIcon size={32} />,
+            title: 'Inprnt',
         },
     ];
 
@@ -84,14 +93,15 @@ export default function Contact() {
 
             <h1 className="mb-6 flex justify-center text-2xl tracking-tight text-gray-800 sm:text-3xl dark:text-gray-200">You can find me on</h1>
             <div className="mb-12 flex flex-wrap justify-center gap-4">
-                {socialLinks.map(({ name, url, icon }) => (
+                {socialLinks.map(({ name, url, icon, title }) => (
                     <div key={url} className="group relative flex flex-col items-center space-y-1">
                         <a
                             href={url}
+                            title={title}
                             target="_blank"
                             aria-label={name}
                             rel="noopener noreferrer"
-                            className="flex items-center justify-center rounded-full border-2 border-[#822a59] bg-white p-5 shadow-md transition hover:shadow-md dark:bg-neutral-800 dark:hover:bg-neutral-700"
+                            className="flex items-center justify-center rounded-full border-2 border-[#822a59] bg-white p-5 dark:bg-neutral-800 dark:hover:bg-neutral-700 shadow-md transition hover:shadow-xl"
                         >
                             <span className="transition-transform group-hover:scale-110">{icon}</span>
                         </a>

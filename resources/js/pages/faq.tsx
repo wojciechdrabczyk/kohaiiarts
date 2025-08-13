@@ -63,7 +63,7 @@ export default function Faq() {
                                     What tools do you use for your art?
                                 </h3>
                                 <p className="text-sm text-gray-500 dark:text-gray-400 leading-relaxed">
-                                    I use a digital tablet along with PaintTool SAI. For traditional work, I use ink pens, markers, and sketchbooks.
+                                    I use a digital tablet along with Clip Studio Paint. For traditional work, I use ink pens, markers, and sketchbooks.
                                 </p>
                             </div>
 

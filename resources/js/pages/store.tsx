@@ -22,10 +22,15 @@ export default function Store() {
 
                     <div className="grid grid-cols-1 gap-6 sm:grid-cols-3">
                         <a
-                            href="https://www.teepublic.com/stores/kohaiiarts"
-                            target="_blank"
-                            className="group block rounded-lg border border-gray-200 bg-white p-6 shadow-md transition hover:shadow-xl dark:border-gray-700 dark:bg-neutral-800 dark:hover:bg-neutral-700"
+                            // href="https://www.teepublic.com/stores/kohaiiarts"
+                            aria-disabled="true"
+                            title="Currently unavailable"
+                            className="group relative block cursor-not-allowed rounded-xl border border-gray-200 bg-white p-6 opacity-50 shadow-md grayscale transition hover:shadow-lg dark:border-gray-700 dark:bg-neutral-800"
                         >
+                            <span className="absolute top-4 right-4 rounded-full bg-gray-200 px-2 py-0.5 text-xs text-gray-700 dark:bg-neutral-700 dark:text-gray-200">
+                                Unavailable
+                            </span>
+
                             <div className="flex items-center gap-4">
                                 <SiTeepublic size={40} className="text-gray-800 transition-transform group-hover:scale-105 dark:text-white" />
                                 <div>
@@ -37,8 +42,9 @@ export default function Store() {
 
                         <a
                             href="https://www.inprnt.com/gallery/kohaiiarts/"
+                            title="INPRNT"
                             target="_blank"
-                            className="group block rounded-lg border border-gray-200 bg-white p-6 shadow-md transition hover:shadow-xl dark:border-gray-700 dark:bg-neutral-800 dark:hover:bg-neutral-700"
+                            className="group block rounded-xl border border-[#6e1f48] bg-white p-5 shadow-md transition hover:shadow-xl dark:bg-neutral-800 dark:hover:bg-neutral-700"
                         >
                             <div className="flex items-center gap-4">
                                 <InprntIcon size={40} className="text-gray-800 transition-transform group-hover:scale-105 dark:text-white" />
@@ -51,8 +57,9 @@ export default function Store() {
 
                         <a
                             href="https://www.patreon.com/KohaiiArts"
+                            title="Patreon"
                             target="_blank"
-                            className="group block rounded-lg border border-gray-200 bg-white p-6 shadow-md transition hover:shadow-xl dark:border-gray-700 dark:bg-neutral-800 dark:hover:bg-neutral-700"
+                            className="group block rounded-xl border border-[#6e1f48] bg-white p-5 shadow-md transition hover:shadow-xl dark:bg-neutral-800 dark:hover:bg-neutral-700"
                         >
                             <div className="flex items-center gap-4">
                                 <FaPatreon size={40} className="text-gray-800 transition-transform group-hover:scale-105 dark:text-white" />
@@ -68,9 +75,8 @@ export default function Store() {
 
                     <div className="mt-12" />
 
-                    <div className="text-center">
-                        <p className="text-sm text-gray-600 dark:text-gray-500">More platforms and products coming soon.</p>
-                        <p className="mt-2 text-sm text-gray-600 dark:text-gray-500">Thank you for your support, it means the world to me!</p>
+                    <div className="mt-12 text-center">
+                        <p className="text-sm text-gray-600 dark:text-gray-500">Thanks for checking out the shop and supporting my work.</p>
                     </div>
                 </div>
             </section>

@@ -10,14 +10,14 @@ export default function Footer() {
     const iconProps = { size: 24 };
 
     const socialLinks2 = [
-        { name: 'X', url: 'https://x.com/KohaiiArts', Icon: FaXTwitter, },
-        { name: 'Threads', url: 'https://www.threads.com/@kohaii_arts', Icon: FaThreads },
-        { name: 'Instagram', url: 'https://www.instagram.com/kohaii_arts/', Icon: BsInstagram },
-        { name: 'Discord', url: 'invitation link to the discord server?', Icon: FaDiscord },
-        { name: 'Newgrounds', url: 'https://kohaiiarts.newgrounds.com/art', Icon: NewgroundsIcon },
-        { name: 'Patreon', url: 'https://www.patreon.com/KohaiiArts', Icon: FaPatreon },
-        { name: 'Throne', url: 'https://throne.com/kohaiiarts', Icon: ThroneIcon },
-        { name: 'Inprnt', url: 'https://www.inprnt.com/gallery/kohaiiarts/', Icon: InprntIcon },
+        { name: 'X', url: 'https://x.com/KohaiiArts', Icon: FaXTwitter, title: 'X' },
+        { name: 'Threads', url: 'https://www.threads.com/@kohaii_arts', Icon: FaThreads, title: 'Threads' },
+        { name: 'Instagram', url: 'https://www.instagram.com/kohaii_arts/', Icon: BsInstagram, title: 'Instagram' },
+        { name: 'Discord', url: 'invitation link to the discord server?', Icon: FaDiscord, title: 'Discord' },
+        { name: 'Newgrounds', url: 'https://kohaiiarts.newgrounds.com/art', Icon: NewgroundsIcon, title: 'Newgrounds' },
+        { name: 'Patreon', url: 'https://www.patreon.com/KohaiiArts', Icon: FaPatreon, title: 'Patreon' },
+        { name: 'Throne', url: 'https://throne.com/kohaiiarts', Icon: ThroneIcon, title: 'Throne' },
+        { name: 'Inprnt', url: 'https://www.inprnt.com/gallery/kohaiiarts/', Icon: InprntIcon, title: 'Inprnt' },
     ];
 
     return (
@@ -27,14 +27,15 @@ export default function Footer() {
         >
             <div className="mx-auto flex max-w-5/6 flex-col items-center justify-center gap-12 sm:flex-row sm:items-center sm:justify-between">
                 <div className="flex flex-wrap justify-center gap-4">
-                    {socialLinks2.map(({ name, url, Icon }) => (
+                    {socialLinks2.map(({ name, url, Icon, title }) => (
                         <div key={url} className="group relative flex flex-col items-center ">
                             <a
                                 href={url}
+                                title={title}
                                 target="_blank"
                                 aria-label={name}
                                 rel="noopener noreferrer"
-                                className="flex items-center justify-center   p-2 text-[#822a59]   sm:p-3  dark:text-[#822a59]  transition-transform group-hover:scale-120"
+                                className="flex items-center justify-center p-2 text-[#822a59] sm:p-3 dark:text-[#822a59]  transition-transform group-hover:scale-120"
                             >
                                 <Icon {...iconProps} style={{color: '#822a59'}} />
                             </a>

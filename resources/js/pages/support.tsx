@@ -1,8 +1,8 @@
+import ThroneIcon from '@/assets/icons/ThroneIcon';
 import DefaultLayout from '@/layouts/default-layout';
 import { Head } from '@inertiajs/react';
 import React from 'react';
 import { FaPatreon } from 'react-icons/fa6';
-import ThroneIcon from '@/assets/icons/ThroneIcon';
 
 export default function Support() {
     return (
@@ -13,13 +13,11 @@ export default function Support() {
             </Head>
             <section className="" style={{ fontFamily: 'Montserrat, sans-serif' }}>
                 <div className="mx-auto max-w-screen-xl px-4 py-8 sm:py-16 lg:px-6">
-                    <h1 className="mb-4 text-center text-3xl leading-relaxed text-black dark:text-white">
-                        Thank you for considering supporting me
-                    </h1>
+                    <h1 className="mb-4 text-center text-3xl leading-relaxed text-black dark:text-white">Thank you for considering supporting me</h1>
                     <div className="text-center">
-                        <p className="mx-auto mb-12 max-w-2xl text-[14px] leading-[1.75]  text-gray-600 dark:text-gray-300">
-                            Your support helps me keep doing what I love making art and sharing it with the world. Whether it's through Patreon, Throne,
-                            or simply sharing my work, your kindness truly means a lot.
+                        <p className="mx-auto mb-12 max-w-2xl text-[14px] leading-[1.75] text-gray-600 dark:text-gray-300">
+                            Your support helps me keep doing what I love making art and sharing it with the world. Whether it's through Patreon,
+                            Throne, or simply sharing my work, your kindness truly means a lot.
                         </p>
                     </div>
 
@@ -40,8 +38,8 @@ export default function Support() {
                             <div className="mx-auto max-w-2xl text-center">
                                 <p className="text-[14px] leading-[1.75] text-gray-600 dark:text-gray-400">
                                     Supporters get access to behind-the-scenes sketches, progress shots, and personal updates I don’t share anywhere
-                                    else. Some tiers also include early access to art, high-res files, or the chance to help guide future work.
-                                    But truly, every bit of support helps me keep going, and I’m grateful for all of it.
+                                    else. Some tiers also include early access to art, high-res files, or the chance to help guide future work. But
+                                    truly, every bit of support helps me keep going, and I’m grateful for all of it.
                                 </p>
                             </div>
                         </div>
@@ -50,12 +48,10 @@ export default function Support() {
                             <a
                                 href="https://www.patreon.com/KohaiiArts"
                                 target="_blank"
-                                className="group block rounded-lg border border-gray-200 bg-white p-6 shadow-md transition hover:shadow-xl dark:border-gray-700 dark:bg-neutral-800 dark:hover:bg-neutral-700"
+                                className="group block rounded-xl border border-[#6e1f48] bg-white p-5 shadow-md transition hover:shadow-xl dark:bg-neutral-800 dark:hover:bg-neutral-700"
                             >
                                 <div className="flex items-center gap-4">
-                                    <FaPatreon
-                                        className="min-w-[40px] min-h-[40px] flex-shrink-0 text-gray-800 transition-transform group-hover:scale-105 dark:text-white  "
-                                    />
+                                    <FaPatreon className="min-h-[40px] min-w-[40px] flex-shrink-0 text-gray-800 transition-transform group-hover:scale-105 dark:text-white" />
                                     <div>
                                         <h3 className="text-lg font-semibold text-gray-800 dark:text-white">Patreon</h3>
                                         <p className="mt-1 text-sm text-gray-600 dark:text-gray-400">
@@ -68,17 +64,13 @@ export default function Support() {
                             <a
                                 href="https://throne.com/kohaiiarts"
                                 target="_blank"
-                                className="group block rounded-lg border border-gray-200 bg-white p-6 shadow-md transition hover:shadow-xl dark:border-gray-700 dark:bg-neutral-800 dark:hover:bg-neutral-700"
+                                className="group block rounded-xl border border-[#6e1f48] bg-white p-5 shadow-md transition hover:shadow-xl dark:bg-neutral-800 dark:hover:bg-neutral-700"
                             >
                                 <div className="flex items-center gap-4">
-                                    <ThroneIcon
-                                        className="min-w-[40px] min-h-[40px] flex-shrink-0 text-gray-800 transition-transform group-hover:scale-105 dark:text-white"
-                                    />
+                                    <ThroneIcon className="min-h-[40px] min-w-[40px] flex-shrink-0 text-gray-800 transition-transform group-hover:scale-105 dark:text-white" />
                                     <div>
                                         <h3 className="text-lg font-semibold text-gray-800 dark:text-white">Throne</h3>
-                                        <p className="mt-1 text-sm text-gray-600 dark:text-gray-400">
-                                            Send me a thoughtful gift directly - art tools, snacks, and more!
-                                        </p>
+                                        <p className="mt-1 text-sm text-gray-600 dark:text-gray-400">Send me a gift directly through Throne</p>
                                     </div>
                                 </div>
                             </a>
