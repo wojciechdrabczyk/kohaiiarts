@@ -54,7 +54,7 @@ export default function Contact() {
         },
         {
             name: 'Discord',
-            url: 'invitation link to the discord server?',
+            url: 'https://discord.gg/hqGs4fGQXm',
             icon: <FaDiscord size={32} className="text-indigo-500" />,
             title: 'Discord',
         },

@@ -13,7 +13,7 @@ export default function Footer() {
         { name: 'X', url: 'https://x.com/KohaiiArts', Icon: FaXTwitter, title: 'X' },
         { name: 'Threads', url: 'https://www.threads.com/@kohaii_arts', Icon: FaThreads, title: 'Threads' },
         { name: 'Instagram', url: 'https://www.instagram.com/kohaii_arts/', Icon: BsInstagram, title: 'Instagram' },
-        { name: 'Discord', url: 'invitation link to the discord server?', Icon: FaDiscord, title: 'Discord' },
+        { name: 'Discord', url: 'https://discord.gg/hqGs4fGQXm', Icon: FaDiscord, title: 'Discord' },
         { name: 'Newgrounds', url: 'https://kohaiiarts.newgrounds.com/art', Icon: NewgroundsIcon, title: 'Newgrounds' },
         { name: 'Patreon', url: 'https://www.patreon.com/KohaiiArts', Icon: FaPatreon, title: 'Patreon' },
         { name: 'Throne', url: 'https://throne.com/kohaiiarts', Icon: ThroneIcon, title: 'Throne' },
