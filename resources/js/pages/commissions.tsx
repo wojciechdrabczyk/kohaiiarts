@@ -404,7 +404,7 @@ export default function Commissions() {
                             <button
                                 type="button"
                                 onClick={toggleFaqs}
-                                className="rounded bg-[#822a59] px-4 py-2 text-sm font-medium text-white transition hover:bg-[#6e1f48] dark:bg-[#822a59] dark:text-white dark:hover:bg-[#6e1f48]"
+                                className="rounded bg-[#822a59] px-4 py-2 text-sm font-medium text-white transition hover:bg-[#9c3d6e] dark:bg-[#822a59] dark:text-white dark:hover:bg-[#6e1f48]"
                             >
                                 {showAllFaqs ? 'Show less' : 'Show more'}
                             </button>
