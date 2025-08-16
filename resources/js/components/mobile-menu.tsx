@@ -1,22 +1,18 @@
 import NewgroundsIcon from '@/assets/icons/NewgroundsIcon';
 import { Link, router } from '@inertiajs/react';
+import { AnimatePresence, motion } from 'framer-motion';
 import { useEffect, useRef, useState } from 'react';
 import { BsInstagram } from 'react-icons/bs';
 import { FaDiscord, FaXTwitter } from 'react-icons/fa6';
 import { SiThreads } from 'react-icons/si';
-import { AnimatePresence, motion } from 'framer-motion';
 
 type NavLink = { label: string; href: string };
-type Props = {
-    links: NavLink[];
-    brandColor?: string;
-};
+type Props = { links: NavLink[]; brandColor?: string; onToggleTheme: () => void; theme?: 'light' | 'dark' };
 
 export default function MobileMenu({ links, brandColor = '#822a59' }: Props) {
     const [open, setOpen] = useState(false);
     const openerRef = useRef<HTMLButtonElement | null>(null);
 
-    // lock scroll while open
     useEffect(() => {
         document.documentElement.classList.toggle('overflow-hidden', open);
         return () => document.documentElement.classList.remove('overflow-hidden');
@@ -28,19 +24,13 @@ export default function MobileMenu({ links, brandColor = '#822a59' }: Props) {
         setTimeout(() => router.visit(href), 300);
     };
 
-    // Staggered children (links + socials participate)
-    const groupVariants = {
-        open: { transition: { staggerChildren: 0.06, delayChildren: 0.05, when: 'beforeChildren' } },
-        closed: { transition: { staggerChildren: 0.06, staggerDirection: -1, when: 'afterChildren' } },
-    };
     const itemVariants = {
-        open: { opacity: 1, y: 0, transition: { duration: 0.25, ease: [0.2, 0.65, 0.3, 0.9] } },
-        closed: { opacity: 0, y: 8, transition: { duration: 0.2, ease: [0.4, 0.0, 0.2, 1] } },
-    };
+        open: { opacity: 1, y: 0, transition: { duration: 0.25, ease: [0.2, 0.65, 0.3, 0.9] as const } },
+        closed: { opacity: 0, y: 8, transition: { duration: 0.2, ease: [0.4, 0.0, 0.2, 1] as const } },
+    } as const;
 
     return (
         <>
-            {/* Hamburger */}
             <button
                 ref={openerRef}
                 aria-label={open ? 'Close menu' : 'Open menu'}
@@ -48,17 +38,22 @@ export default function MobileMenu({ links, brandColor = '#822a59' }: Props) {
                 onClick={() => setOpen(true)}
                 className="fixed top-4 right-4 z-40 flex h-11 w-11 items-center justify-center rounded-full bg-gray-200/90 backdrop-blur md:hidden dark:bg-neutral-800/90"
             >
-        <span className="relative block h-4 w-6">
-          <span className={`absolute top-0 left-0 h-0.5 w-full bg-black transition-transform duration-300 dark:bg-white ${open ? 'translate-y-2 rotate-45' : ''}`} />
-          <span className={`absolute top-1/2 left-0 -mt-[1px] h-0.5 w-full bg-black transition-opacity duration-200 dark:bg-white ${open ? 'opacity-0' : 'opacity-100'}`} />
-          <span className={`absolute bottom-0 left-0 h-0.5 w-full bg-black transition-transform duration-300 dark:bg-white ${open ? '-translate-y-2 -rotate-45' : ''}`} />
-        </span>
+                <span className="relative block h-4 w-6">
+                    <span
+                        className={`absolute top-0 left-0 h-0.5 w-full bg-black transition-transform duration-300 dark:bg-white ${open ? 'translate-y-2 rotate-45' : ''}`}
+                    />
+                    <span
+                        className={`absolute top-1/2 left-0 -mt-[1px] h-0.5 w-full bg-black transition-opacity duration-200 dark:bg-white ${open ? 'opacity-0' : 'opacity-100'}`}
+                    />
+                    <span
+                        className={`absolute bottom-0 left-0 h-0.5 w-full bg-black transition-transform duration-300 dark:bg-white ${open ? '-translate-y-2 -rotate-45' : ''}`}
+                    />
+                </span>
             </button>
 
             <AnimatePresence>
                 {open && (
                     <>
-                        {/* Backdrop (click to close) */}
                         <motion.div
                             key="backdrop"
                             className="fixed inset-0 z-40 bg-black/40"
@@ -68,80 +63,111 @@ export default function MobileMenu({ links, brandColor = '#822a59' }: Props) {
                             onClick={() => setOpen(false)}
                         />
 
-                        {/* Sheet */}
                         <motion.div
                             key="sheet"
                             role="dialog"
                             aria-modal="true"
-                            className="fixed inset-0 z-50 flex flex-col overflow-hidden bg-white will-change-transform transform-gpu outline-none dark:bg-neutral-900 md:hidden"
-                            // NOTE: no scale here -> prevents the top “outline” flicker
-                            initial={{ opacity: 0, y: 16 }}
-                            animate={{ opacity: 1, y: 0, transition: { duration: 0.3, ease: [0.2, 0.65, 0.3, 0.9] } }}
-                            exit={{ opacity: 0, y: 16, transition: { duration: 0.25, ease: [0.4, 0.0, 0.2, 1] } }}
+                            className="fixed inset-0 z-50 flex transform-gpu flex-col overflow-hidden bg-white will-change-transform outline-none md:hidden dark:bg-neutral-900"
+                            initial={{ opacity: 10 }}
+                            animate={{ opacity: 1, transition: { duration: 0.6, delay: 0.06, ease: [0.2, 0.65, 0.3, 0.9] } }}
+                            exit={{ opacity: 0, transition: { duration: 0.6, ease: [0.4, 0.0, 0.2, 1] } }}
                             onKeyDown={(e) => e.key === 'Escape' && setOpen(false)}
                         >
-                            {/* Close button (unchanged) */}
-                            <div className="absolute top-4 right-4">
-                                <button
-                                    aria-label="Close menu"
-                                    onClick={() => setOpen(false)}
-                                    className="flex h-10 w-10 items-center justify-center rounded-full bg-gray-200 dark:bg-neutral-800"
-                                >
-                  <span className="relative block h-4 w-4">
-                    <span className="absolute top-1/2 left-0 h-0.5 w-full -translate-y-1/2 rotate-45 bg-black dark:bg-white" />
-                    <span className="absolute top-1/2 left-0 h-0.5 w-full -translate-y-1/2 -rotate-45 bg-black dark:bg-white" />
-                  </span>
-                                </button>
-                            </div>
-
-                            {/* Content with staggered children */}
-                            <motion.nav
-                                className="flex-1 overflow-y-auto"
-                                variants={groupVariants}
-                                initial="closed"
-                                animate="open"
-                                exit="closed"
-                            >
-                                <div className="flex h-full flex-col items-center justify-center gap-10">
-                                    {links.map((l) => (
-                                        <motion.div key={l.label} variants={itemVariants}>
-                                            <Link
-                                                href={l.href}
-                                                prefetch
-                                                onClick={handleLinkClick(l.href)}
-                                                className="text-2xl font-semibold text-gray-800 transition-transform active:scale-[0.98] dark:text-gray-100"
-                                            >
-                                                {l.label}
-                                            </Link>
-                                        </motion.div>
-                                    ))}
-                                </div>
-                            </motion.nav>
-
-                            {/* Social row (stays at bottom; unchanged) */}
                             <motion.div
-                                className="border-t border-gray-200 dark:border-white/10"
-                                variants={groupVariants}
-                                initial="closed"
-                                animate="open"
-                                exit="closed"
+                                className="flex h-full flex-col"
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1, transition: { duration: 0.24, delay: 0.06 } }}
+                                exit={{ opacity: 0, y: 12, transition: { duration: 0.22 } }}
+                                style={{ willChange: 'transform' }}
                             >
-                                <motion.div className="mx-auto flex items-center justify-center gap-4 py-4" variants={itemVariants} style={{ color: brandColor }}>
-                                    <a href="https://x.com/KohaiiArts" target="_blank" rel="noopener noreferrer" aria-label="X / Twitter" className="p-2 transition-transform active:scale-95">
-                                        <FaXTwitter size={20} />
-                                    </a>
-                                    <a href="https://www.instagram.com/kohaii_arts/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="p-2 transition-transform active:scale-95">
-                                        <BsInstagram size={20} />
-                                    </a>
-                                    <a href="https://kohaiiarts.newgrounds.com/art" target="_blank" rel="noopener noreferrer" aria-label="Newgrounds" className="p-2 transition-transform active:scale-95">
-                                        <span><NewgroundsIcon size={20} /></span>
-                                    </a>
-                                    <a href="https://www.threads.net/@kohaii_arts" target="_blank" rel="noopener noreferrer" aria-label="Threads" className="p-2 transition-transform active:scale-95">
-                                        <SiThreads size={20} />
-                                    </a>
-                                    <a href="https://discord.gg/hqGs4fGQXm" aria-label="Discord" className="p-2 transition-transform active:scale-95">
-                                        <FaDiscord size={20} />
-                                    </a>
+                                <div className="absolute top-4 right-4">
+                                    <button
+                                        aria-label="Close menu"
+                                        onClick={() => setOpen(false)}
+                                        className="flex h-10 w-10 items-center justify-center rounded-full bg-gray-200 dark:bg-neutral-800"
+                                    >
+                                        <span className="relative block h-4 w-4">
+                                            <span className="absolute top-1/2 left-0 h-0.5 w-full -translate-y-1/2 rotate-45 bg-black dark:bg-white" />
+                                            <span className="absolute top-1/2 left-0 h-0.5 w-full -translate-y-1/2 -rotate-45 bg-black dark:bg-white" />
+                                        </span>
+                                    </button>
+                                </div>
+
+                                <motion.nav className="flex-1 overflow-y-auto" variants={itemVariants} initial="closed" animate="open" exit="closed">
+                                    <div className="flex h-full flex-col items-center justify-center gap-10">
+                                        {links.map((l) => (
+                                            <motion.div key={l.label} variants={itemVariants}>
+                                                <Link
+                                                    href={l.href}
+                                                    prefetch
+                                                    onClick={handleLinkClick(l.href)}
+                                                    className="text-2xl font-semibold text-gray-800 transition-transform active:scale-[0.98] dark:text-gray-100"
+                                                >
+                                                    {l.label}
+                                                </Link>
+                                            </motion.div>
+                                        ))}
+                                    </div>
+                                </motion.nav>
+
+                                <motion.div
+                                    className="border-t border-gray-200 dark:border-white/10"
+                                    variants={itemVariants}
+                                    initial="closed"
+                                    animate="open"
+                                    exit="closed"
+                                >
+                                    <motion.div
+                                        className="mx-auto flex items-center justify-center gap-4 py-4"
+                                        variants={itemVariants}
+                                        style={{ color: brandColor }}
+                                    >
+                                        <a
+                                            href="https://x.com/KohaiiArts"
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            aria-label="X / Twitter"
+                                            className="p-2 transition-transform active:scale-95"
+                                        >
+                                            <FaXTwitter size={20} />
+                                        </a>
+                                        <a
+                                            href="https://www.instagram.com/kohaii_arts/"
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            aria-label="Instagram"
+                                            className="p-2 transition-transform active:scale-95"
+                                        >
+                                            <BsInstagram size={20} />
+                                        </a>
+                                        <a
+                                            href="https://kohaiiarts.newgrounds.com/art"
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            aria-label="Newgrounds"
+                                            className="p-2 transition-transform active:scale-95"
+                                        >
+                                            <span>
+                                                <NewgroundsIcon size={20} />
+                                            </span>
+                                        </a>
+                                        <a
+                                            href="https://www.threads.net/@kohaii_arts"
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            aria-label="Threads"
+                                            className="p-2 transition-transform active:scale-95"
+                                        >
+                                            <SiThreads size={20} />
+                                        </a>
+                                        <a
+                                            href="https://discord.gg/hqGs4fGQXm"
+                                            aria-label="Discord"
+                                            className="p-2 transition-transform active:scale-95"
+                                        >
+                                            <FaDiscord size={20} />
+                                        </a>
+                                    </motion.div>
                                 </motion.div>
                             </motion.div>
                         </motion.div>
