@@ -70,7 +70,7 @@ export default function Support() {
                                     <ThroneIcon className="min-h-[40px] min-w-[40px] flex-shrink-0 text-gray-800 transition-transform group-hover:scale-105 dark:text-white" />
                                     <div>
                                         <h3 className="text-lg font-semibold text-gray-800 dark:text-white">Throne</h3>
-                                        <p className="mt-1 text-sm text-gray-600 dark:text-gray-400">Send me a gift directly through Throne</p>
+                                        <p className="mt-1 text-sm text-gray-600 dark:text-gray-400">Send me a gift directly through Throne.</p>
                                     </div>
                                 </div>
                             </a>
