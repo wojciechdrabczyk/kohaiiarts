@@ -1,22 +1,8 @@
 import HeroSection from '@/components/hero-section';
 import DefaultLayout from '@/layouts/default-layout';
-import { Head,} from '@inertiajs/react';
-import { useLayoutEffect, useState } from 'react';
+import { Head } from '@inertiajs/react';
 
 export default function NavBar() {
-    const [theme, setTheme] = useState(() => localStorage.getItem('theme') || 'light');
-
-    useLayoutEffect(() => {
-        const root = document.documentElement;
-        if (theme === 'dark') {
-            root.classList.add('dark');
-        } else {
-            root.classList.remove('dark');
-        }
-        localStorage.setItem('theme', theme);
-    }, [theme]);
-
-
     return (
         <div className="top-0 z-10">
             <Head>
