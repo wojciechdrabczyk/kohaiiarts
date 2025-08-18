@@ -4,10 +4,10 @@ import { Head } from '@inertiajs/react';
 
 export default function NavBar() {
     return (
-        <div className="top-0 z-10">
+        <div className="top-0 z-10 bg-white/80 backdrop-blur dark:bg-black/80">
             <Head>
-                <link rel="preload" href="/img-static/LogoKohii.webp" as="image" />
-                <link rel="preload" href="/img-static/LogoKohiiNight.webp" as="image" />
+                <link rel="preload" href="/img-static/LogoKohii.webp" as="image" type="image/webp" />
+                <link rel="preload" href="/img-static/LogoKohiiNight.webp" as="image" type="image/webp" />
             </Head>
             <HeroSection />
         </div>

@@ -1,7 +1,7 @@
 import InprntIcon from '@/assets/icons/InprntIcon';
 import NewgroundsIcon from '@/assets/icons/NewgroundsIcon';
 import ThroneIcon from '@/assets/icons/ThroneIcon';
-import DefaultLayout from '@/layouts/default-layout';
+import { motion, MotionConfig, stagger } from 'framer-motion';
 import { BsInstagram } from 'react-icons/bs';
 import { FaDiscord } from 'react-icons/fa';
 import { FaPatreon, FaThreads, FaXTwitter } from 'react-icons/fa6';
@@ -25,24 +25,60 @@ export default function Footer() {
             className="align-center bottom-0 flex w-full flex-col items-center px-2 py-4"
             style={{ fontFamily: 'Montserrat, sans-serif' }}
         >
-            <div className="mx-auto flex max-w-5/6 flex-col items-center justify-center gap-12 sm:flex-row sm:items-center sm:justify-between">
-                <div className="flex flex-wrap justify-center gap-4">
-                    {socialLinks2.map(({ name, url, Icon, title }) => (
-                        <div key={url} className="group relative flex flex-col items-center ">
-                            <a
-                                href={url}
-                                title={title}
-                                target="_blank"
-                                aria-label={name}
-                                rel="noopener noreferrer"
-                                className="flex items-center justify-center p-2 text-[#822a59] sm:p-3 dark:text-[#822a59]  transition-transform group-hover:scale-120"
+            <div className="mx-auto flex max-w-5/6 flex-col items-center justify-center sm:flex-row sm:items-center sm:justify-between">
+                <MotionConfig reducedMotion="never">
+                    <motion.ul
+                        className="flex flex-wrap justify-center gap-10 will-change-transform"
+                        initial="hidden"
+                        animate="visible"
+                        variants={{
+                            hidden: { opacity: 0, y: 6, scale: 0.98 },
+                            visible: {
+                                opacity: 1,
+                                y: 0,
+                                scale: 1,
+                                transition: {
+                                    duration: 0.28,
+                                    ease: [0.2, 0.65, 0.3, 0.9],
+                                    ...stagger(0.06, { startDelay: 0.06 }),
+                                },
+                            },
+                        }}
+                    >
+                        {socialLinks2.map(({ name, url, Icon, title }) => (
+                            <motion.li
+                                key={url}
+                                className="will-change-transform"
+                                variants={{
+                                    hidden: { opacity: 0, y: 10, scale: 0.9 },
+                                    visible: {
+                                        opacity: 1,
+                                        y: 0,
+                                        scale: 1,
+                                        transition: { duration: 0.22, ease: [0.2, 0.65, 0.3, 0.9] },
+                                    },
+                                }}
                             >
-                                <Icon {...iconProps} style={{color: '#822a59'}} />
-                            </a>
-                        </div>
-                    ))}
-                </div>
+                                <motion.a
+                                    href={url}
+                                    title={title}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    aria-label={name}
+                                    className="inline-flex h-10 w-10 items-center justify-center rounded text-[#822a59] dark:text-[#822a59] transform-gpu focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#822a59] focus-visible:ring-offset-2 dark:focus-visible:ring-offset-black"
+                                    whileHover={{ scale: 1.12, y: -1 }}
+                                    whileTap={{ scale: 0.95 }}
+                                    transition={{ type: 'spring', stiffness: 420, damping: 24 }}
+                                >
+                                    <Icon {...iconProps} />
+                                </motion.a>
+                            </motion.li>
+                        ))}
+                    </motion.ul>
+                </MotionConfig>
+
             </div>
+
             <p className="text-sm pt-4 text-gray-500 sm:self-center dark:text-gray-400">
                 © {new Date().getFullYear()} Kohaii Arts - All rights reserved.
             </p>
@@ -50,4 +86,3 @@ export default function Footer() {
     );
 }
 
-Footer.layout = (page: React.ReactNode) => <DefaultLayout>{page}</DefaultLayout>;
