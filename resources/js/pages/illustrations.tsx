@@ -9,6 +9,7 @@ import { useSwipeable } from 'react-swipeable';
 const images = [
     { src: '/img-static/Esil.webp', caption: 'ESIL (Solo Leveling)' },
     { src: '/img-static/StTrinaCensored.webp', caption: 'SAINT TRINA (Elden Ring)' },
+    { src: '/img-static/Hikaru.webp', caption: 'HIKARU - Girl Version (The Summer Hikaru Died)' },
     { src: '/img-static/Stormie.webp', caption: 'STORMIE' },
     { src: '/img-static/Varesa.webp', caption: 'VARESA (Genshin Impact)' },
     { src: '/img-static/Rogue.webp', caption: 'ROGUE (Character Concept)' },
