@@ -1,7 +1,7 @@
 import InprntIcon from '@/assets/icons/InprntIcon';
 import NewgroundsIcon from '@/assets/icons/NewgroundsIcon';
 import ThroneIcon from '@/assets/icons/ThroneIcon';
-import { motion, MotionConfig, stagger } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { BsInstagram } from 'react-icons/bs';
 import { FaDiscord } from 'react-icons/fa';
 import { FaPatreon, FaThreads, FaXTwitter } from 'react-icons/fa6';
@@ -11,7 +11,7 @@ export default function Footer() {
 
     const socialLinks2 = [
         { name: 'X', url: 'https://x.com/KohaiiArts', Icon: FaXTwitter, title: 'X' },
-        { name: 'Threads', url: 'https://www.threads.com/@kohaii_arts', Icon: FaThreads, title: 'Threads' },
+        { name: 'Threads', url: 'https://www.threads.net/@kohaii_arts', Icon: FaThreads, title: 'Threads' }, // threads.net is typical
         { name: 'Instagram', url: 'https://www.instagram.com/kohaii_arts/', Icon: BsInstagram, title: 'Instagram' },
         { name: 'Discord', url: 'https://discord.gg/hqGs4fGQXm', Icon: FaDiscord, title: 'Discord' },
         { name: 'Newgrounds', url: 'https://kohaiiarts.newgrounds.com/art', Icon: NewgroundsIcon, title: 'Newgrounds' },
@@ -26,63 +26,30 @@ export default function Footer() {
             style={{ fontFamily: 'Montserrat, sans-serif' }}
         >
             <div className="mx-auto flex max-w-5/6 flex-col items-center justify-center sm:flex-row sm:items-center sm:justify-between">
-                <MotionConfig reducedMotion="never">
-                    <motion.ul
-                        className="flex flex-wrap justify-center gap-10 will-change-transform"
-                        initial="hidden"
-                        animate="visible"
-                        variants={{
-                            hidden: { opacity: 0, y: 6, scale: 0.98 },
-                            visible: {
-                                opacity: 1,
-                                y: 0,
-                                scale: 1,
-                                transition: {
-                                    duration: 0.28,
-                                    ease: [0.2, 0.65, 0.3, 0.9],
-                                    ...stagger(0.06, { startDelay: 0.06 }),
-                                },
-                            },
-                        }}
-                    >
-                        {socialLinks2.map(({ name, url, Icon, title }) => (
-                            <motion.li
-                                key={url}
-                                className="will-change-transform"
-                                variants={{
-                                    hidden: { opacity: 0, y: 10, scale: 0.9 },
-                                    visible: {
-                                        opacity: 1,
-                                        y: 0,
-                                        scale: 1,
-                                        transition: { duration: 0.22, ease: [0.2, 0.65, 0.3, 0.9] },
-                                    },
-                                }}
+                <ul className="flex flex-wrap justify-center gap-10">
+                    {socialLinks2.map(({ name, url, Icon, title }) => (
+                        <li key={url}>
+                            <motion.a
+                                href={url}
+                                title={title}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                aria-label={name}
+                                className="inline-flex h-10 w-10 items-center justify-center rounded text-[#822a59] dark:text-[#822a59] transform-gpu focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#822a59] focus-visible:ring-offset-2 dark:focus-visible:ring-offset-black"
+                                whileHover={{ scale: 1.12, y: -1 }}
+                                whileTap={{ scale: 0.95 }}
+                                transition={{ type: 'spring', stiffness: 420, damping: 24 }}
                             >
-                                <motion.a
-                                    href={url}
-                                    title={title}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    aria-label={name}
-                                    className="inline-flex h-10 w-10 items-center justify-center rounded text-[#822a59] dark:text-[#822a59] transform-gpu focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#822a59] focus-visible:ring-offset-2 dark:focus-visible:ring-offset-black"
-                                    whileHover={{ scale: 1.12, y: -1 }}
-                                    whileTap={{ scale: 0.95 }}
-                                    transition={{ type: 'spring', stiffness: 420, damping: 24 }}
-                                >
-                                    <Icon {...iconProps} />
-                                </motion.a>
-                            </motion.li>
-                        ))}
-                    </motion.ul>
-                </MotionConfig>
-
+                                <Icon {...iconProps} />
+                            </motion.a>
+                        </li>
+                    ))}
+                </ul>
             </div>
 
-            <p className="text-sm pt-4 text-gray-500 sm:self-center dark:text-gray-400">
+            <p className="pt-4 text-sm text-gray-500 sm:self-center dark:text-gray-400">
                 © {new Date().getFullYear()} Kohaii Arts - All rights reserved.
             </p>
         </footer>
     );
 }
-
