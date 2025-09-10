@@ -2,7 +2,6 @@ import InprntIcon from '@/assets/icons/InprntIcon';
 import NewgroundsIcon from '@/assets/icons/NewgroundsIcon';
 import ThroneIcon from '@/assets/icons/ThroneIcon';
 import DefaultLayout from '@/layouts/default-layout';
-import type { PageProps } from '@inertiajs/inertia';
 import { Head, router, usePage } from '@inertiajs/react';
 import { motion, MotionConfig, stagger } from 'framer-motion';
 import React, { FormEvent, useState } from 'react';
@@ -11,13 +10,28 @@ import { FaDiscord } from 'react-icons/fa';
 import { FaPatreon, FaThreads, FaXTwitter } from 'react-icons/fa6';
 
 type Status = 'success' | 'error' | null;
+type HoneypotProps = {
+    enabled: boolean;
+    nameFieldName: string;
+    validFromFieldName: string;
+    encryptedValidFrom: string;
+};
 
 export default function Contact() {
     const [status, setStatus] = useState<Status>(null);
-    const { errors } = usePage<PageProps>().props as { errors: Record<string, string> };
+    const { errors, honeypot } = usePage().props as {
+        errors: Record<string, string>;
+        honeypot?: HoneypotProps;
+    };
+    const [submitting, setSubmitting] = useState(false);
 
     const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+
+        if (submitting) return;
+
+        setSubmitting(true);
+
         const formData = new FormData(e.currentTarget);
 
         router.post('/contact', formData, {
@@ -27,6 +41,9 @@ export default function Contact() {
             },
             onError: () => {
                 setStatus('error');
+            },
+            onFinish: () => {
+                setSubmitting(false);
             },
         });
     };
@@ -189,14 +206,22 @@ export default function Contact() {
                         );
                     })}
 
+                    {honeypot?.enabled && (
+                        <div className="hidden" aria-hidden="true">
+                            <input type="text" name={honeypot.nameFieldName} defaultValue="" autoComplete="off" tabIndex={-1} />
+                            <input type="text" name={honeypot.validFromFieldName} defaultValue={honeypot.encryptedValidFrom} readOnly />
+                        </div>
+                    )}
+
                     <motion.button
                         type="submit"
-                        className="w-full rounded bg-[#822a59] px-4 py-3 text-sm font-semibold text-white transition hover:bg-[#6e1f48] dark:bg-[#822a59] dark:text-white dark:hover:bg-[#6e1f48]"
-                        whileHover={{ y: -1 }}
-                        whileTap={{ scale: 0.98 }}
+                        disabled={submitting}
+                        className={`w-full rounded px-4 py-3 text-sm font-semibold text-white transition ${submitting ? 'cursor-not-allowed bg-gray-400' : 'bg-[#822a59] hover:bg-[#6e1f48] dark:bg-[#822a59] dark:hover:bg-[#6e1f48]'}`}
+                        whileHover={!submitting ? { y: -1 } : {}}
+                        whileTap={!submitting ? { scale: 0.98 } : {}}
                         transition={{ type: 'tween', duration: 0.12 }}
                     >
-                        Send
+                        {submitting ? 'Sending…' : 'Send'}
                     </motion.button>
                 </motion.form>
 
