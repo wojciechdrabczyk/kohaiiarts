@@ -2,14 +2,14 @@ import InprntIcon from '@/assets/icons/InprntIcon';
 import NewgroundsIcon from '@/assets/icons/NewgroundsIcon';
 import ThroneIcon from '@/assets/icons/ThroneIcon';
 import DefaultLayout from '@/layouts/default-layout';
-import { Head, router, usePage } from '@inertiajs/react';
+import { Form, Head, usePage } from '@inertiajs/react';
 import { motion, MotionConfig, stagger } from 'framer-motion';
-import React, { FormEvent, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { BsInstagram } from 'react-icons/bs';
 import { FaDiscord } from 'react-icons/fa';
 import { FaPatreon, FaThreads, FaXTwitter } from 'react-icons/fa6';
+import { toast } from 'sonner';
 
-type Status = 'success' | 'error' | null;
 type HoneypotProps = {
     enabled: boolean;
     nameFieldName: string;
@@ -17,36 +17,24 @@ type HoneypotProps = {
     encryptedValidFrom: string;
 };
 
+type PageProps = {
+    errors: Record<string, string>; // still available from server, but <Form> will pass its own `errors` via slot props
+    honeypot?: HoneypotProps;
+};
+
+/** Minimal typing for the <Form> render-props we use */
+type InertiaFormSlotProps = {
+    errors: Record<string, string>;
+    processing: boolean;
+    progress?: { percentage: number } | null;
+    recentlySuccessful: boolean;
+};
+
 export default function Contact() {
-    const [status, setStatus] = useState<Status>(null);
-    const { errors, honeypot } = usePage().props as {
-        errors: Record<string, string>;
-        honeypot?: HoneypotProps;
-    };
-    const [submitting, setSubmitting] = useState(false);
+    const { honeypot } = usePage().props as PageProps;
 
-    const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-
-        if (submitting) return;
-
-        setSubmitting(true);
-
-        const formData = new FormData(e.currentTarget);
-
-        router.post('/contact', formData, {
-            onSuccess: () => {
-                setStatus('success');
-                e.currentTarget.reset();
-            },
-            onError: () => {
-                setStatus('error');
-            },
-            onFinish: () => {
-                setSubmitting(false);
-            },
-        });
-    };
+    const [status, setStatus] = useState<'success' | 'error' | null>(null);
+    const toastIdRef = useRef<string | number | undefined>(undefined);
 
     const socialLinks = [
         { name: 'X', url: 'https://x.com/KohaiiArts', icon: <FaXTwitter size={32} />, title: 'X' },
@@ -86,11 +74,7 @@ export default function Contact() {
                     animate="visible"
                     variants={{
                         hidden: { opacity: 0, y: 6 },
-                        visible: {
-                            opacity: 1,
-                            y: 0,
-                            transition: { duration: 0.25, staggerChildren: 0.06 },
-                        },
+                        visible: { opacity: 1, y: 0, transition: { duration: 0.25, staggerChildren: 0.06 } },
                     }}
                 >
                     {socialLinks.map(({ name, url, icon, title }) => (
@@ -128,117 +112,141 @@ export default function Contact() {
                     </motion.p>
                 </div>
 
-                <motion.form
-                    onSubmit={handleSubmit}
-                    id="contactForm"
+                {/* Inertia v2 <Form>: manages submission, errors, processing, progress */}
+                <Form
+                    action="/contact"
+                    method="post"
                     className="mx-auto mt-12 max-w-xl scroll-mt-24 space-y-6 rounded-xl border-2 border-[#822a59] bg-white p-12 shadow-md dark:bg-neutral-900"
+                    transform={(data: Record<string, any>) => {
+                        if (honeypot?.enabled) {
+                            data[honeypot.nameFieldName] = '';
+                            data[honeypot.validFromFieldName] = honeypot.encryptedValidFrom;
+                        }
+                        return data;
+                    }}
+                    options={{ preserveScroll: true }}
+                    disableWhileProcessing
+                    onStart={() => {
+                        setStatus(null);
+                        // show loading toast, keep the id so we can replace it later
+                        toastIdRef.current = toast.loading('Sending your message…');
+                    }}
+                    onSuccess={() => {
+                        setStatus('success');
+                        toast.success('Thanks! Your message has been sent.', { id: toastIdRef.current });
+                    }}
+                    onError={() => {
+                        setStatus('error');
+                        toast.error('Please fix the errors and try again.', { id: toastIdRef.current });
+                    }}
+                    onFinish={() => {
+                        toastIdRef.current = undefined;
+                    }}
+                    // keep motion animation wrappers identical
+                    as={motion.form}
+                    id="contactForm"
                     initial="hidden"
                     animate="visible"
                     variants={{
                         hidden: { opacity: 0, y: 8 },
-                        visible: {
-                            opacity: 1,
-                            y: 0,
-                            transition: { duration: 0.28, ...stagger(0.06) },
-                        },
+                        visible: { opacity: 1, y: 0, transition: { duration: 0.28, ...stagger(0.06) } },
                     }}
                 >
-                    <motion.h2
-                        className="text-xl font-semibold text-gray-800 dark:text-gray-200"
-                        variants={{ hidden: { opacity: 0, y: 8 }, visible: { opacity: 1, y: 0, transition: { duration: 0.2 } } }}
-                    >
-                        Contact me
-                    </motion.h2>
-
-                    {[
-                        { id: 'name', label: 'Name', required: true, type: 'text', placeholder: 'Your name, nickname, @discord' },
-                        { id: 'email', label: 'Email Address', required: true, type: 'email', placeholder: 'example@domain.com' },
-                        { id: 'subject', label: 'Subject', required: false, type: 'text', placeholder: 'e.g. Collab, Feedback, Inquiry' },
-                        {
-                            id: 'message',
-                            label: 'Message',
-                            required: true,
-                            type: 'textarea',
-                            placeholder: 'Feel free to share your thoughts, questions, or inquiries here.',
-                        },
-                    ].map(({ id, label, required, type, placeholder }) => {
-                        const error = errors[id];
-                        return (
-                            <motion.div
-                                key={id}
-                                className="space-y-1"
-                                variants={{ hidden: { opacity: 0, y: 10 }, visible: { opacity: 1, y: 0, transition: { duration: 0.2 } } }}
+                    {({ errors, processing, progress, recentlySuccessful }) => (
+                        <>
+                            <motion.h2
+                                className="text-xl font-semibold text-gray-800 dark:text-gray-200"
+                                variants={{ hidden: { opacity: 0, y: 8 }, visible: { opacity: 1, y: 0, transition: { duration: 0.2 } } }}
                             >
-                                <label htmlFor={id} className="text-sm font-medium text-gray-600 dark:text-gray-300">
-                                    {label} <span className="text-xs text-gray-400">{required ? '(required)' : '(optional)'}</span>
-                                </label>
+                                Contact me
+                            </motion.h2>
 
-                                {type === 'textarea' ? (
-                                    <textarea
-                                        id={id}
-                                        name={id}
-                                        required={required}
-                                        rows={5}
-                                        placeholder={placeholder}
-                                        className={`w-full rounded border px-4 py-3 text-sm transition focus:border-[#822a59] focus:ring-1 focus:ring-[#822a59] focus:outline-none ${
-                                            error
-                                                ? 'border-red-600'
-                                                : 'border-gray-300 bg-white text-gray-900 dark:border-gray-600 dark:bg-neutral-800 dark:text-gray-100'
-                                        }`}
-                                    />
-                                ) : (
-                                    <input
-                                        id={id}
-                                        name={id}
-                                        type={type ?? 'text'}
-                                        required={required}
-                                        placeholder={placeholder}
-                                        className={`w-full rounded border px-4 py-3 text-sm transition focus:border-[#822a59] focus:ring-1 focus:ring-[#822a59] focus:outline-none ${
-                                            error
-                                                ? 'border-red-600'
-                                                : 'border-gray-300 bg-white text-gray-900 dark:border-gray-600 dark:bg-neutral-800 dark:text-gray-100'
-                                        }`}
-                                    />
-                                )}
+                            {[
+                                { id: 'name', label: 'Name', required: true, type: 'text', placeholder: 'Your name, nickname, @discord' },
+                                { id: 'email', label: 'Email Address', required: true, type: 'email', placeholder: 'example@domain.com' },
+                                { id: 'subject', label: 'Subject', required: false, type: 'text', placeholder: 'e.g. Collab, Feedback, Inquiry' },
+                                {
+                                    id: 'message',
+                                    label: 'Message',
+                                    required: true,
+                                    type: 'textarea',
+                                    placeholder: 'Feel free to share your thoughts, questions, or inquiries here.',
+                                },
+                            ].map(({ id, label, required, type, placeholder }) => {
+                                const err = errors?.[id];
+                                const common =
+                                    `w-full rounded border px-4 py-3 text-sm transition focus:border-[#822a59] focus:ring-1 focus:ring-[#822a59] focus:outline-none ` +
+                                    (err
+                                        ? 'border-red-600'
+                                        : 'border-gray-300 bg-white text-gray-900 dark:border-gray-600 dark:bg-neutral-800 dark:text-gray-100');
 
-                                {error && <p className="text-sm text-red-600 dark:text-red-400">{error}</p>}
-                            </motion.div>
-                        );
-                    })}
+                                return (
+                                    <motion.div
+                                        key={id}
+                                        className="space-y-1"
+                                        variants={{ hidden: { opacity: 0, y: 10 }, visible: { opacity: 1, y: 0, transition: { duration: 0.2 } } }}
+                                    >
+                                        <label htmlFor={id} className="text-sm font-medium text-gray-600 dark:text-gray-300">
+                                            {label} <span className="text-xs text-gray-400">{required ? '(required)' : '(optional)'}</span>
+                                        </label>
 
-                    {honeypot?.enabled && (
-                        <div className="hidden" aria-hidden="true">
-                            <input type="text" name={honeypot.nameFieldName} defaultValue="" autoComplete="off" tabIndex={-1} />
-                            <input type="text" name={honeypot.validFromFieldName} defaultValue={honeypot.encryptedValidFrom} readOnly />
-                        </div>
+                                        {type === 'textarea' ? (
+                                            <textarea id={id} name={id} required={required} rows={5} placeholder={placeholder} className={common} />
+                                        ) : (
+                                            <input id={id} name={id} type={type} required={required} placeholder={placeholder} className={common} />
+                                        )}
+
+                                        {err && <p className="text-sm text-red-600 dark:text-red-400">{err}</p>}
+                                    </motion.div>
+                                );
+                            })}
+
+                            {honeypot?.enabled && (
+                                <div className="hidden" aria-hidden="true">
+                                    <input type="text" name={honeypot.nameFieldName} defaultValue="" autoComplete="off" tabIndex={-1} />
+                                    <input type="text" name={honeypot.validFromFieldName} defaultValue={honeypot.encryptedValidFrom} readOnly />
+                                </div>
+                            )}
+
+                            <motion.button
+                                type="submit"
+                                disabled={processing}
+                                className={`w-full rounded px-4 py-3 text-sm font-semibold text-white transition ${
+                                    processing
+                                        ? 'cursor-not-allowed bg-gray-400'
+                                        : 'bg-[#822a59] hover:bg-[#6e1f48] dark:bg-[#822a59] dark:hover:bg-[#6e1f48]'
+                                }`}
+                                whileHover={!processing ? { y: -1 } : {}}
+                                whileTap={!processing ? { scale: 0.98 } : {}}
+                                transition={{ type: 'tween', duration: 0.12 }}
+                            >
+                                {processing ? (progress?.percentage != null ? `Sending… ${progress.percentage}%` : 'Sending…') : 'Send'}
+                            </motion.button>
+
+                            {(status === 'success' || (status === null && recentlySuccessful)) && (
+                                <motion.div
+                                    className="mx-auto mt-5 max-w-xl rounded-xl bg-white px-6 py-4 shadow-md dark:bg-neutral-900"
+                                    initial={{ opacity: 0, y: 6 }}
+                                    animate={{ opacity: 1, y: 0, transition: { duration: 0.2 } }}
+                                >
+                                    <p className="text-center text-sm text-green-600 dark:text-green-400">Thank you! Your message has been sent.</p>
+                                </motion.div>
+                            )}
+
+                            {status === 'error' && (
+                                <motion.div
+                                    className="mx-auto mt-5 max-w-xl rounded-xl bg-white px-6 py-4 shadow-md dark:bg-neutral-900"
+                                    initial={{ opacity: 0, y: 6 }}
+                                    animate={{ opacity: 1, y: 0, transition: { duration: 0.2 } }}
+                                >
+                                    <p className="text-center text-sm text-red-600 dark:text-red-400">
+                                        Oops! Something went wrong. Please try again.
+                                    </p>
+                                </motion.div>
+                            )}
+                        </>
                     )}
-
-                    <motion.button
-                        type="submit"
-                        disabled={submitting}
-                        className={`w-full rounded px-4 py-3 text-sm font-semibold text-white transition ${submitting ? 'cursor-not-allowed bg-gray-400' : 'bg-[#822a59] hover:bg-[#6e1f48] dark:bg-[#822a59] dark:hover:bg-[#6e1f48]'}`}
-                        whileHover={!submitting ? { y: -1 } : {}}
-                        whileTap={!submitting ? { scale: 0.98 } : {}}
-                        transition={{ type: 'tween', duration: 0.12 }}
-                    >
-                        {submitting ? 'Sending…' : 'Send'}
-                    </motion.button>
-                </motion.form>
-
-                {status && (
-                    <motion.div
-                        className="mx-auto mt-5 max-w-xl rounded-xl bg-white px-6 py-4 shadow-md dark:bg-neutral-900"
-                        initial={{ opacity: 0, y: 6 }}
-                        animate={{ opacity: 1, y: 0, transition: { duration: 0.2 } }}
-                    >
-                        {status === 'success' && (
-                            <p className="text-center text-sm text-green-600 dark:text-green-400">Thank you! Your message has been sent.</p>
-                        )}
-                        {status === 'error' && (
-                            <p className="text-center text-sm text-red-600 dark:text-red-400">Oops! Something went wrong. Please try again.</p>
-                        )}
-                    </motion.div>
-                )}
+                </Form>
             </MotionConfig>
         </div>
     );
