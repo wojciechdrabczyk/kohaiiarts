@@ -2,6 +2,7 @@ import DefaultLayout from '@/layouts/default-layout';
 import { Head, router, useForm, usePage } from '@inertiajs/react';
 import React, { FormEvent, useMemo, useRef, useState } from 'react';
 import { FiUpload } from 'react-icons/fi';
+import { toast } from 'sonner';
 
 type Status = 'success' | 'error' | null;
 
@@ -34,6 +35,8 @@ export default function Commissions() {
 
     const faqRef = useRef<HTMLDivElement | null>(null);
     const fileInputRef = useRef<HTMLInputElement>(null);
+
+    const toastIdRef = useRef<string | number | undefined>(undefined);
 
     // Inertia form state (we'll submit with router.post)
     const form = useForm<FormDataShape>({
@@ -82,6 +85,9 @@ export default function Commissions() {
         e.preventDefault();
         setStatus(null);
 
+        const id = toast.loading('Sending your commission request…');
+        toastIdRef.current = id;
+
         const fd = new FormData();
         fd.append('name', form.data.name);
         fd.append('email', form.data.email);
@@ -108,8 +114,12 @@ export default function Commissions() {
                 setTimeout(() => {
                     document.getElementById('commissionForm')?.scrollIntoView({ behavior: 'smooth' });
                 }, 100);
+                toast.success('Your commission request has been received!', { id });
             },
-            onError: () => setStatus('error'),
+            onError: () => {
+                setStatus('error');
+                toast.error('Please fix the errors and try again.', { id });
+            },
         });
     };
 
