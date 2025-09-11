@@ -20,7 +20,9 @@ class CommissionController extends Controller
 
             // files[]: optional, up to 5 images, 4MB each
             'files'        => ['nullable', 'array', 'max:5'],
-            'files.*'      => ['file', 'mimes:jpg,jpeg,png,webp', 'max:4096'],
+            'files.*'      => ['file', 'mimes:jpg,jpeg,png,webp', 'max:5120'],
+        ], [
+            'files.*'      => 'All the files must be images and the maximum size of 5MB'
         ]);
 
         // Store files and collect public URLs
