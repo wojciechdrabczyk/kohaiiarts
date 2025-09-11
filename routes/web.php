@@ -47,3 +47,6 @@ Route::post('/contact', [ContactController::class, 'send'])
 Route::post('/commissions', [CommissionController::class, 'submit'])
     ->middleware([ProtectAgainstSpam::class, 'throttle:commission_form'])
     ->name('commissions.submit');
+
+require __DIR__ . '/settings.php';
+require __DIR__ . '/auth.php';
