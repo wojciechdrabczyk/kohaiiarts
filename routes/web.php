@@ -3,27 +3,10 @@
 use App\Http\Controllers\CommissionController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\StaticPageController;
-use Illuminate\Cache\RateLimiting\Limit;
-use Illuminate\Support\Facades\RateLimiter;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use Spatie\Honeypot\ProtectAgainstSpam;
 
-// Rate limiters
-RateLimiter::for('contact_form', function (Request $request) {
-    return [
-        Limit::perMinute(3)->by($request->ip()),
-        Limit::perHour(20)->by($request->ip()),
-    ];
-});
-
-RateLimiter::for('commission_form', function (Request $request) {
-    return [
-        Limit::perMinute(3)->by($request->ip()),
-        Limit::perHour(20)->by($request->ip()),
-    ];
-});
 
 // Public pages
 Route::get('/', [StaticPageController::class, 'illustrations'])->name('home');
