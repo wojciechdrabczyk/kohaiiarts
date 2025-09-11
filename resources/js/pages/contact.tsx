@@ -22,14 +22,6 @@ type PageProps = {
     honeypot?: HoneypotProps;
 };
 
-/** Minimal typing for the <Form> render-props we use */
-type InertiaFormSlotProps = {
-    errors: Record<string, string>;
-    processing: boolean;
-    progress?: { percentage: number } | null;
-    recentlySuccessful: boolean;
-};
-
 export default function Contact() {
     const { honeypot } = usePage().props as PageProps;
 
@@ -117,7 +109,7 @@ export default function Contact() {
                     action="/contact"
                     method="post"
                     className="mx-auto mt-12 max-w-xl scroll-mt-24 space-y-6 rounded-xl border-2 border-[#822a59] bg-white p-12 shadow-md dark:bg-neutral-900"
-                    transform={(data: Record<string, any>) => {
+                    transform={(data) => {
                         if (honeypot?.enabled) {
                             data[honeypot.nameFieldName] = '';
                             data[honeypot.validFromFieldName] = honeypot.encryptedValidFrom;

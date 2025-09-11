@@ -15,13 +15,6 @@ type PageProps = {
     honeypot?: HoneypotProps;
 };
 
-type InertiaFormSlotProps = {
-    errors: Record<string, string>;
-    processing: boolean;
-    progress?: { percentage: number } | null;
-    recentlySuccessful: boolean;
-};
-
 export default function Commissions() {
     const { honeypot } = usePage().props as PageProps;
 
@@ -119,7 +112,7 @@ export default function Commissions() {
                         encType="multipart/form-data"
                         className="mt-12 scroll-mt-24 space-y-6 rounded-xl border-2 border-[#822a59] bg-white p-6 shadow-md dark:bg-neutral-900"
                         // inject honeypot fields just before submit (docs: transform)
-                        transform={(data: Record<string, any>) => {
+                        transform={(data) => {
                             if (honeypot?.enabled) {
                                 data[honeypot.nameFieldName] = '';
                                 data[honeypot.validFromFieldName] = honeypot.encryptedValidFrom;
