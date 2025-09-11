@@ -1,6 +1,6 @@
 import DefaultLayout from '@/layouts/default-layout';
-import { Head, router, usePage } from '@inertiajs/react';
-import React, { FormEvent, useRef, useState } from 'react';
+import { Head, router, useForm, usePage } from '@inertiajs/react';
+import React, { FormEvent, useMemo, useRef, useState } from 'react';
 import { FiUpload } from 'react-icons/fi';
 
 type Status = 'success' | 'error' | null;
@@ -12,16 +12,56 @@ type HoneypotProps = {
     encryptedValidFrom: string;
 };
 
+type PageProps = {
+    errors: Record<string, string>;
+    honeypot?: HoneypotProps;
+};
+
+type FormDataShape = {
+    name: string;
+    email: string;
+    paypal_email: string;
+    subject: string;
+    message: string;
+    files: File[];
+};
+
 export default function Commissions() {
-    const [submitting, setSubmitting] = useState(false);
-    const [status, setStatus] = useState<Status>(null);
-    const [filePreviews, setFilePreviews] = useState<File[]>([]);
+    const { errors, honeypot } = usePage().props as PageProps;
+
     const [showAllFaqs, setShowAllFaqs] = useState<boolean>(false);
+    const [status, setStatus] = useState<Status>(null);
+
     const faqRef = useRef<HTMLDivElement | null>(null);
     const fileInputRef = useRef<HTMLInputElement>(null);
-    const { errors, honeypot } = usePage().props as {
-        errors: Record<string, string>;
-        honeypot?: HoneypotProps;
+
+    // Inertia form state (we'll submit with router.post)
+    const form = useForm<FormDataShape>({
+        name: '',
+        email: '',
+        paypal_email: '',
+        subject: '',
+        message: '',
+        files: [],
+    });
+
+    // Make preview URLs for selected files
+    const filePreviews = useMemo(() => form.data.files.map((f) => ({ file: f, url: URL.createObjectURL(f) })), [form.data.files]);
+
+    // Revoke object URLs when previews change/unmount
+    React.useEffect(() => {
+        return () => {
+            filePreviews.forEach((p) => URL.revokeObjectURL(p.url));
+        };
+    }, [filePreviews]);
+
+    // Helper to fetch per-field backend errors (handles arrays like files.0)
+    const getError = (name: string) => {
+        if (!errors) return undefined;
+        if (errors[name]) return errors[name];
+        const prefix = `${name}.`;
+        const key = Object.keys(errors).find((k) => k === name || k.startsWith(prefix));
+        return key ? errors[key] : undefined;
     };
 
     const toggleFaqs = () => {
@@ -40,23 +80,36 @@ export default function Commissions() {
 
     const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        if (submitting) return;
-        setSubmitting(true);
+        setStatus(null);
 
-        const formData = new FormData(e.currentTarget);
+        const fd = new FormData();
+        fd.append('name', form.data.name);
+        fd.append('email', form.data.email);
+        fd.append('paypal_email', form.data.paypal_email ?? '');
+        fd.append('subject', form.data.subject);
+        fd.append('message', form.data.message);
 
-        formData.delete('files[]');
-        filePreviews.forEach((f) => formData.append('files[]', f));
+        for (const f of form.data.files) {
+            fd.append('files[]', f);
+        }
 
-        router.post('/commissions', formData, {
+        if (honeypot?.enabled) {
+            fd.append(honeypot.nameFieldName, '');
+            fd.append(honeypot.validFromFieldName, honeypot.encryptedValidFrom);
+        }
+
+        router.post('/commissions', fd, {
+            forceFormData: true,
+            preserveScroll: true,
             onSuccess: () => {
                 setStatus('success');
-                setFilePreviews([]);
-                e.currentTarget.reset();
-                setTimeout(() => document.getElementById('commissionForm')?.scrollIntoView({ behavior: 'smooth' }), 100);
+                form.reset();
+                if (fileInputRef.current) fileInputRef.current.value = '';
+                setTimeout(() => {
+                    document.getElementById('commissionForm')?.scrollIntoView({ behavior: 'smooth' });
+                }, 100);
             },
             onError: () => setStatus('error'),
-            onFinish: () => setSubmitting(false),
         });
     };
 
@@ -133,6 +186,7 @@ export default function Commissions() {
                                 id: 'subject',
                                 label: 'Subject / Type of Commission',
                                 required: true,
+                                type: 'text',
                                 placeholder: 'e.g. Half-body OC',
                             },
                             {
@@ -144,7 +198,12 @@ export default function Commissions() {
                                     'Please describe the scene, pose, character design, and mood. Include links or attach image references below.',
                             },
                         ].map(({ id, label, required, type, placeholder }) => {
-                            const error = errors[id];
+                            const error = getError(id);
+                            const commonClasses =
+                                `w-full rounded border px-4 py-3 text-sm transition focus:border-[#822a59] focus:ring-1 focus:ring-[#822a59] focus:outline-none ` +
+                                (error
+                                    ? 'border-red-600'
+                                    : 'border-gray-300 bg-white text-gray-900 dark:border-gray-600 dark:bg-neutral-800 dark:text-gray-100');
 
                             return (
                                 <div key={id} className="space-y-1">
@@ -159,11 +218,11 @@ export default function Commissions() {
                                             required={required}
                                             rows={5}
                                             placeholder={placeholder}
-                                            className={`w-full rounded border px-4 py-3 text-sm transition focus:border-[#822a59] focus:ring-1 focus:ring-[#822a59] focus:outline-none ${
-                                                error
-                                                    ? 'border-red-600'
-                                                    : 'border-gray-300 bg-white text-gray-900 dark:border-gray-600 dark:bg-neutral-800 dark:text-gray-100'
-                                            }`}
+                                            value={(form.data as any)[id] ?? ''}
+                                            onChange={(e) => form.setData(id as keyof FormDataShape, e.target.value as any)}
+                                            className={commonClasses}
+                                            aria-invalid={!!error}
+                                            aria-describedby={error ? `${id}-error` : undefined}
                                         />
                                     ) : (
                                         <input
@@ -172,15 +231,19 @@ export default function Commissions() {
                                             type={type ?? 'text'}
                                             required={required}
                                             placeholder={placeholder}
-                                            className={`w-full rounded border px-4 py-3 text-sm transition focus:border-[#822a59] focus:ring-1 focus:ring-[#822a59] focus:outline-none ${
-                                                error
-                                                    ? 'border-red-600'
-                                                    : 'border-gray-300 bg-white text-gray-900 dark:border-gray-600 dark:bg-neutral-800 dark:text-gray-100'
-                                            }`}
+                                            value={(form.data as any)[id] ?? ''}
+                                            onChange={(e) => form.setData(id as keyof FormDataShape, e.target.value as any)}
+                                            className={commonClasses}
+                                            aria-invalid={!!error}
+                                            aria-describedby={error ? `${id}-error` : undefined}
                                         />
                                     )}
 
-                                    {error && <p className="text-sm text-red-600 dark:text-red-400">{error}</p>}
+                                    {error && (
+                                        <p id={`${id}-error`} className="text-sm text-red-600 dark:text-red-400">
+                                            {error}
+                                        </p>
+                                    )}
                                 </div>
                             );
                         })}
@@ -207,7 +270,7 @@ export default function Commissions() {
                                     multiple
                                     onChange={(e) => {
                                         const newFiles = Array.from(e.target.files || []);
-                                        setFilePreviews((prev) => [...prev, ...newFiles]);
+                                        form.setData('files', [...form.data.files, ...newFiles]);
                                         if (fileInputRef.current) fileInputRef.current.value = '';
                                     }}
                                     className="hidden"
@@ -222,45 +285,60 @@ export default function Commissions() {
                                 </label>
 
                                 <span className="text-sm text-gray-600 dark:text-gray-300">
-                                    {filePreviews.length} {filePreviews.length === 1 ? 'file' : 'files'} selected
+                                    {form.data.files.length} {form.data.files.length === 1 ? 'file' : 'files'} selected
                                 </span>
                             </div>
 
-                            {filePreviews.length > 0 && (
+                            {form.data.files.length > 0 && (
                                 <div className="mt-2 flex flex-wrap gap-2">
-                                    {filePreviews.map((file, i) => {
-                                        const url = URL.createObjectURL(file);
-                                        return (
-                                            <div key={i} className="relative">
-                                                <img
-                                                    src={url}
-                                                    alt={`Preview ${i + 1}`}
-                                                    className="h-20 w-20 rounded object-cover ring-1 ring-gray-300 dark:ring-gray-600"
-                                                />
-                                                <button
-                                                    type="button"
-                                                    onClick={() => {
-                                                        setFilePreviews((prev) => prev.filter((_, index) => index !== i));
-                                                        URL.revokeObjectURL(url);
-                                                    }}
-                                                    className="bg-opacity-75 absolute top-0 right-0 rounded-full bg-black px-2 py-1 text-xs text-white hover:bg-red-600 dark:bg-white dark:text-black dark:hover:bg-red-600"
-                                                    style={{ fontSize: '14px' }}
-                                                >
-                                                    ×
-                                                </button>
-                                            </div>
-                                        );
-                                    })}
+                                    {filePreviews.map((p, i) => (
+                                        <div key={i} className="relative">
+                                            <img
+                                                src={p.url}
+                                                alt={`Preview ${i + 1}`}
+                                                className="h-20 w-20 rounded object-cover ring-1 ring-gray-300 dark:ring-gray-600"
+                                            />
+                                            <button
+                                                type="button"
+                                                onClick={() => {
+                                                    const next = [...form.data.files];
+                                                    next.splice(i, 1);
+                                                    form.setData('files', next);
+                                                    URL.revokeObjectURL(p.url);
+                                                }}
+                                                className="bg-opacity-75 absolute top-0 right-0 rounded-full bg-black px-2 py-1 text-xs text-white hover:bg-red-600 dark:bg-white dark:text-black dark:hover:bg-red-600"
+                                                style={{ fontSize: '14px' }}
+                                            >
+                                                ×
+                                            </button>
+                                        </div>
+                                    ))}
                                 </div>
                             )}
+
+                            {/* Show any files[] or files.* validation errors */}
+                            {(() => {
+                                const filesError = getError('files');
+                                return (
+                                    filesError && (
+                                        <p id="files-error" className="mt-2 text-sm text-red-600 dark:text-red-400">
+                                            {filesError}
+                                        </p>
+                                    )
+                                );
+                            })()}
                         </div>
 
                         <button
                             type="submit"
-                            disabled={submitting}
-                            className={`w-full rounded px-4 py-3 text-sm font-semibold text-white transition ${submitting ? 'cursor-not-allowed bg-gray-400' : 'bg-[#822a59] hover:bg-[#6e1f48] dark:bg-[#822a59] dark:hover:bg-[#6e1f48]'}`}
+                            disabled={form.processing /* available on most useForm versions; harmless if falsey */}
+                            className={`w-full rounded px-4 py-3 text-sm font-semibold text-white transition ${
+                                form.processing
+                                    ? 'cursor-not-allowed bg-gray-400'
+                                    : 'bg-[#822a59] hover:bg-[#6e1f48] dark:bg-[#822a59] dark:hover:bg-[#6e1f48]'
+                            }`}
                         >
-                            {submitting ? 'Sending…' : 'Send Commission Request'}
+                            {form.processing ? 'Sending…' : 'Send Commission Request'}
                         </button>
 
                         {status === 'success' && (

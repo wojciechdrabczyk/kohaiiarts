@@ -39,6 +39,7 @@ class CommissionController extends Controller
         // Send (use ->queue() in prod if you run a worker)
         Mail::to($to)->send(new CommissionRequest($payload));
 
+        dd("sent");
         return back()->with('success', 'Message sent!');
     }
 }
