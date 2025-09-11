@@ -36,7 +36,7 @@ Route::get('/not-found', [StaticPageController::class, 'notfound'])->name('notfo
 
 // Authenticated area
 Route::middleware(['auth', 'verified'])->group(function () {
-    Route::get('/dashboard', fn () => Inertia::render('dashboard'))->name('dashboard');
+    Route::get('/dashboard', fn() => Inertia::render('dashboard'))->name('dashboard');
 });
 
 // Form submits (protected)

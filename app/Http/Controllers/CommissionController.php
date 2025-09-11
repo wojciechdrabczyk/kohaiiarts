@@ -11,7 +11,6 @@ class CommissionController extends Controller
 {
     public function submit(Request $request)
     {
-        // Validate payload (mirror your UI)
         $data = $request->validate([
             'name'         => ['required', 'string', 'min:2', 'max:30'],
             'email'        => ['required', 'email:rfc,dns', 'max:50'],
@@ -35,7 +34,7 @@ class CommissionController extends Controller
         $payload = array_merge($data, ['files' => $urls]);
 
         // Recipient from config (maps your KOHAIIS_EMAIL_ADDRESS in config/mail.php)
-        $to = config('mail.contact_to.address') ?? config('mail.from.address');
+        $to = config('mail.commissions.address');
 
         // Send (use ->queue() in prod if you run a worker)
         Mail::to($to)->send(new CommissionRequest($payload));
