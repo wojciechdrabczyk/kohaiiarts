@@ -4,7 +4,10 @@
     "singleAttributePerLine": false,
     "htmlWhitespaceSensitivity": "css",
     "printWidth": 150,
-    "plugins": ["prettier-plugin-organize-imports", "prettier-plugin-tailwindcss"],
+    "plugins": [
+        "prettier-plugin-organize-imports",
+        "prettier-plugin-tailwindcss"
+    ],
     "tailwindFunctions": ["clsx", "cn"],
     "tabWidth": 4,
     "overrides": [
@@ -12,6 +15,13 @@
             "files": "**/*.yml",
             "options": {
                 "tabWidth": 2
+            }
+        },
+        {
+            "files": "*.php",
+            "options": {
+                "singleQuote": false,
+                "tabWidth": 4
             }
         }
     ]

@@ -1,18 +1,27 @@
 import DefaultLayout from '@/layouts/default-layout';
-import { PageProps } from '@inertiajs/inertia';
 import { Head, router, usePage } from '@inertiajs/react';
 import React, { FormEvent, useRef, useState } from 'react';
 import { FiUpload } from 'react-icons/fi';
 
 type Status = 'success' | 'error' | null;
 
+type HoneypotProps = {
+    enabled: boolean;
+    nameFieldName: string;
+    validFromFieldName: string;
+    encryptedValidFrom: string;
+};
+
 export default function Commissions() {
+    const [submitting, setSubmitting] = useState(false);
     const [status, setStatus] = useState<Status>(null);
     const [filePreviews, setFilePreviews] = useState<File[]>([]);
     const [showAllFaqs, setShowAllFaqs] = useState<boolean>(false);
     const faqRef = useRef<HTMLDivElement | null>(null);
-    const { errors } = usePage<PageProps>().props as {
+    const fileInputRef = useRef<HTMLInputElement>(null);
+    const { errors, honeypot } = usePage().props as {
         errors: Record<string, string>;
+        honeypot?: HoneypotProps;
     };
 
     const toggleFaqs = () => {
@@ -31,20 +40,23 @@ export default function Commissions() {
 
     const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+        if (submitting) return;
+        setSubmitting(true);
+
         const formData = new FormData(e.currentTarget);
+
+        formData.delete('files[]');
+        filePreviews.forEach((f) => formData.append('files[]', f));
 
         router.post('/commissions', formData, {
             onSuccess: () => {
                 setStatus('success');
                 setFilePreviews([]);
                 e.currentTarget.reset();
-                setTimeout(() => {
-                    document.getElementById('commissionForm')?.scrollIntoView({ behavior: 'smooth' });
-                }, 100);
+                setTimeout(() => document.getElementById('commissionForm')?.scrollIntoView({ behavior: 'smooth' }), 100);
             },
-            onError: () => {
-                setStatus('error');
-            },
+            onError: () => setStatus('error'),
+            onFinish: () => setSubmitting(false),
         });
     };
 
@@ -89,6 +101,8 @@ export default function Commissions() {
                     <form
                         onSubmit={handleSubmit}
                         id="commissionForm"
+                        noValidate
+                        encType="multipart/form-data"
                         className="mt-12 scroll-mt-24 space-y-6 rounded-xl border-2 border-[#822a59] bg-white p-6 shadow-md dark:bg-neutral-900"
                     >
                         <h2 className="text-xl font-semibold text-gray-800 dark:text-gray-200">Request a Commission</h2>
@@ -171,24 +185,34 @@ export default function Commissions() {
                             );
                         })}
 
-                        <div className="">
+                        {honeypot?.enabled && (
+                            <div className="hidden" aria-hidden="true">
+                                <input type="text" name={honeypot.nameFieldName} defaultValue="" autoComplete="off" tabIndex={-1} />
+                                <input type="text" name={honeypot.validFromFieldName} defaultValue={honeypot.encryptedValidFrom} readOnly />
+                            </div>
+                        )}
+
+                        <div>
                             <label htmlFor="files" className="mb-2 block text-sm font-medium text-gray-600 dark:text-gray-300">
                                 Attach Image References <span className="text-xs text-gray-400">(optional)</span>
                             </label>
 
                             <div className="flex items-center gap-3">
                                 <input
+                                    ref={fileInputRef}
                                     id="files"
                                     name="files[]"
                                     type="file"
-                                    accept="image/*"
+                                    accept="image/jpeg,image/png,image/webp"
                                     multiple
                                     onChange={(e) => {
                                         const newFiles = Array.from(e.target.files || []);
                                         setFilePreviews((prev) => [...prev, ...newFiles]);
+                                        if (fileInputRef.current) fileInputRef.current.value = '';
                                     }}
                                     className="hidden"
                                 />
+
                                 <label
                                     htmlFor="files"
                                     className="flex cursor-pointer items-center gap-2 rounded bg-[#822a59] px-4 py-2 text-sm font-medium text-white hover:bg-[#6e1f48] dark:bg-[#822a59] dark:text-white dark:hover:bg-[#6e1f48]"
@@ -196,13 +220,14 @@ export default function Commissions() {
                                     <FiUpload className="text-lg" />
                                     Choose Files
                                 </label>
+
                                 <span className="text-sm text-gray-600 dark:text-gray-300">
                                     {filePreviews.length} {filePreviews.length === 1 ? 'file' : 'files'} selected
                                 </span>
                             </div>
 
                             {filePreviews.length > 0 && (
-                                <div className="flex flex-wrap gap-2">
+                                <div className="mt-2 flex flex-wrap gap-2">
                                     {filePreviews.map((file, i) => {
                                         const url = URL.createObjectURL(file);
                                         return (
@@ -232,9 +257,10 @@ export default function Commissions() {
 
                         <button
                             type="submit"
-                            className="w-full rounded bg-[#822a59] px-4 py-3 text-sm font-semibold text-white transition hover:bg-[#6e1f48] dark:bg-[#822a59] dark:text-white dark:hover:bg-[#6e1f48]"
+                            disabled={submitting}
+                            className={`w-full rounded px-4 py-3 text-sm font-semibold text-white transition ${submitting ? 'cursor-not-allowed bg-gray-400' : 'bg-[#822a59] hover:bg-[#6e1f48] dark:bg-[#822a59] dark:hover:bg-[#6e1f48]'}`}
                         >
-                            Send Commission Request
+                            {submitting ? 'Sending…' : 'Send Commission Request'}
                         </button>
 
                         {status === 'success' && (

@@ -121,4 +121,9 @@ return [
         'name' => env('MAIL_FROM_NAME', 'Example'),
     ],
 
+    'contact_to' => [
+        'address' => env('KOHAIIS_EMAIL_ADDRESS'),
+        'name'    => env('CONTACT_TO_NAME', config('mail.from.name')),
+    ],
+
 ];

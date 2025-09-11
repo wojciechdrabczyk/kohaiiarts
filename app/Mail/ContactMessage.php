@@ -25,12 +25,21 @@ class ContactMessage extends Mailable
     /**
      * Get the message envelope.
      */
-    public function envelope(): Envelope
+    public function envelope(): \Illuminate\Mail\Mailables\Envelope
     {
-        return new Envelope(
-            from: new Address('contact@' . env('MAILGUN_DOMAIN'), 'Kohaiis Art Inquiries'),
-            to: [new Address(env('KOHAIIS_EMAIL_ADDRESS'), 'Kohaiis Art Inquiries')],
-            subject: 'New Contact Message from ' . $this->data['name'],
+        $fromAddress = config('mail.from.address') ?: 'no-reply@example.com';
+        $fromName    = config('mail.from.name') ?: 'App';
+
+        $toAddress   = config('mail.contact_to.address') ?? $fromAddress;
+        $toName      = config('mail.contact_to.name') ?? $fromName;
+
+        return new \Illuminate\Mail\Mailables\Envelope(
+            from: new \Illuminate\Mail\Mailables\Address($fromAddress, $fromName),
+            to: [new \Illuminate\Mail\Mailables\Address($toAddress, $toName)],
+            replyTo: [
+                new \Illuminate\Mail\Mailables\Address($this->data['email'] ?? $fromAddress, $this->data['name'] ?? 'Sender'),
+            ],
+            subject: 'New Contact Message from ' . ($this->data['name'] ?? 'Unknown'),
         );
     }
     /**
