@@ -367,7 +367,120 @@ export default function Commissions() {
                             </p>
                         </details>
 
-                        {showAllFaqs && <>{/* (rest of your FAQ unchanged) */}</>}
+                        {showAllFaqs && (
+                            <>
+                                <details className="min-h-[50px] rounded-xl border-2 border-[#822a59] bg-white p-4 text-sm text-gray-600 shadow-md dark:bg-neutral-900 dark:text-gray-400">
+                                    <summary className="cursor-pointer font-semibold text-gray-700 dark:text-gray-200 [&::marker]:text-[#c59d36]">
+                                        Can I request a faster delivery?
+                                    </summary>
+                                    <p className="mt-2">
+                                        If you need your commission completed within a shorter timeframe (typically 2–5 business days), priority
+                                        scheduling may be available depending on current workload and the complexity of the piece.
+                                    </p>
+                                    <p className="mt-2">
+                                        To request faster delivery, please mention it in your message or subject line. Priority commissions include an
+                                        additional fee of 75% of the total cost. For example, a $70 order would total $123 USD plus tax when
+                                        expedited.
+                                    </p>
+                                </details>
+                                <details className="min-h-[50px] rounded-xl border-2 border-[#822a59] bg-white p-4 text-sm text-gray-600 shadow-md dark:bg-neutral-900 dark:text-gray-400">
+                                    <summary className="cursor-pointer font-semibold text-gray-700 dark:text-gray-200 [&::marker]:text-[#c59d36]">
+                                        Can I request a private commission?
+                                    </summary>
+                                    <p className="mt-2">
+                                        Yes, you may request for your commission to remain private, meaning it will not be posted online, included in
+                                        my portfolio, or used for promotional purposes. If you would like your piece to remain private, please mention
+                                        this in your request.
+                                    </p>
+                                    <p className="mt-2">
+                                        By default, I reserve the right to showcase commissioned artwork for the purpose of promoting my brand. This
+                                        includes sharing it online, using it on merchandise, or featuring it in publications, unless explicitly
+                                        requested otherwise.
+                                    </p>
+                                    <p className="mt-2">
+                                        If a commission is to remain fully private, a <strong>35% increase in the total price</strong> will apply to
+                                        account for the loss of promotional value.
+                                    </p>
+                                </details>
+                                <details className="min-h-[50px] rounded-xl border-2 border-[#822a59] bg-white p-4 text-sm text-gray-600 shadow-md dark:bg-neutral-900 dark:text-gray-400">
+                                    <summary className="cursor-pointer font-semibold text-gray-700 dark:text-gray-200 [&::marker]:text-[#c59d36]">
+                                        Can I use the artwork on Twitch, YouTube, or social media?
+                                    </summary>
+                                    <p className="mt-2">
+                                        Yes! You're welcome to use the commission for personal use online. Please credit me when possible. For
+                                        commercial use, a separate license is required.
+                                    </p>
+                                </details>
+                                <details className="min-h-[50px] rounded-xl border-2 border-[#822a59] bg-white p-4 text-sm text-gray-600 shadow-md dark:bg-neutral-900 dark:text-gray-400">
+                                    <summary className="cursor-pointer font-semibold text-gray-700 dark:text-gray-200 [&::marker]:text-[#c59d36]">
+                                        How is payment handled?
+                                    </summary>
+                                    <p className="mt-2">
+                                        Payments are processed through PayPal. I’ll send you an invoice once the sketch is approved. Full payment is
+                                        required before finalizing the artwork.
+                                    </p>
+                                </details>
+                                <details className="min-h-[50px] rounded-xl border-2 border-[#822a59] bg-white p-4 text-sm text-gray-600 shadow-md dark:bg-neutral-900 dark:text-gray-400">
+                                    <summary className="cursor-pointer font-semibold text-gray-700 dark:text-gray-200 [&::marker]:text-[#c59d36]">
+                                        Can I use the artwork commercially?
+                                    </summary>
+                                    <p className="mt-2">
+                                        Commissions are intended for personal use only. If you plan to use the artwork in a way that earns money, such
+                                        as printing and selling merchandise, including it in a published book, or using it in promotional materials,
+                                        you will need to purchase a commercial license.
+                                    </p>
+                                    <p className="mt-2">
+                                        Commercial licenses typically require a 300% fee increase based on the total price of the artwork. This helps
+                                        account for the extended value and reach of the work.
+                                    </p>
+                                    <p className="mt-2">
+                                        If you are not sure whether your intended use is considered commercial, just let me know in your request and I
+                                        will be happy to clarify.
+                                    </p>
+                                </details>
+                                <details className="min-h-[50px] rounded-xl border-2 border-[#822a59] bg-white p-4 text-sm text-gray-600 shadow-md dark:bg-neutral-900 dark:text-gray-400">
+                                    <summary className="cursor-pointer font-semibold text-gray-700 dark:text-gray-200 [&::marker]:text-[#c59d36]">
+                                        What types of licenses do you offer?
+                                    </summary>
+                                    <ul className="mt-2 list-inside list-disc space-y-1">
+                                        <li>
+                                            <strong>Personal Use:</strong> Use the artwork on your social media, as an avatar, desktop background, or
+                                            for personal printing. No additional charge.
+                                        </li>
+                                        <li>
+                                            <strong>Small Commercial:</strong> Use in monetized YouTube videos, Twitch streams, or small merchandise
+                                            runs. +100% fee.
+                                        </li>
+                                        <li>
+                                            <strong>Full Commercial:</strong> Includes resale rights, publication in books, large-scale product lines,
+                                            or exclusive usage. +300% fee.
+                                        </li>
+                                    </ul>
+                                    <p className="mt-2">
+                                        All commercial licenses are non-exclusive unless otherwise discussed. Please mention your intended use in your
+                                        request.
+                                    </p>
+                                </details>
+                                <details className="min-h-[50px] rounded-xl border-2 border-[#822a59] bg-white p-4 text-sm text-gray-600 shadow-md dark:bg-neutral-900 dark:text-gray-400">
+                                    <summary className="cursor-pointer font-semibold text-gray-700 dark:text-gray-200 [&::marker]:text-[#c59d36]">
+                                        Can I get my artwork as a print or on merch?
+                                    </summary>
+                                    <p className="mt-2">
+                                        I don’t offer physical prints directly through commissions, but you can purchase selected artworks as prints
+                                        or merchandise through my INPRNT and TeePublic shops.
+                                    </p>
+                                </details>
+                                <details className="min-h-[50px] rounded-xl border-2 border-[#822a59] bg-white p-4 text-sm text-gray-600 shadow-md dark:bg-neutral-900 dark:text-gray-400">
+                                    <summary className="cursor-pointer font-semibold text-gray-700 dark:text-gray-200 [&::marker]:text-[#c59d36]">
+                                        Do you offer refunds?
+                                    </summary>
+                                    <p className="mt-2">
+                                        Refunds are only available if I haven’t started working on your piece yet. After the sketch is sent, refunds
+                                        are no longer possible.
+                                    </p>
+                                </details>
+                            </>
+                        )}
 
                         <div className="mt-4 flex justify-end">
                             <button

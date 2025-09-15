@@ -2,7 +2,7 @@ import NewgroundsIcon from '@/assets/icons/NewgroundsIcon';
 import MobileMenu from '@/components/mobile-menu';
 import NavItem from '@/components/nav-item';
 import { Link } from '@inertiajs/react';
-import { motion, MotionConfig, stagger } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { useEffect, useMemo, useState } from 'react';
 import { BsInstagram } from 'react-icons/bs';
 import { FaDiscord } from 'react-icons/fa';
@@ -68,29 +68,29 @@ export default function HeroSection() {
 
     return (
         <div>
-            <section className="relative w-full bg-white py-16 text-center antialiased md:py-20 dark:bg-black">
+            <section className="relative w-full bg-white py-2 text-center antialiased sm:px-1 md:px-1 lg:px-1 dark:bg-black">
                 <div className="absolute top-4 right-4 z-10">
                     <button
                         onClick={toggleTheme}
                         className="relative hidden h-10 w-10 items-center justify-center rounded-full bg-gray-200 transition hover:bg-gray-300 focus-visible:ring-2 focus-visible:ring-[#822a59] focus-visible:outline-none md:flex dark:bg-neutral-800 dark:hover:bg-neutral-700"
                         aria-label="Toggle theme"
                     >
-            <span
-                className={`absolute inset-0 flex items-center justify-center transition-all duration-300 motion-reduce:duration-0 ${
-                    theme === 'dark' ? 'scale-0 rotate-180 opacity-0' : 'scale-100 rotate-0 opacity-100'
-                }`}
-                aria-hidden={theme === 'dark'}
-            >
-              <FaMoon className="h-5 w-5 text-gray-800" />
-            </span>
+                        <span
+                            className={`absolute inset-0 flex items-center justify-center transition-all duration-300 motion-reduce:duration-0 ${
+                                theme === 'dark' ? 'scale-0 rotate-180 opacity-0' : 'scale-100 rotate-0 opacity-100'
+                            }`}
+                            aria-hidden={theme === 'dark'}
+                        >
+                            <FaMoon className="h-5 w-5 text-gray-800" />
+                        </span>
                         <span
                             className={`absolute inset-0 flex items-center justify-center transition-all duration-300 motion-reduce:duration-0 ${
                                 theme === 'dark' ? 'scale-100 rotate-0 opacity-100' : 'scale-0 rotate-180 opacity-0'
                             }`}
                             aria-hidden={theme !== 'dark'}
                         >
-              <FaSun className="h-5 w-5 text-yellow-400" />
-            </span>
+                            <FaSun className="h-5 w-5 text-yellow-400" />
+                        </span>
                     </button>
                 </div>
 
@@ -102,7 +102,7 @@ export default function HeroSection() {
                 />
 
                 {/* Social links rail (no animation) */}
-                <div className="absolute hidden items-center sm:left-5 md:left-5 md:flex">
+                <div className="absolute top-1/2 hidden -translate-y-1/2 sm:left-5 md:left-5 md:flex">
                     <ul className="flex flex-col items-center gap-10">
                         {socials.map(({ url, name, Icon, title }) => (
                             <li key={url}>
@@ -112,7 +112,7 @@ export default function HeroSection() {
                                     rel="noopener noreferrer"
                                     aria-label={name}
                                     title={title}
-                                    className="inline-flex h-6 w-6 items-center justify-center rounded text-[#822a59] dark:text-[#822a59] transform-gpu focus-visible:ring-2 focus-visible:ring-[#822a59] focus-visible:ring-offset-2 focus-visible:outline-none dark:focus-visible:ring-offset-black"
+                                    className="inline-flex h-6 w-6 transform-gpu items-center justify-center rounded text-[#822a59] focus-visible:ring-2 focus-visible:ring-[#822a59] focus-visible:ring-offset-2 focus-visible:outline-none dark:text-[#822a59] dark:focus-visible:ring-offset-black"
                                     whileHover={{ scale: 1.12, y: -1 }}
                                     whileTap={{ scale: 0.95 }}
                                     transition={{ type: 'spring', stiffness: 420, damping: 24 }}
@@ -162,10 +162,7 @@ export default function HeroSection() {
                     </Link>
                 </div>
 
-                <h1
-                    className="mt-6 text-3xl font-light text-[#6e1f48] md:text-6xl dark:text-[#6e1f48]"
-                    style={{ fontFamily: 'Montserrat' }}
-                >
+                <h1 className="mt-6 text-3xl font-light text-[#6e1f48] md:text-6xl dark:text-[#6e1f48]" style={{ fontFamily: 'Montserrat' }}>
                     KOHAII ARTS
                 </h1>
                 <p className="mt-2 text-base text-gray-500 md:text-xl dark:text-gray-400" style={{ fontFamily: 'Montserrat' }}>
