@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\IllustrationsAdminController;
 use App\Http\Controllers\CommissionController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\StaticPageController;
@@ -21,6 +22,22 @@ Route::get('/not-found', [StaticPageController::class, 'notfound'])->name('notfo
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/dashboard', fn() => Inertia::render('dashboard'))->name('dashboard');
 });
+
+Route::middleware(['auth','verified'])
+    ->prefix('admin')->name('admin.')
+    ->group(function () {
+        Route::get('illustrations', [IllustrationsAdminController::class, 'index'])->name('illustrations.index');
+        Route::post('illustrations', [IllustrationsAdminController::class, 'store'])->name('illustrations.store');
+
+        Route::patch('illustrations/reorder', [IllustrationsAdminController::class, 'reorder'])
+            ->name('illustrations.reorder');
+
+        Route::patch('illustrations/{illustration}', [IllustrationsAdminController::class, 'update'])
+            ->whereNumber('illustration')->name('illustrations.update');
+        Route::delete('illustrations/{illustration}', [IllustrationsAdminController::class, 'destroy'])
+            ->whereNumber('illustration')->name('illustrations.destroy');
+    });
+
 
 // Form submits (protected)
 Route::post('/contact', [ContactController::class, 'send'])
