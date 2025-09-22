@@ -18,13 +18,12 @@ function getCookie(name: string): string | null {
     return m ? decodeURIComponent(m[1]) : null;
 }
 
-// Build correct headers for Laravel CSRF verification
 function csrfHeaders(): Record<string, string> {
     const meta = (document.querySelector('meta[name="csrf-token"]') as HTMLMetaElement | null)?.content;
     const xsrf = getCookie('XSRF-TOKEN');
     const h: Record<string, string> = { 'X-Requested-With': 'XMLHttpRequest', Accept: 'application/json' };
-    if (meta) h['X-CSRF-TOKEN'] = meta;   // from <meta name="csrf-token" ...>
-    if (xsrf) h['X-XSRF-TOKEN'] = xsrf;   // from XSRF-TOKEN cookie (NOTE header name)
+    if (meta) h['X-CSRF-TOKEN'] = meta;
+    if (xsrf) h['X-XSRF-TOKEN'] = xsrf;
     return h;
 }
 
@@ -32,10 +31,9 @@ export default function AdminIllustrations({ items }: Props) {
     const [list, setList] = useState<Item[]>(items);
 
     useEffect(() => {
-        setList(items); // trust server order
+        setList(items);
     }, [items]);
 
-    // ---------- Upload form ----------
     const fileRef = useRef<HTMLInputElement | null>(null);
     const [captions, setCaptions] = useState<string[]>([]);
     const { post, processing, reset, setData, data } = useForm<{
@@ -95,7 +93,7 @@ export default function AdminIllustrations({ items }: Props) {
             credentials: 'same-origin',
             headers: {
                 'Content-Type': 'application/json',
-                ...csrfHeaders(), // <<< FIX: send both CSRF headers correctly
+                ...csrfHeaders(),
             },
             body: JSON.stringify({ order: ids.map(id => ({ id })) }),
         });
@@ -105,7 +103,7 @@ export default function AdminIllustrations({ items }: Props) {
             return;
         }
 
-        const data = await res.json(); // { ok: true, ordered: number[] }
+        const data = await res.json();
         const idOrder: number[] = data.ordered ?? ids;
 
         setList(prev => {
@@ -126,8 +124,8 @@ export default function AdminIllustrations({ items }: Props) {
         const [moved] = next.splice(from, 1);
         next.splice(to, 0, moved);
         const numbered = renumber(next);
-        setList(numbered);          // optimistic UI
-        void persistOrder(numbered); // save
+        setList(numbered);
+        void persistOrder(numbered);
     };
 
     return (
@@ -135,7 +133,6 @@ export default function AdminIllustrations({ items }: Props) {
             <Head title="Manage Illustrations" />
             <h1 className="mb-4 text-2xl font-semibold">Illustrations</h1>
 
-            {/* Existing */}
             <h2 className="mb-3 text-xl font-semibold">Existing</h2>
             <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
                 {list.map((item, idx) => (
@@ -194,7 +191,6 @@ export default function AdminIllustrations({ items }: Props) {
                 ))}
             </ul>
 
-            {/* Upload */}
             <h2 className="mt-10 mb-3 text-xl font-semibold">Upload</h2>
             <form onSubmit={submit} className="space-y-4 rounded-xl border p-4">
                 <div>
