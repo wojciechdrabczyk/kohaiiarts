@@ -70,6 +70,7 @@ export default function Illustrations({ images = [] as Img[] }: { images?: Img[]
                                             key={`${image.src}-${globalIndex}`}
                                             src={image.src}
                                             alt={image.caption ?? 'Artwork image'}
+                                            caption={image.caption ?? undefined}
                                             onClick={() => setCurrentIndex(globalIndex)}
                                         />
                                     );
@@ -81,12 +82,28 @@ export default function Illustrations({ images = [] as Img[] }: { images?: Img[]
 
             <Transition appear show={currentIndex !== null} as={Fragment}>
                 <Dialog as="div" className="relative z-50" onClose={() => setCurrentIndex(null)}>
-                    <TransitionChild as={Fragment} enter="ease-out duration-300" enterFrom="opacity-0" enterTo="opacity-100" leave="ease-in duration-200" leaveFrom="opacity-100" leaveTo="opacity-0">
+                    <TransitionChild
+                        as={Fragment}
+                        enter="ease-out duration-300"
+                        enterFrom="opacity-0"
+                        enterTo="opacity-100"
+                        leave="ease-in duration-200"
+                        leaveFrom="opacity-100"
+                        leaveTo="opacity-0"
+                    >
                         <div className="fixed inset-0 bg-white/40 backdrop-blur-sm" />
                     </TransitionChild>
 
                     <div className="fixed inset-0 flex items-center justify-center p-4">
-                        <TransitionChild as={Fragment} enter="ease-out duration-300" enterFrom="opacity-0 scale-95" enterTo="opacity-100 scale-100" leave="ease-in duration-200" leaveFrom="opacity-100 scale-100" leaveTo="opacity-0 scale-95">
+                        <TransitionChild
+                            as={Fragment}
+                            enter="ease-out duration-300"
+                            enterFrom="opacity-0 scale-95"
+                            enterTo="opacity-100 scale-100"
+                            leave="ease-in duration-200"
+                            leaveFrom="opacity-100 scale-100"
+                            leaveTo="opacity-0 scale-95"
+                        >
                             <div
                                 className="fixed inset-0 z-50 flex items-center justify-center p-4"
                                 onClick={(e) => {
@@ -95,7 +112,15 @@ export default function Illustrations({ images = [] as Img[] }: { images?: Img[]
                                     setCurrentIndex(null);
                                 }}
                             >
-                                <TransitionChild as={Fragment} enter="ease-out duration-300" enterFrom="opacity-0 scale-95" enterTo="opacity-100 scale-100" leave="ease-in duration-200" leaveFrom="opacity-100 scale-100" leaveTo="opacity-0 scale-95">
+                                <TransitionChild
+                                    as={Fragment}
+                                    enter="ease-out duration-300"
+                                    enterFrom="opacity-0 scale-95"
+                                    enterTo="opacity-100 scale-100"
+                                    leave="ease-in duration-200"
+                                    leaveFrom="opacity-100 scale-100"
+                                    leaveTo="opacity-0 scale-95"
+                                >
                                     <DialogPanel
                                         {...swipeHandlers}
                                         className="group relative flex h-full w-full items-center justify-center p-4 sm:p-6"
@@ -107,7 +132,12 @@ export default function Illustrations({ images = [] as Img[] }: { images?: Img[]
                                     >
                                         {currentIndex !== null && gallery[currentIndex] && (
                                             <>
-                                                <figure className="z-20 max-h-[90vh] max-w-[95vw] overflow-auto" data-no-click-zone role="group" aria-labelledby="caption">
+                                                <figure
+                                                    className="z-20 max-h-[90vh] max-w-[95vw] overflow-auto"
+                                                    data-no-click-zone
+                                                    role="group"
+                                                    aria-labelledby="caption"
+                                                >
                                                     <img
                                                         key={gallery[currentIndex].src}
                                                         src={gallery[currentIndex].src}
@@ -119,11 +149,6 @@ export default function Illustrations({ images = [] as Img[] }: { images?: Img[]
                                                             img.classList.add('blur-0', 'opacity-100');
                                                         }}
                                                     />
-                                                    {gallery[currentIndex].caption && (
-                                                        <figcaption id="caption" className="mt-4 rounded-xl px-3 py-3 text-center text-3xl text-white drop-shadow-md sm:hidden" style={{ fontFamily: 'Inter, sans-serif' }}>
-                                                            {gallery[currentIndex].caption}
-                                                        </figcaption>
-                                                    )}
                                                 </figure>
 
                                                 <button

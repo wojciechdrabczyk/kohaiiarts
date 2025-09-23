@@ -23,7 +23,7 @@ const breadcrumbs: BreadcrumbItem[] = [
 
 export default function Dashboard({ recentIllustrations = [], illustrationCount = 0 }: Props) {
     const fileRef = useRef<HTMLInputElement | null>(null);
-    const [captions, setCaptions] = useState<string[]>([]);
+
     const { post, processing, reset, setData, data } = useForm<{
         images: File[];
         captions: (string | null)[];
@@ -34,25 +34,24 @@ export default function Dashboard({ recentIllustrations = [], illustrationCount 
         if (!files) return;
         const arr = Array.from(files);
         setData('images', arr);
-        setCaptions(arr.map(() => ''));
+        setData('captions', arr.map(() => ''));
     };
+
 
     const removePending = (i: number) => {
         setData('images', data.images.filter((_, idx) => idx !== i));
-        setCaptions(captions.filter((_, idx) => idx !== i));
+        setData('captions', (data.captions ?? []).filter((_, idx) => idx !== i));
         if (fileRef.current && data.images.length === 1) fileRef.current.value = '';
     };
 
     const submit = (e: React.FormEvent) => {
         e.preventDefault();
-        setData('captions', captions);
         post(route('admin.illustrations.store'), {
             forceFormData: true,
             preserveScroll: true,
             onSuccess: () => {
                 reset();
                 if (fileRef.current) fileRef.current.value = '';
-                setCaptions([]);
             },
         });
     };
@@ -98,15 +97,14 @@ export default function Dashboard({ recentIllustrations = [], illustrationCount 
                                                 <input
                                                     type="text"
                                                     placeholder="Caption (optional)"
-                                                    value={captions[i] ?? ''}
+                                                    value={data.captions[i] ?? ''}
                                                     onChange={(e) => {
-                                                        const next = [...captions];
+                                                        const next = [...(data.captions ?? [])];
                                                         next[i] = e.target.value;
-                                                        setCaptions(next);
+                                                        setData('captions', next);
                                                     }}
                                                     className="flex-1 rounded-lg border p-1.5 text-sm"
-                                                />
-                                                <button
+                                                />                                                <button
                                                     type="button"
                                                     onClick={() => removePending(i)}
                                                     className="rounded-lg border px-2 py-1 text-xs hover:bg-neutral-800"

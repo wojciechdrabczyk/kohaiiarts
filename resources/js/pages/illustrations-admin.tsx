@@ -12,9 +12,7 @@ type Item = {
 type Props = { items: Item[] };
 
 function getCookie(name: string): string | null {
-    const m = document.cookie.match(
-        new RegExp(`(?:^|; )${name.replace(/[$()*+./?[\\\]^{|}-]/g, '\\$&')}=([^;]*)`)
-    );
+    const m = document.cookie.match(new RegExp(`(?:^|; )${name.replace(/[$()*+./?[\\\]^{|}-]/g, '\\$&')}=([^;]*)`));
     return m ? decodeURIComponent(m[1]) : null;
 }
 
@@ -35,7 +33,6 @@ export default function AdminIllustrations({ items }: Props) {
     }, [items]);
 
     const fileRef = useRef<HTMLInputElement | null>(null);
-    const [captions, setCaptions] = useState<string[]>([]);
     const { post, processing, reset, setData, data } = useForm<{
         images: File[];
         captions: (string | null)[];
@@ -46,36 +43,39 @@ export default function AdminIllustrations({ items }: Props) {
         if (!files) return;
         const arr = Array.from(files);
         setData('images', arr);
-        setCaptions(arr.map(() => ''));
+        setData(
+            'captions',
+            arr.map(() => ''),
+        );
     };
 
     const removePending = (i: number) => {
-        setData('images', data.images.filter((_, idx) => idx !== i));
-        setCaptions(captions.filter((_, idx) => idx !== i));
+        setData(
+            'images',
+            data.images.filter((_, idx) => idx !== i),
+        );
+        setData(
+            'captions',
+            (data.captions ?? []).filter((_, idx) => idx !== i),
+        );
         if (fileRef.current && data.images.length === 1) fileRef.current.value = '';
     };
 
     const submit = (e: React.FormEvent) => {
         e.preventDefault();
-        setData('captions', captions);
         post(route('admin.illustrations.store'), {
             forceFormData: true,
             preserveScroll: true,
             onSuccess: () => {
                 reset();
                 if (fileRef.current) fileRef.current.value = '';
-                setCaptions([]);
             },
         });
     };
 
     // ---------- Publish / Delete ----------
     const togglePublish = (item: Item) => {
-        router.patch(
-            route('admin.illustrations.update', item.id),
-            { is_published: !item.is_published },
-            { preserveScroll: true }
-        );
+        router.patch(route('admin.illustrations.update', item.id), { is_published: !item.is_published }, { preserveScroll: true });
     };
 
     const destroyItem = (item: Item) => {
@@ -86,7 +86,7 @@ export default function AdminIllustrations({ items }: Props) {
     const renumber = (arr: Item[]) => arr.map((it, idx) => ({ ...it, sort_order: idx + 1 }));
 
     async function persistOrder(arr: Item[]) {
-        const ids = arr.map(i => i.id);
+        const ids = arr.map((i) => i.id);
 
         const res = await fetch(route('admin.illustrations.reorder'), {
             method: 'PATCH',
@@ -95,7 +95,7 @@ export default function AdminIllustrations({ items }: Props) {
                 'Content-Type': 'application/json',
                 ...csrfHeaders(),
             },
-            body: JSON.stringify({ order: ids.map(id => ({ id })) }),
+            body: JSON.stringify({ order: ids.map((id) => ({ id })) }),
         });
 
         if (!res.ok) {
@@ -106,8 +106,8 @@ export default function AdminIllustrations({ items }: Props) {
         const data = await res.json();
         const idOrder: number[] = data.ordered ?? ids;
 
-        setList(prev => {
-            const byId = new Map(prev.map(it => [it.id, it]));
+        setList((prev) => {
+            const byId = new Map(prev.map((it) => [it.id, it]));
             return idOrder.map((id, idx) => ({ ...byId.get(id)!, sort_order: idx + 1 }));
         });
 
@@ -136,11 +136,11 @@ export default function AdminIllustrations({ items }: Props) {
             <h2 className="mb-3 text-xl font-semibold">Existing</h2>
             <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
                 {list.map((item, idx) => (
-                    <li key={item.id} className="rounded-xl border bg-black/10 p-3 dark:bg:white/5">
+                    <li key={item.id} className="dark:bg:white/5 rounded-xl border bg-black/10 p-3">
                         <div className="mb-2 flex items-center justify-between">
-              <span className="text-xs opacity-70">
-                Order: {item.sort_order} • {item.is_published ? 'Published' : 'Hidden'}
-              </span>
+                            <span className="text-xs opacity-70">
+                                Order: {item.sort_order} • {item.is_published ? 'Published' : 'Hidden'}
+                            </span>
                             <div className="flex gap-1">
                                 <button
                                     type="button"
@@ -222,14 +222,14 @@ export default function AdminIllustrations({ items }: Props) {
                                 <input
                                     type="text"
                                     placeholder="Caption (optional)"
-                                    value={captions[i] ?? ''}
+                                    value={data.captions[i] ?? ''}
                                     onChange={(e) => {
-                                        const next = [...captions];
+                                        const next = [...(data.captions ?? [])];
                                         next[i] = e.target.value;
-                                        setCaptions(next);
+                                        setData('captions', next);
                                     }}
                                     className="flex-1 rounded-lg border p-2"
-                                />
+                                />{' '}
                                 <button
                                     type="button"
                                     onClick={() => removePending(i)}
@@ -243,11 +243,7 @@ export default function AdminIllustrations({ items }: Props) {
                 )}
 
                 <label className="flex items-center gap-2">
-                    <input
-                        type="checkbox"
-                        checked={data.is_published}
-                        onChange={(e) => setData('is_published', e.target.checked)}
-                    />
+                    <input type="checkbox" checked={data.is_published} onChange={(e) => setData('is_published', e.target.checked)} />
                     <span>Publish immediately</span>
                 </label>
 
