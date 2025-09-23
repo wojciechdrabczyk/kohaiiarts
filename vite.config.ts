@@ -1,13 +1,10 @@
 import tailwindcss from '@tailwindcss/vite';
 import react from '@vitejs/plugin-react';
 import laravel from 'laravel-vite-plugin';
-import { resolve } from 'node:path';
 import { defineConfig, loadEnv } from 'vite';
 
 export default defineConfig(({ mode }) => {
     const env = loadEnv(mode, process.cwd(), '');
-
-    console.log('APP_URL:', env.APP_URL);
 
     return {
         plugins: [
@@ -19,16 +16,14 @@ export default defineConfig(({ mode }) => {
             react(),
             tailwindcss(),
         ],
-        esbuild: {
-            jsx: 'automatic',
+        server: { hmr: { overlay: false } },
+
+        // 👇 add these two blocks
+        optimizeDeps: {
+            include: ['@hello-pangea/dnd'],
         },
-        resolve: {
-            alias: {
-                'ziggy-js': resolve(__dirname, 'vendor/tightenco/ziggy'),
-            },
-        },
-        define: {
-            __APP_URL__: JSON.stringify(env.APP_URL),
+        ssr: {
+            noExternal: ['@hello-pangea/dnd'],
         },
     };
 });

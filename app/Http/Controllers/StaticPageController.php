@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Illustration;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Spatie\Honeypot\Honeypot;
@@ -10,9 +11,15 @@ class StaticPageController extends Controller
 {
     public function illustrations()
     {
-        return Inertia::render('illustrations');
-    }
+        $images = \App\Models\Illustration::published()
+            ->get()
+            ->map(fn($i) => [
+                'src'     => $i->url(),
+                'caption' => $i->caption,
+            ]);
 
+        return \Inertia\Inertia::render('illustrations', ['images' => $images]);
+    }
     public function store()
     {
         return Inertia::render('store');

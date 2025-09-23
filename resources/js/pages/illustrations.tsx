@@ -1,3 +1,4 @@
+// resources/js/Pages/illustrations.tsx
 import ThumbnailImage from '@/components/thumbnail-image';
 import DefaultLayout from '@/layouts/default-layout';
 import { Dialog, DialogPanel, Transition, TransitionChild } from '@headlessui/react';
@@ -6,63 +7,37 @@ import React, { Fragment, useCallback, useEffect, useState } from 'react';
 import { FaChevronLeft, FaChevronRight, FaXmark } from 'react-icons/fa6';
 import { useSwipeable } from 'react-swipeable';
 
-const images = [
-    { src: '/img-static/Esil.webp', caption: 'ESIL (Solo Leveling)' },
-    { src: '/img-static/StTrinaCensored.webp', caption: 'SAINT TRINA (Elden Ring)' },
-    { src: '/img-static/Hikaru.webp', caption: 'HIKARU - Girl Version (The Summer Hikaru Died)' },
-    { src: '/img-static/Stormie.webp', caption: 'STORMIE' },
-    { src: '/img-static/Varesa.webp', caption: 'VARESA (Genshin Impact)' },
-    { src: '/img-static/Rogue.webp', caption: 'ROGUE (Character Concept)' },
-    { src: '/img-static/PokemonArtChristmas.webp', caption: 'Pokémon Christmas' },
-    { src: '/img-static/Halloween2023.webp', caption: 'Trick or Treat' },
-    { src: '/img-static/ValentinesCapella.webp', caption: 'CAPELLA (Re:Zero − Starting Life in Another World)' },
-    { src: '/img-static/Mitsuri.webp', caption: 'MITSURI KANROJI (Demon Slayer)' },
-    { src: '/img-static/BreakArt2.webp', caption: 'Urban Daydream' },
-    { src: '/img-static/CoffeeRelax.webp', caption: 'Latte Vibes' },
-    { src: '/img-static/Fenrys.webp', caption: "FENRYS (Chillin' in Another World with Level 2 Super Cheat Powers)" },
-    { src: '/img-static/BrazilianMiku.webp', caption: 'BRAZILIAN MIKU (Cultural Fan Art)' },
-    { src: '/img-static/BreakArt.webp', caption: 'Peaceful Horizon' },
-    { src: '/img-static/Hornpurple.webp', caption: 'Summer by the beach' },
-    { src: '/img-static/JuriKisisingWSign.webp', caption: 'JURI HAN (Street Fighter)' },
-    { src: '/img-static/Ultima.webp', caption: 'ULTIMA (Final Fantasy)' },
-];
+type Img = { src: string; caption?: string | null };
 
-export default function Illustrations() {
+export default function Illustrations({ images = [] as Img[] }: { images?: Img[] }) {
+    const gallery = images; // DB only
+
     const [currentIndex, setCurrentIndex] = useState<number | null>(null);
 
     useEffect(() => {
+        if (!gallery.length) return;
         const handleKeyDown = (e: KeyboardEvent) => {
             if (currentIndex === null) return;
-            if (e.key === 'Escape') {
-                setCurrentIndex(null);
-            } else if (e.key === 'ArrowRight') {
-                const nextIndex = currentIndex + 1;
-                setCurrentIndex(nextIndex < images.length ? nextIndex : 0);
-            } else if (e.key === 'ArrowLeft') {
-                if (currentIndex >= 0) {
-                    const prevIndex = currentIndex - 1;
-                    setCurrentIndex(prevIndex >= 0 ? prevIndex : images.length - 1);
-                }
-            }
+            if (e.key === 'Escape') setCurrentIndex(null);
+            else if (e.key === 'ArrowRight') setCurrentIndex((currentIndex + 1) % gallery.length);
+            else if (e.key === 'ArrowLeft') setCurrentIndex((currentIndex - 1 + gallery.length) % gallery.length);
         };
-
         window.addEventListener('keydown', handleKeyDown);
         return () => window.removeEventListener('keydown', handleKeyDown);
-    }, [currentIndex]);
+    }, [currentIndex, gallery.length]);
 
     const goPrev = useCallback(() => {
-        if (currentIndex !== null) {
-            const prevIndex = currentIndex - 1;
-            setCurrentIndex(prevIndex >= 0 ? prevIndex : images.length - 1);
+        if (currentIndex !== null && gallery.length) {
+            setCurrentIndex((currentIndex - 1 + gallery.length) % gallery.length);
         }
-    }, [currentIndex]);
+    }, [currentIndex, gallery.length]);
 
     const goNext = useCallback(() => {
-        if (currentIndex !== null) {
-            const nextIndex = currentIndex + 1;
-            setCurrentIndex(nextIndex < images.length ? nextIndex : 0);
+        if (currentIndex !== null && gallery.length) {
+            setCurrentIndex((currentIndex + 1) % gallery.length);
         }
-    }, [currentIndex]);
+    }, [currentIndex, gallery.length]);
+
     const swipeHandlers = useSwipeable({
         onSwipedDown: () => setCurrentIndex(null),
         onSwipedLeft: () => goPrev(),
@@ -80,25 +55,30 @@ export default function Illustrations() {
                 <meta name="description" content="Here are my latest drawings" />
             </Head>
 
-            <div className="grid grid-cols-1 gap-5 px-4 pb-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-                {[0, 1, 2, 3].map((colIndex) => (
-                    <div key={colIndex} className="grid gap-5">
-                        {images
-                            .filter((_, i) => i % 4 === colIndex)
-                            .map((image, index) => {
-                                const globalIndex = colIndex + index * 4;
-                                return (
-                                    <ThumbnailImage
-                                        key={globalIndex}
-                                        src={image.src}
-                                        alt={image.caption}
-                                        onClick={() => setCurrentIndex(globalIndex)}
-                                    />
-                                );
-                            })}
-                    </div>
-                ))}
-            </div>
+            {!gallery.length ? (
+                <div className="px-4 py-16 text-center opacity-70">No illustrations yet.</div>
+            ) : (
+                <div className="grid grid-cols-1 gap-5 px-4 pb-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+                    {[0, 1, 2, 3].map((colIndex) => (
+                        <div key={colIndex} className="grid gap-5">
+                            {gallery
+                                .filter((_, i) => i % 4 === colIndex)
+                                .map((image, index) => {
+                                    const globalIndex = colIndex + index * 4;
+                                    return (
+                                        <ThumbnailImage
+                                            key={`${image.src}-${globalIndex}`}
+                                            src={image.src}
+                                            alt={image.caption ?? 'Artwork image'}
+                                            caption={image.caption ?? undefined}
+                                            onClick={() => setCurrentIndex(globalIndex)}
+                                        />
+                                    );
+                                })}
+                        </div>
+                    ))}
+                </div>
+            )}
 
             <Transition appear show={currentIndex !== null} as={Fragment}>
                 <Dialog as="div" className="relative z-50" onClose={() => setCurrentIndex(null)}>
@@ -129,7 +109,6 @@ export default function Illustrations() {
                                 onClick={(e) => {
                                     const target = e.target as HTMLElement;
                                     if (target.closest('[data-no-click-zone]') || target.tagName === 'IMG') return;
-
                                     setCurrentIndex(null);
                                 }}
                             >
@@ -148,11 +127,10 @@ export default function Illustrations() {
                                         onClick={(e) => {
                                             const target = e.target as HTMLElement;
                                             if (target.closest('[data-no-click-zone]') || target.tagName === 'IMG') return;
-
                                             setCurrentIndex(null);
                                         }}
                                     >
-                                        {currentIndex !== null && (
+                                        {currentIndex !== null && gallery[currentIndex] && (
                                             <>
                                                 <figure
                                                     className="z-20 max-h-[90vh] max-w-[95vw] overflow-auto"
@@ -161,9 +139,9 @@ export default function Illustrations() {
                                                     aria-labelledby="caption"
                                                 >
                                                     <img
-                                                        key={images[currentIndex].src}
-                                                        src={images[currentIndex].src}
-                                                        alt={images[currentIndex].caption || 'Artwork image'}
+                                                        key={gallery[currentIndex].src}
+                                                        src={gallery[currentIndex].src}
+                                                        alt={gallery[currentIndex].caption ?? 'Artwork image'}
                                                         className="mx-auto h-auto max-h-[90vh] w-auto object-contain opacity-60 shadow-lg blur-lg transition-all duration-[300ms] ease-in-out"
                                                         onLoad={(e) => {
                                                             const img = e.currentTarget;
@@ -171,16 +149,6 @@ export default function Illustrations() {
                                                             img.classList.add('blur-0', 'opacity-100');
                                                         }}
                                                     />
-
-                                                    {images[currentIndex].caption && (
-                                                        <figcaption
-                                                            id="caption"
-                                                            className="mt-4 rounded-xl px-3 py-3 text-center text-3xl text-white drop-shadow-md sm:hidden"
-                                                            style={{ fontFamily: 'Inter, sans-serif' }}
-                                                        >
-                                                            {images[currentIndex].caption}
-                                                        </figcaption>
-                                                    )}
                                                 </figure>
 
                                                 <button
