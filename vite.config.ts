@@ -1,11 +1,9 @@
 import tailwindcss from '@tailwindcss/vite';
 import react from '@vitejs/plugin-react';
 import laravel from 'laravel-vite-plugin';
-import { defineConfig, loadEnv } from 'vite';
+import { defineConfig } from 'vite';
 
-export default defineConfig(({ mode }) => {
-    const env = loadEnv(mode, process.cwd(), '');
-
+export default defineConfig(() => {
     return {
         plugins: [
             laravel({
@@ -18,7 +16,6 @@ export default defineConfig(({ mode }) => {
         ],
         server: { hmr: { overlay: false } },
 
-        // 👇 add these two blocks
         optimizeDeps: {
             include: ['@hello-pangea/dnd'],
         },
