@@ -1,4 +1,4 @@
-import { Head, useForm } from '@inertiajs/react';
+import { Head, useForm, usePage } from '@inertiajs/react';
 import { LoaderCircle } from 'lucide-react';
 import { FormEventHandler } from 'react';
 
@@ -21,6 +21,9 @@ interface LoginProps {
     canResetPassword: boolean;
 }
 
+// Type only the props we need from Inertia's shared props
+type SharedProps = { allow_registration: boolean };
+
 export default function Login({ status, canResetPassword }: LoginProps) {
     const { data, setData, post, processing, errors, reset } = useForm<Required<LoginForm>>({
         email: '',
@@ -34,6 +37,11 @@ export default function Login({ status, canResetPassword }: LoginProps) {
             onFinish: () => reset('password'),
         });
     };
+
+    const { props } = usePage<SharedProps>();
+    const { allow_registration } = props;
+
+    const registerUrl = allow_registration ? route('register') : null;
 
     return (
         <AuthLayout title="Log in to your account" description="Enter your email and password below to log in">
@@ -96,12 +104,14 @@ export default function Login({ status, canResetPassword }: LoginProps) {
                     </Button>
                 </div>
 
-                <div className="text-muted-foreground text-center text-sm">
-                    Don't have an account?{' '}
-                    <TextLink href={route('register')} tabIndex={5}>
-                        Sign up
-                    </TextLink>
-                </div>
+                {registerUrl && (
+                    <div className="text-muted-foreground text-center text-sm">
+                        Don't have an account?{' '}
+                        <TextLink href={registerUrl} tabIndex={5}>
+                            Sign up
+                        </TextLink>
+                    </div>
+                )}
             </form>
 
             {status && <div className="mb-4 text-center text-sm font-medium text-green-600">{status}</div>}

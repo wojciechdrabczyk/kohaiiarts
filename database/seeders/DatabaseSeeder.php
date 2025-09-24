@@ -10,13 +10,22 @@ class DatabaseSeeder extends Seeder
 {
     public function run(): void
     {
-        // Upsert by unique 'email' to avoid duplicates
-        User::upsert([
+        $email = env('ADMIN_EMAIL');
+        $password = env('ADMIN_PASSWORD');
+
+
+        if (!$email || !$password) {
+            throw new \RuntimeException("ADMIN_EMAIL and ADMIN_PASSWORD must be set in .env");
+        }
+
+        User::updateOrCreate(
+            ['email' => $email],
             [
-                'name' => 'Kohaii',
-                'email' => 'test@example.com',
-                'password' => Hash::make(env('KOHAII_PASSWORD', 'testing')),
-            ],
-        ], ['email'], ['name', 'password']);
+                'name' => env('ADMIN_NAME', 'Admin'),
+                'password' => Hash::make($password),
+                'email_verified_at' => now(),
+                'is_admin' => true,
+            ]
+        );
     }
 }

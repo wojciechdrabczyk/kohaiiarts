@@ -4,12 +4,11 @@ use App\Http\Controllers\Admin\IllustrationsAdminController;
 use App\Http\Controllers\CommissionController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\StaticPageController;
-use App\Http\Controllers\DashboardController; // <-- add this import
+use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use Spatie\Honeypot\ProtectAgainstSpam;
 
-// Public pages
 Route::get('/', [StaticPageController::class, 'illustrations'])->name('home');
 Route::get('/store', [StaticPageController::class, 'store'])->name('store');
 Route::get('/support', [StaticPageController::class, 'support'])->name('support');
@@ -20,7 +19,7 @@ Route::get('/not-found', [StaticPageController::class, 'notfound'])->name('notfo
 
 // Authenticated area
 Route::middleware(['auth', 'verified'])->group(function () {
-    Route::get('/dashboard', DashboardController::class)->name('dashboard'); // <-- single source of truth
+    Route::get('/dashboard', DashboardController::class)->name('dashboard');
 });
 
 // Admin (authenticated)
@@ -39,7 +38,6 @@ Route::middleware(['auth', 'verified'])
             ->whereNumber('illustration')->name('illustrations.destroy');
     });
 
-// Form submits (protected)
 Route::post('/contact', [ContactController::class, 'send'])
     ->middleware([ProtectAgainstSpam::class, 'throttle:contact_form'])
     ->name('contact.submit');
