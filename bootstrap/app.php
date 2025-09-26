@@ -26,7 +26,11 @@ return Application::configure(basePath: dirname(__DIR__))
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
-        $exceptions->render(function (NotFoundHTTPException $e, Request $request) {
-            return Inertia::render('not-found');
+        $exceptions->render(function (NotFoundHttpException $e, Request $request) {
+            // Render the Inertia not-found page and return 404
+            return Inertia::render('not-found')
+                ->toResponse($request)
+                ->setStatusCode(404);
         });
-    })->create();
+    })
+    ->create();
