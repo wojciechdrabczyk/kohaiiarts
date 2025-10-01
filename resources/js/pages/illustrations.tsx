@@ -10,21 +10,22 @@ import { useSwipeable } from 'react-swipeable';
 type Img = { src: string; caption?: string | null };
 
 export default function Illustrations({ images = [] as Img[] }: { images?: Img[] }) {
-    const gallery = images; // DB only
+    const gallery = images;
 
     const [currentIndex, setCurrentIndex] = useState<number | null>(null);
+    const [imgError, setImgError] = useState(false);
 
+    // Open specific image only if the URL actually has ?image=N
     useEffect(() => {
         if (!gallery.length) return;
-        const handleKeyDown = (e: KeyboardEvent) => {
-            if (currentIndex === null) return;
-            if (e.key === 'Escape') setCurrentIndex(null);
-            else if (e.key === 'ArrowRight') setCurrentIndex((currentIndex + 1) % gallery.length);
-            else if (e.key === 'ArrowLeft') setCurrentIndex((currentIndex - 1 + gallery.length) % gallery.length);
-        };
-        window.addEventListener('keydown', handleKeyDown);
-        return () => window.removeEventListener('keydown', handleKeyDown);
-    }, [currentIndex, gallery.length]);
+        const p = new URLSearchParams(window.location.search);
+        if (p.has('image')) {
+            const raw = p.get('image');
+            // ensure integer index
+            const idx = raw !== null && /^\d+$/.test(raw) ? Number(raw) : NaN;
+            if (!Number.isNaN(idx) && gallery[idx]) setCurrentIndex(idx);
+        }
+    }, [gallery]);
 
     const goPrev = useCallback(() => {
         if (currentIndex !== null && gallery.length) {
@@ -47,6 +48,31 @@ export default function Illustrations({ images = [] as Img[] }: { images?: Img[]
         trackMouse: true,
         delta: 30,
     });
+
+    // Preload neighbors for snappier nav
+    useEffect(() => {
+        if (currentIndex === null || !gallery.length) return;
+        const next = new Image();
+        next.src = gallery[(currentIndex + 1) % gallery.length].src;
+        const prev = new Image();
+        prev.src = gallery[(currentIndex - 1 + gallery.length) % gallery.length].src;
+    }, [currentIndex, gallery]);
+
+    // Keep URL in sync while viewer is open
+    useEffect(() => {
+        const u = new URL(window.location.href);
+        if (currentIndex === null) {
+            u.searchParams.delete('image');
+        } else {
+            u.searchParams.set('image', String(currentIndex));
+        }
+        window.history.replaceState(null, '', u.toString());
+    }, [currentIndex]);
+
+    // Reset error on image change
+    useEffect(() => {
+        setImgError(false);
+    }, [currentIndex]);
 
     return (
         <div>
@@ -138,17 +164,29 @@ export default function Illustrations({ images = [] as Img[] }: { images?: Img[]
                                                     role="group"
                                                     aria-labelledby="caption"
                                                 >
-                                                    <img
-                                                        key={gallery[currentIndex].src}
-                                                        src={gallery[currentIndex].src}
-                                                        alt={gallery[currentIndex].caption ?? 'Artwork image'}
-                                                        className="mx-auto h-auto max-h-[90vh] w-auto object-contain opacity-60 shadow-lg blur-lg transition-all duration-[300ms] ease-in-out"
-                                                        onLoad={(e) => {
-                                                            const img = e.currentTarget;
-                                                            img.classList.remove('blur-lg', 'opacity-60');
-                                                            img.classList.add('blur-0', 'opacity-100');
-                                                        }}
-                                                    />
+                                                    {!imgError ? (
+                                                        <img
+                                                            key={gallery[currentIndex].src}
+                                                            src={gallery[currentIndex].src}
+                                                            alt={gallery[currentIndex].caption ?? 'Artwork image'}
+                                                            decoding="async"
+                                                            fetchPriority="high"
+                                                            className="mx-auto h-auto max-h-[90vh] w-auto object-contain opacity-60 shadow-lg blur-lg transition-all duration-[300ms] ease-in-out"
+                                                            onLoad={(e) => {
+                                                                const img = e.currentTarget;
+                                                                img.classList.remove('blur-lg', 'opacity-60');
+                                                                img.classList.add('blur-0', 'opacity-100');
+                                                            }}
+                                                            onError={() => setImgError(true)}
+                                                        />
+                                                    ) : (
+                                                        <div className="mx-auto flex h-[60vh] w-[70vw] max-w-[900px] flex-col items-center justify-center">
+                                                            <div className="h-[60vh] w-full rounded-xl bg-white/10 [mask-image:linear-gradient(90deg,transparent,black,transparent)]">
+                                                                <div className="h-full w-1/3 animate-pulse rounded-xl bg-white/10" />
+                                                            </div>
+                                                            <p className="mt-3 text-center text-sm text-white/70">Couldn’t load this image.</p>
+                                                        </div>
+                                                    )}
                                                 </figure>
 
                                                 <button

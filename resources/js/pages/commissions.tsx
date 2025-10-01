@@ -82,19 +82,69 @@ export default function Commissions() {
                         I’d love to bring your vision to life.
                     </p>
 
+                    {/* NEW: What's Included */}
                     <div className="mt-12 rounded-xl border-2 border-[#822a59] bg-white p-6 shadow-md dark:bg-neutral-900">
-                        <h2 className="mb-4 text-xl font-semibold text-gray-800 dark:text-gray-200">Base Commission Prices</h2>
-                        <ul className="mb-6 list-inside list-disc text-sm text-gray-600 dark:text-gray-400">
-                            <li>Portrait – $88</li>
-                            <li>Half Body – $108</li>
-                            <li>Full Body – $128</li>
+                        <h2 className="mb-4 text-xl font-semibold text-gray-800 dark:text-gray-200">What’s Included</h2>
+                        <ul className="list-inside list-disc space-y-1 text-sm text-gray-600 dark:text-gray-400">
+                            <li>Full line art</li>
+                            <li>Fully rendered / colored</li>
+                            <li>
+                                High-res PNG/JPEG – <strong>3000×3000 @ 300dpi</strong>
+                            </li>
+                            <li>Simple background included (unless stated otherwise)</li>
                         </ul>
-                        <p className="text-sm text-gray-600 dark:text-gray-400">
-                            Additional charges may apply for complex outfits, backgrounds, props, or pets. High-resolution formats for printing are
-                            also available upon request.
-                        </p>
                     </div>
 
+                    {/* NEW: Pricing & Details (replaces old Base Commission Prices) */}
+                    <div className="mt-6 rounded-xl border-2 border-[#822a59] bg-white p-6 shadow-md dark:bg-neutral-900">
+                        <h2 className="mb-4 text-xl font-semibold text-gray-800 dark:text-gray-200">Pricing & Details</h2>
+                        <ul className="list-inside list-disc space-y-1 text-sm text-gray-600 dark:text-gray-400">
+                            <li>
+                                <strong>Portrait / Bust-Up</strong> — <strong>$128</strong>
+                            </li>
+                            <li>
+                                <strong>Half-Body</strong> — <strong>$168</strong>
+                            </li>
+                            <li>
+                                <strong>Full Body</strong> — <strong>$188</strong>
+                            </li>
+                        </ul>
+                        <p className="mt-3 text-sm text-gray-600 dark:text-gray-400">Simple background included (unless stated otherwise).</p>
+                    </div>
+
+                    {/* NEW: Add-ons */}
+                    <div className="mt-6 rounded-xl border-2 border-[#822a59] bg-white p-6 shadow-md dark:bg-neutral-900">
+                        <h2 className="mb-4 text-xl font-semibold text-gray-800 dark:text-gray-200">Add-ons</h2>
+                        <ul className="list-inside list-disc space-y-1 text-sm text-gray-600 dark:text-gray-400">
+                            <li>
+                                Extra character — <strong>+80%</strong> of base price
+                            </li>
+                            <li>
+                                NSFW version (with & without outfit) — <strong>+50%</strong>
+                            </li>
+                            <li>
+                                Complex background — <strong>+ $150</strong>
+                            </li>
+                            <li>Additional accessories / details may add extra costs</li>
+                        </ul>
+                    </div>
+
+                    {/* NEW: Important notes */}
+                    <div className="mt-6 rounded-xl border-2 border-[#822a59] bg-white p-6 shadow-md dark:bg-neutral-900">
+                        <h2 className="mb-4 text-xl font-semibold text-gray-800 dark:text-gray-200">Important</h2>
+                        <ul className="list-inside list-disc space-y-1 text-sm text-gray-600 dark:text-gray-400">
+                            <li>
+                                Minimum time to finish is <strong>7 days</strong> from sketch start; more items/complex details can add a few extra
+                                days.
+                            </li>
+                            <li>
+                                I’m most confident drawing <strong>female / androgynous</strong> characters, but I can adapt to male characters as
+                                well.
+                            </li>
+                        </ul>
+                    </div>
+
+                    {/* Commission Process (kept) */}
                     <div className="mt-12 rounded-xl border-2 border-[#822a59] bg-white p-6 shadow-md dark:bg-neutral-900">
                         <h2 className="mb-4 text-xl font-semibold text-gray-800 dark:text-gray-200">Commission Process</h2>
                         <ol className="list-decimal space-y-2 pl-4 text-sm text-gray-600 dark:text-gray-400">
@@ -105,21 +155,19 @@ export default function Commissions() {
                         </ol>
                     </div>
 
-                    {/* Inertia v2 Form — keeps your markup but manages submission/errors/progress */}
                     <Form
                         action="/commissions"
                         method="post"
                         encType="multipart/form-data"
                         className="mt-12 scroll-mt-24 space-y-6 rounded-xl border-2 border-[#822a59] bg-white p-6 shadow-md dark:bg-neutral-900"
-                        // inject honeypot fields just before submit (docs: transform)
                         transform={(data) => {
-                            if (honeypot?.enabled) {
-                                data[honeypot.nameFieldName] = '';
-                                data[honeypot.validFromFieldName] = honeypot.encryptedValidFrom;
+                            const { honeypot: hp } = usePage().props as PageProps;
+                            if (hp?.enabled) {
+                                data[hp.nameFieldName] = '';
+                                data[hp.validFromFieldName] = hp.encryptedValidFrom;
                             }
                             return data;
                         }}
-                        // visit handling (docs: options & events)
                         options={{ preserveScroll: true }}
                         disableWhileProcessing
                         onStart={() => {
@@ -152,7 +200,7 @@ export default function Commissions() {
                                     Request a Commission
                                 </h2>
 
-                                {/* Text fields (uncontrolled; just use name=... so Form collects them) */}
+                                {/* Text fields */}
                                 {[
                                     {
                                         id: 'name',
@@ -231,8 +279,6 @@ export default function Commissions() {
                                         </div>
                                     );
                                 })}
-
-                                {/* Hidden honeypot is optional since we inject via transform; harmless to keep out */}
 
                                 {/* Files */}
                                 <div>
@@ -327,24 +373,92 @@ export default function Commissions() {
                         )}
                     </Form>
 
+                    {/* FAQ / Terms (friendlier question-style headings) */}
                     <div ref={faqRef} className="mt-8 space-y-4">
+                        {/* GENERAL */}
                         <details className="min-h-[50px] rounded-xl border-2 border-[#822a59] bg-white p-4 text-sm text-gray-600 shadow-md dark:bg-neutral-900 dark:text-gray-400">
                             <summary className="cursor-pointer font-semibold text-gray-700 dark:text-gray-200 [&::marker]:text-[#c59d36]">
-                                What can I request?
+                                Do you stream progress? Can I use the art for AI/Crypto/NFT?
                             </summary>
                             <p className="mt-2">
-                                I accept most character-based commissions, including original characters, fanart, and adult-themed works. If you’re
-                                unsure, feel free to ask!
+                                I may stream progress on my social platforms. My artwork <strong>cannot</strong> be used for{' '}
+                                <strong>AI, Crypto, or NFT</strong> purposes under any circumstances.
                             </p>
                         </details>
 
+                        {/* PAYMENTS */}
+                        <details className="min-h-[50px] rounded-xl border-2 border-[#822a59] bg-white p-4 text-sm text-gray-600 shadow-md dark:bg-neutral-900 dark:text-gray-400">
+                            <summary className="cursor-pointer font-semibold text-gray-700 dark:text-gray-200 [&::marker]:text-[#c59d36]">
+                                How do payments work?
+                            </summary>
+                            <p className="mt-2">
+                                Upfront payment is required. For orders over <strong>$600</strong>, I may accept a 50/50 split (first half to start,
+                                second half upon completion).
+                            </p>
+                        </details>
+
+                        {/* REVISIONS */}
+                        <details className="min-h-[50px] rounded-xl border-2 border-[#822a59] bg-white p-4 text-sm text-gray-600 shadow-md dark:bg-neutral-900 dark:text-gray-400">
+                            <summary className="cursor-pointer font-semibold text-gray-700 dark:text-gray-200 [&::marker]:text-[#c59d36]">
+                                How many revisions are included?
+                            </summary>
+                            <p className="mt-2">
+                                I include up to <strong>2 revisions</strong> at the sketch/WIP stage. Additional revisions after that may incur extra
+                                costs.
+                            </p>
+                        </details>
+
+                        {/* DEADLINES & DELIVERY */}
+                        <details className="min-h-[50px] rounded-xl border-2 border-[#822a59] bg-white p-4 text-sm text-gray-600 shadow-md dark:bg-neutral-900 dark:text-gray-400">
+                            <summary className="cursor-pointer font-semibold text-gray-700 dark:text-gray-200 [&::marker]:text-[#c59d36]">
+                                How long will my commission take?
+                            </summary>
+                            <p className="mt-2">
+                                If not specified or rushed, typical completion time is <strong>1–2 weeks</strong>, depending on the complexity and
+                                details requested.
+                            </p>
+                        </details>
+
+                        {/* USAGE & COMMERCIAL RIGHTS */}
+                        <details className="min-h-[50px] rounded-xl border-2 border-[#822a59] bg-white p-4 text-sm text-gray-600 shadow-md dark:bg-neutral-900 dark:text-gray-400">
+                            <summary className="cursor-pointer font-semibold text-gray-700 dark:text-gray-200 [&::marker]:text-[#c59d36]">
+                                Can I use the artwork commercially or in public?
+                            </summary>
+                            <p className="mt-2">
+                                Finished artwork is for <strong>personal use</strong> by default. If you intend to use it commercially or under an
+                                NDA, please state this in your request so we can agree on terms in advance.
+                            </p>
+                        </details>
+
+                        {/* IP RIGHTS */}
+                        <details className="min-h-[50px] rounded-xl border-2 border-[#822a59] bg-white p-4 text-sm text-gray-600 shadow-md dark:bg-neutral-900 dark:text-gray-400">
+                            <summary className="cursor-pointer font-semibold text-gray-700 dark:text-gray-200 [&::marker]:text-[#c59d36]">
+                                Who owns the artwork and rights?
+                            </summary>
+                            <p className="mt-2">
+                                I retain exclusive rights to my artwork, including reproduction, distribution, and public display. I may showcase
+                                commissioned pieces in my portfolio, on social media, or for promotional use unless we agree otherwise.
+                            </p>
+                        </details>
+
+                        {/* REFUNDS */}
+                        <details className="min-h-[50px] rounded-xl border-2 border-[#822a59] bg-white p-4 text-sm text-gray-600 shadow-md dark:bg-neutral-900 dark:text-gray-400">
+                            <summary className="cursor-pointer font-semibold text-gray-700 dark:text-gray-200 [&::marker]:text-[#c59d36]">
+                                Do you offer refunds?
+                            </summary>
+                            <p className="mt-2">
+                                Refunds are only granted if I’m unable to deliver the project. I’ll reach out to you if that ever happens.
+                            </p>
+                        </details>
+
+                        {/* Helpful non-conflicting FAQs */}
                         <details className="min-h-[50px] rounded-xl border-2 border-[#822a59] bg-white p-4 text-sm text-gray-600 shadow-md dark:bg-neutral-900 dark:text-gray-400">
                             <summary className="cursor-pointer font-semibold text-gray-700 dark:text-gray-200 [&::marker]:text-[#c59d36]">
                                 What references should I include?
                             </summary>
                             <p className="mt-2">
-                                Please include any visual references that help describe your idea — character sheets, poses, color palettes, outfits,
-                                or moodboards. Even rough sketches or Pinterest boards are welcome.
+                                Visuals that help describe your idea—character sheets, poses, color palettes, outfits, moodboards, or even rough
+                                sketches and Pinterest boards—are very helpful.
                             </p>
                         </details>
 
@@ -353,17 +467,8 @@ export default function Commissions() {
                                 Do you draw NSFW or suggestive content?
                             </summary>
                             <p className="mt-2">
-                                Yes, I accept adult-themed work within reason. If you're unsure about the content, feel free to ask privately before
-                                submitting a request.
-                            </p>
-                        </details>
-
-                        <details className="min-h-[50px] rounded-xl border-2 border-[#822a59] bg-white p-4 text-sm text-gray-600 shadow-md dark:bg-neutral-900 dark:text-gray-400">
-                            <summary className="cursor-pointer font-semibold text-gray-700 dark:text-gray-200 [&::marker]:text-[#c59d36]">
-                                What’s the expected turnaround time?
-                            </summary>
-                            <p className="mt-2">
-                                Usually 1-3 weeks depending on complexity and queue. If I expect any delays, I’ll let you know right away.
+                                Yes—adult-themed work is accepted within reason. If you’re unsure, feel free to ask privately before submitting a
+                                request.
                             </p>
                         </details>
 
@@ -374,109 +479,38 @@ export default function Commissions() {
                                         Can I request a faster delivery?
                                     </summary>
                                     <p className="mt-2">
-                                        If you need your commission completed within a shorter timeframe (typically 2–5 business days), priority
-                                        scheduling may be available depending on current workload and the complexity of the piece.
-                                    </p>
-                                    <p className="mt-2">
-                                        To request faster delivery, please mention it in your message or subject line. Priority commissions include an
-                                        additional fee of 75% of the total cost. For example, a $70 order would total $123 USD plus tax when
-                                        expedited.
+                                        Priority scheduling may be available depending on workload and complexity. Mention your deadline in the
+                                        request and we’ll confirm feasibility and any additional cost before starting.
                                     </p>
                                 </details>
+
                                 <details className="min-h-[50px] rounded-xl border-2 border-[#822a59] bg-white p-4 text-sm text-gray-600 shadow-md dark:bg-neutral-900 dark:text-gray-400">
                                     <summary className="cursor-pointer font-semibold text-gray-700 dark:text-gray-200 [&::marker]:text-[#c59d36]">
                                         Can I request a private commission?
                                     </summary>
                                     <p className="mt-2">
-                                        Yes, you may request for your commission to remain private, meaning it will not be posted online, included in
-                                        my portfolio, or used for promotional purposes. If you would like your piece to remain private, please mention
-                                        this in your request.
-                                    </p>
-                                    <p className="mt-2">
-                                        By default, I reserve the right to showcase commissioned artwork for the purpose of promoting my brand. This
-                                        includes sharing it online, using it on merchandise, or featuring it in publications, unless explicitly
-                                        requested otherwise.
-                                    </p>
-                                    <p className="mt-2">
-                                        If a commission is to remain fully private, a <strong>35% increase in the total price</strong> will apply to
-                                        account for the loss of promotional value.
+                                        Yes—private commissions won’t be posted or added to my portfolio. Please mention this in your request so we
+                                        can align on terms before work begins.
                                     </p>
                                 </details>
+
                                 <details className="min-h-[50px] rounded-xl border-2 border-[#822a59] bg-white p-4 text-sm text-gray-600 shadow-md dark:bg-neutral-900 dark:text-gray-400">
                                     <summary className="cursor-pointer font-semibold text-gray-700 dark:text-gray-200 [&::marker]:text-[#c59d36]">
                                         Can I use the artwork on Twitch, YouTube, or social media?
                                     </summary>
                                     <p className="mt-2">
-                                        Yes! You're welcome to use the commission for personal use online. Please credit me when possible. For
-                                        commercial use, a separate license is required.
+                                        Personal use online is welcome (credit appreciated). For any commercial or monetized use, please mention it in
+                                        your request so we can agree on terms beforehand.
                                     </p>
                                 </details>
-                                <details className="min-h-[50px] rounded-xl border-2 border-[#822a59] bg-white p-4 text-sm text-gray-600 shadow-md dark:bg-neutral-900 dark:text-gray-400">
-                                    <summary className="cursor-pointer font-semibold text-gray-700 dark:text-gray-200 [&::marker]:text-[#c59d36]">
-                                        How is payment handled?
-                                    </summary>
-                                    <p className="mt-2">
-                                        Payments are processed through PayPal. I’ll send you an invoice once the sketch is approved. Full payment is
-                                        required before finalizing the artwork.
-                                    </p>
-                                </details>
-                                <details className="min-h-[50px] rounded-xl border-2 border-[#822a59] bg-white p-4 text-sm text-gray-600 shadow-md dark:bg-neutral-900 dark:text-gray-400">
-                                    <summary className="cursor-pointer font-semibold text-gray-700 dark:text-gray-200 [&::marker]:text-[#c59d36]">
-                                        Can I use the artwork commercially?
-                                    </summary>
-                                    <p className="mt-2">
-                                        Commissions are intended for personal use only. If you plan to use the artwork in a way that earns money, such
-                                        as printing and selling merchandise, including it in a published book, or using it in promotional materials,
-                                        you will need to purchase a commercial license.
-                                    </p>
-                                    <p className="mt-2">
-                                        Commercial licenses typically require a 300% fee increase based on the total price of the artwork. This helps
-                                        account for the extended value and reach of the work.
-                                    </p>
-                                    <p className="mt-2">
-                                        If you are not sure whether your intended use is considered commercial, just let me know in your request and I
-                                        will be happy to clarify.
-                                    </p>
-                                </details>
-                                <details className="min-h-[50px] rounded-xl border-2 border-[#822a59] bg-white p-4 text-sm text-gray-600 shadow-md dark:bg-neutral-900 dark:text-gray-400">
-                                    <summary className="cursor-pointer font-semibold text-gray-700 dark:text-gray-200 [&::marker]:text-[#c59d36]">
-                                        What types of licenses do you offer?
-                                    </summary>
-                                    <ul className="mt-2 list-inside list-disc space-y-1">
-                                        <li>
-                                            <strong>Personal Use:</strong> Use the artwork on your social media, as an avatar, desktop background, or
-                                            for personal printing. No additional charge.
-                                        </li>
-                                        <li>
-                                            <strong>Small Commercial:</strong> Use in monetized YouTube videos, Twitch streams, or small merchandise
-                                            runs. +100% fee.
-                                        </li>
-                                        <li>
-                                            <strong>Full Commercial:</strong> Includes resale rights, publication in books, large-scale product lines,
-                                            or exclusive usage. +300% fee.
-                                        </li>
-                                    </ul>
-                                    <p className="mt-2">
-                                        All commercial licenses are non-exclusive unless otherwise discussed. Please mention your intended use in your
-                                        request.
-                                    </p>
-                                </details>
+
                                 <details className="min-h-[50px] rounded-xl border-2 border-[#822a59] bg-white p-4 text-sm text-gray-600 shadow-md dark:bg-neutral-900 dark:text-gray-400">
                                     <summary className="cursor-pointer font-semibold text-gray-700 dark:text-gray-200 [&::marker]:text-[#c59d36]">
                                         Can I get my artwork as a print or on merch?
                                     </summary>
                                     <p className="mt-2">
-                                        I don’t offer physical prints directly through commissions, but you can purchase selected artworks as prints
-                                        or merchandise through my INPRNT and TeePublic shops.
-                                    </p>
-                                </details>
-                                <details className="min-h-[50px] rounded-xl border-2 border-[#822a59] bg-white p-4 text-sm text-gray-600 shadow-md dark:bg-neutral-900 dark:text-gray-400">
-                                    <summary className="cursor-pointer font-semibold text-gray-700 dark:text-gray-200 [&::marker]:text-[#c59d36]">
-                                        Do you offer refunds?
-                                    </summary>
-                                    <p className="mt-2">
-                                        Refunds are only available if I haven’t started working on your piece yet. After the sketch is sent, refunds
-                                        are no longer possible.
+                                        I don’t offer physical prints directly through commissions, but selected artworks may be available on my
+                                        storefronts (e.g., INPRNT ). Feel free to ask if you’re looking for something specific.
                                     </p>
                                 </details>
                             </>

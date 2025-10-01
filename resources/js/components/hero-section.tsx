@@ -1,4 +1,5 @@
 import NewgroundsIcon from '@/assets/icons/NewgroundsIcon';
+import VGenIcon from '@/assets/icons/VgenIcon';
 import MobileMenu from '@/components/mobile-menu';
 import NavItem from '@/components/nav-item';
 import { Link } from '@inertiajs/react';
@@ -16,7 +17,12 @@ const socials = [
     { name: 'Instagram', url: 'https://www.instagram.com/kohaii_arts/', Icon: BsInstagram, title: 'Instagram' },
     { name: 'Discord', url: 'https://discord.gg/hqGs4fGQXm', Icon: FaDiscord, title: 'Discord' },
     { name: 'Newgrounds', url: 'https://kohaiiarts.newgrounds.com/art', Icon: NewgroundsIcon, title: 'Newgrounds' },
+    { name: 'VGen', url: 'https://vgen.co/KohaiiArts', Icon: VGenIcon, title: 'VGen' },
 ] as const;
+
+const mid = Math.ceil(socials.length / 2);
+const socialsLeft = socials.slice(0, mid);
+const socialsRight = socials.slice(mid);
 
 const navLinks = [
     { label: 'Illustrations', name: 'home' as const },
@@ -68,7 +74,7 @@ export default function HeroSection() {
 
     return (
         <div>
-            <section className="relative w-full bg-white py-2 text-center antialiased sm:px-1 md:px-1 lg:px-1 dark:bg-black">
+            <section className="relative w-full bg-transparent py-1 text-center antialiased sm:px-1 md:px-1 lg:px-1">
                 <div className="absolute top-4 right-4 z-10">
                     <button
                         onClick={toggleTheme}
@@ -101,30 +107,7 @@ export default function HeroSection() {
                     theme={theme}
                 />
 
-                {/* Social links rail (no animation) */}
-                <div className="absolute top-1/2 hidden -translate-y-1/2 sm:left-5 md:left-5 md:flex">
-                    <ul className="flex flex-col items-center gap-10">
-                        {socials.map(({ url, name, Icon, title }) => (
-                            <li key={url}>
-                                <motion.a
-                                    href={url}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    aria-label={name}
-                                    title={title}
-                                    className="inline-flex h-6 w-6 transform-gpu items-center justify-center rounded text-[#822a59] focus-visible:ring-2 focus-visible:ring-[#822a59] focus-visible:ring-offset-2 focus-visible:outline-none dark:text-[#822a59] dark:focus-visible:ring-offset-black"
-                                    whileHover={{ scale: 1.12, y: -1 }}
-                                    whileTap={{ scale: 0.95 }}
-                                    transition={{ type: 'spring', stiffness: 420, damping: 24 }}
-                                >
-                                    <Icon size={24} />
-                                </motion.a>
-                            </li>
-                        ))}
-                    </ul>
-                </div>
-
-                <div className="relative mx-auto h-[200px] w-[206px]">
+                <div className="relative mx-auto h-[120px] w-[126px] sm:h-[150px] sm:w-[156px] md:h-[170px] md:w-[176px]">
                     <Link href={route('home')} aria-label="Kohaii Arts – Home" className="relative block h-full w-full">
                         <img
                             src="/img-static/LogoKohii.webp"
@@ -162,18 +145,66 @@ export default function HeroSection() {
                     </Link>
                 </div>
 
-                <h1 className="mt-6 text-3xl font-light text-[#6e1f48] md:text-6xl dark:text-[#6e1f48]" style={{ fontFamily: 'Montserrat' }}>
-                    KOHAII ARTS
-                </h1>
-                <p className="mt-2 text-base text-gray-500 md:text-xl dark:text-gray-400" style={{ fontFamily: 'Montserrat' }}>
-                    Digital Illustrator / Hobbyist
-                </p>
+                <div className="mt-4 flex flex-col items-center gap-4 md:gap-6">
+                    <h1 className="text-3xl font-light text-[#6e1f48] md:text-6xl dark:text-[#6e1f48]" style={{ fontFamily: 'Montserrat' }}>
+                        KOHAII ARTS
+                    </h1>
 
-                <nav aria-label="Primary" className="mt-6 hidden flex-wrap justify-center gap-4 md:flex">
-                    {navLinks.map(({ label, name }) => (
-                        <NavItem key={name} name={name} label={label} className={buttonStyle} />
-                    ))}
-                </nav>
+                    <div className="flex items-center justify-center gap-4 sm:grid sm:grid-cols-[1fr_auto_1fr] md:gap-8">
+                        <ul className="hidden justify-end gap-5 sm:flex md:gap-6">
+                            {socialsLeft.map(({ url, name, Icon, title }) => (
+                                <li key={url}>
+                                    <motion.a
+                                        href={url}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        aria-label={name}
+                                        title={title}
+                                        className="inline-flex h-6 w-6 items-center justify-center text-[#822a59] dark:text-[#822a59]"
+                                        whileHover={{ scale: 1.12, y: -1 }}
+                                        whileTap={{ scale: 0.95 }}
+                                        transition={{ type: 'spring', stiffness: 420, damping: 24 }}
+                                    >
+                                        <Icon size={24} />
+                                    </motion.a>
+                                </li>
+                            ))}
+                        </ul>
+
+                        <p
+                            className="text-base text-gray-500 sm:col-start-2 sm:justify-self-center md:text-xl dark:text-gray-400"
+                            style={{ fontFamily: 'Montserrat' }}
+                        >
+                            Digital Illustrator / Hobbyist
+                        </p>
+
+                        <ul className="hidden justify-start gap-5 sm:flex md:gap-6">
+                            {socialsRight.map(({ url, name, Icon, title }) => (
+                                <li key={url}>
+                                    <motion.a
+                                        href={url}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        aria-label={name}
+                                        title={title}
+                                        className="inline-flex h-6 w-6 items-center justify-center text-[#822a59] dark:text-[#822a59]"
+                                        whileHover={{ scale: 1.12, y: -1 }}
+                                        whileTap={{ scale: 0.95 }}
+                                        transition={{ type: 'spring', stiffness: 420, damping: 24 }}
+                                    >
+                                        <Icon size={24} />
+                                    </motion.a>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+
+                    <nav aria-label="Primary" className="hidden flex-wrap justify-center gap-4 md:flex">
+                        {navLinks.map(({ label, name }) => (
+                            <NavItem key={name} name={name} label={label} className={buttonStyle} />
+                        ))}
+                    </nav>
+                </div>
             </section>
         </div>
     );

@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 import { BsInstagram } from 'react-icons/bs';
 import { FaDiscord } from 'react-icons/fa';
 import { FaPatreon, FaThreads, FaXTwitter } from 'react-icons/fa6';
+import VGenIcon from '@/assets/icons/VgenIcon';
 
 export default function Footer() {
     const iconProps = { size: 24 };
@@ -18,6 +19,7 @@ export default function Footer() {
         { name: 'Patreon', url: 'https://www.patreon.com/KohaiiArts', Icon: FaPatreon, title: 'Patreon' },
         { name: 'Throne', url: 'https://throne.com/kohaiiarts', Icon: ThroneIcon, title: 'Throne' },
         { name: 'Inprnt', url: 'https://www.inprnt.com/gallery/kohaiiarts/', Icon: InprntIcon, title: 'Inprnt' },
+        { name: 'VGen', url: 'https://vgen.co/KohaiiArts', Icon: VGenIcon, title: 'VGen' },
     ];
 
     return (

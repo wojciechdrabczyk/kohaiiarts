@@ -3,7 +3,7 @@ import DefaultLayout from '@/layouts/default-layout';
 import { Head } from '@inertiajs/react';
 import React from 'react';
 import { FaPatreon } from 'react-icons/fa6';
-import { SiTeepublic } from 'react-icons/si';
+import VGenIcon from '@/assets/icons/VgenIcon';
 
 export default function Store() {
     return (
@@ -22,19 +22,19 @@ export default function Store() {
 
                     <div className="grid grid-cols-1 gap-6 sm:grid-cols-3">
                         <a
-                            // href="https://www.teepublic.com/stores/kohaiiarts"
+                            href="https://vgen.co/KohaiiArts"
                             aria-disabled="true"
-                            title="Currently unavailable"
-                            className="group relative block cursor-not-allowed rounded-xl border border-gray-200 bg-white p-6 opacity-50 shadow-md grayscale transition hover:shadow-lg dark:border-gray-700 dark:bg-neutral-800"
+                            title="NEW"
+                            className="group block rounded-xl border border-[#6e1f48] bg-white p-5 shadow-md transition hover:shadow-xl dark:bg-neutral-800 dark:hover:bg-neutral-700"
                         >
                             <span className="absolute top-4 right-4 rounded-full bg-gray-200 px-2 py-0.5 text-xs text-gray-700 dark:bg-neutral-700 dark:text-gray-200">
-                                Unavailable
+                                NEW
                             </span>
 
                             <div className="flex items-center gap-4">
-                                <SiTeepublic size={40} className="text-gray-800 transition-transform group-hover:scale-105 dark:text-white" />
+                                <VGenIcon size={40} className="text-gray-800 transition-transform group-hover:scale-105 dark:text-white" />
                                 <div>
-                                    <h3 className="text-lg font-semibold text-gray-800 dark:text-white">TeePublic</h3>
+                                    <h3 className="text-lg font-semibold text-gray-800 dark:text-white">VGen</h3>
                                     <p className="mt-1 text-sm text-gray-600 dark:text-gray-400">Buy my artwork on shirts, stickers, and more!</p>
                                 </div>
                             </div>
