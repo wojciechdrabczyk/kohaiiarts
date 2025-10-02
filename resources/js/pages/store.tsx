@@ -24,7 +24,7 @@ export default function Store() {
                         <a
                             href="https://vgen.co/KohaiiArts"
                             aria-disabled="true"
-                            title="NEW"
+                            title="VGen"
                             className="group block rounded-xl border border-[#6e1f48] bg-white p-5 shadow-md transition hover:shadow-xl dark:bg-neutral-800 dark:hover:bg-neutral-700"
                         >
                             <span className="absolute top-4 right-4 rounded-full bg-gray-200 px-2 py-0.5 text-xs text-gray-700 dark:bg-neutral-700 dark:text-gray-200">
