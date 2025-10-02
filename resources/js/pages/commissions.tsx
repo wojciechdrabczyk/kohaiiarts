@@ -1,3 +1,4 @@
+// resources/js/pages/commissions.tsx
 import DefaultLayout from '@/layouts/default-layout';
 import { Form, Head, usePage } from '@inertiajs/react';
 import React, { useMemo, useRef, useState } from 'react';
@@ -16,7 +17,9 @@ type PageProps = {
 };
 
 export default function Commissions() {
-    const { honeypot } = usePage().props as PageProps;
+    // ✅ Read page props once at the top (no hooks inside callbacks)
+    const { props } = usePage();
+    const hp = (props as PageProps).honeypot;
 
     const [showAllFaqs, setShowAllFaqs] = useState(false);
     const faqRef = useRef<HTMLDivElement | null>(null);
@@ -161,7 +164,7 @@ export default function Commissions() {
                         encType="multipart/form-data"
                         className="mt-12 scroll-mt-24 space-y-6 rounded-xl border-2 border-[#822a59] bg-white p-6 shadow-md dark:bg-neutral-900"
                         transform={(data) => {
-                            const { honeypot: hp } = usePage().props as PageProps;
+                            // ✅ Use pre-fetched hp; no hook calls here
                             if (hp?.enabled) {
                                 data[hp.nameFieldName] = '';
                                 data[hp.validFromFieldName] = hp.encryptedValidFrom;
@@ -310,8 +313,8 @@ export default function Commissions() {
                                         </label>
 
                                         <span className="text-sm text-gray-600 dark:text-gray-300">
-                                            {files.length} {files.length === 1 ? 'file' : 'files'} selected
-                                        </span>
+                      {files.length} {files.length === 1 ? 'file' : 'files'} selected
+                    </span>
                                     </div>
 
                                     {files.length > 0 && (
