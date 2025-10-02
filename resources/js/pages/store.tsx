@@ -35,7 +35,7 @@ export default function Store() {
                                 <VGenIcon size={40} className="text-gray-800 transition-transform group-hover:scale-105 dark:text-white" />
                                 <div>
                                     <h3 className="text-lg font-semibold text-gray-800 dark:text-white">VGen</h3>
-                                    <p className="mt-1 text-sm text-gray-600 dark:text-gray-400">Buy my artwork on shirts, stickers, and more!</p>
+                                    <p className="mt-1 text-sm text-gray-600 dark:text-gray-400">Support me and commission your artwork.</p>
                                 </div>
                             </div>
                         </a>
