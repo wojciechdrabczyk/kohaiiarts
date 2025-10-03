@@ -11,15 +11,19 @@ class StaticPageController extends Controller
 {
     public function illustrations()
     {
-        $images = \App\Models\Illustration::published()
+        $images = Illustration::published()
+            ->orderBy('sort_order', 'asc')
+            ->orderBy('id', 'asc')
             ->get()
             ->map(fn($i) => [
-                'src'     => $i->url(),
+                'src' => $i->url(),
                 'caption' => $i->caption,
-            ]);
+            ])
+            ->values();
 
-        return \Inertia\Inertia::render('illustrations', ['images' => $images]);
+        return Inertia::render('illustrations', ['images' => $images]);
     }
+
     public function store()
     {
         return Inertia::render('store');
