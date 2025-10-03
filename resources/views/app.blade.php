@@ -10,7 +10,7 @@
                   . "I love drawing anything and everything under the sun!";
     $url      = $canonicalUrl ?? url()->current();
 
-    $ogImg    = $ogImage ?? asset('img-static/LogoKohiiNight.jpg');
+    $ogImg    = $ogImage ?? asset('img-static/twitter.jpg');
 
     $ogType   = 'website';
     $locale   = str_replace('_', '-', app()->getLocale());
