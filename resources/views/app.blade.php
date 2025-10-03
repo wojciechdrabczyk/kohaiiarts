@@ -35,10 +35,10 @@
 <meta property="og:image:alt" content="Featured artwork by {{ $siteName }}">
 
 {{-- Twitter (large image style) --}}
-<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="{{ $title }}">
 <meta name="twitter:description" content="{{ $desc }}">
-<meta name="twitter:image" content="{{ $ogImg }}">
+<meta name="twitter:image" content="{{ asset('img-static/twitter.jpg') }}">
 <meta name="twitter:site" content="@KohaiiArts">
 
 <link rel="icon" href="{{ asset('favicon.ico') }}" sizes="any">
