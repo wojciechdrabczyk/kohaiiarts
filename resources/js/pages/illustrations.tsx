@@ -38,7 +38,6 @@ export default function Illustrations({ images = [] as Img[] }: { images?: Img[]
         }
     }, [currentIndex, gallery.length]);
 
-    // ⬇️ NEW: enable Esc / ← / → while the lightbox is open
     useEffect(() => {
         if (currentIndex === null) return;
 
