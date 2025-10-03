@@ -10,16 +10,18 @@
         $siteName = config('app.name', 'Kohaii Arts');
         $title    = $metaTitle ?? "$siteName — Digital Illustrator / Hobbyist";
         $desc     = $metaDescription
-                   ?? "Aspiring Illewdstrator. Dominating the world one waifu at a time. I love drawing anything and everything under the sun!";
+                  ?? "Aspiring Illewdstrator. Dominating the world one waifu at a time. I love drawing anything and everything under the sun!";
         $url      = $canonicalUrl ?? url()->current();
 
-        // make sure this file exists in /public/img-static and ideally is 1200×630
-        $ogImg    = $ogImage ?? asset('img-static/twitter.jpg');
+        $ogPath   = 'img-static/twitter.jpg';
+        $ogFile   = public_path($ogPath);
+        $version  = is_file($ogFile) ? filemtime($ogFile) : time();
+        $ogImg    = ($ogImage ?? asset($ogPath)) . "?v={$version}";
 
         $ogType   = 'website';
         $locale   = str_replace('_', '-', app()->getLocale());
-    @endphp
 
+    @endphp
     <title>{{ $title }}</title>
     <meta name="description" content="{{ $desc }}">
     <link rel="canonical" href="{{ $url }}">
