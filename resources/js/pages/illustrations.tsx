@@ -21,7 +21,6 @@ export default function Illustrations({ images = [] as Img[] }: { images?: Img[]
         const p = new URLSearchParams(window.location.search);
         if (p.has('image')) {
             const raw = p.get('image');
-            // ensure integer index
             const idx = raw !== null && /^\d+$/.test(raw) ? Number(raw) : NaN;
             if (!Number.isNaN(idx) && gallery[idx]) setCurrentIndex(idx);
         }
@@ -38,6 +37,27 @@ export default function Illustrations({ images = [] as Img[] }: { images?: Img[]
             setCurrentIndex((currentIndex + 1) % gallery.length);
         }
     }, [currentIndex, gallery.length]);
+
+    // ⬇️ NEW: enable Esc / ← / → while the lightbox is open
+    useEffect(() => {
+        if (currentIndex === null) return;
+
+        const onKey = (e: KeyboardEvent) => {
+            if (e.key === 'Escape') {
+                e.preventDefault();
+                setCurrentIndex(null);
+            } else if (e.key === 'ArrowRight') {
+                e.preventDefault();
+                goNext();
+            } else if (e.key === 'ArrowLeft') {
+                e.preventDefault();
+                goPrev();
+            }
+        };
+
+        window.addEventListener('keydown', onKey);
+        return () => window.removeEventListener('keydown', onKey);
+    }, [currentIndex, goNext, goPrev]);
 
     const swipeHandlers = useSwipeable({
         onSwipedDown: () => setCurrentIndex(null),
