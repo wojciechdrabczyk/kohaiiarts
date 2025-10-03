@@ -17,7 +17,6 @@ type PageProps = {
 };
 
 export default function Commissions() {
-    // ✅ Read page props once at the top (no hooks inside callbacks)
     const { props } = usePage();
     const hp = (props as PageProps).honeypot;
 

@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\Storage;
 
 class Illustration extends Model
 {
@@ -37,6 +38,6 @@ class Illustration extends Model
 
     public function url(): string
     {
-        return asset('storage/' . $this->path);
+        return Storage::disk('public')->url($this->path);
     }
 }
