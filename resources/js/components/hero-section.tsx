@@ -74,7 +74,7 @@ export default function HeroSection() {
 
     return (
         <div>
-            <section className="relative w-full bg-transparent py-1 text-center antialiased sm:px-1 md:px-1 lg:px-1">
+            <section className="bg-background relative w-full py-1 text-center antialiased sm:px-1 md:px-1 lg:px-1">
                 <div className="absolute top-4 right-4 z-10">
                     <button
                         onClick={toggleTheme}
@@ -146,7 +146,10 @@ export default function HeroSection() {
                 </div>
 
                 <div className="mt-4 flex flex-col items-center gap-4 md:gap-6">
-                    <h1 className="text-3xl font-light text-[#6e1f48] md:text-6xl dark:text-[#6e1f48]" style={{ fontFamily: 'Montserrat' }}>
+                    <h1
+                        className="text-3xl font-light text-[#6e1f48] transition-colors duration-300 md:text-6xl dark:text-[#deb34a] dark:drop-shadow-[0_0_0.35rem_rgba(222,179,74,0.35)]"
+                        style={{ fontFamily: 'Montserrat' }}
+                    >
                         KOHAII ARTS
                     </h1>
 
@@ -160,7 +163,7 @@ export default function HeroSection() {
                                         rel="noopener noreferrer"
                                         aria-label={name}
                                         title={title}
-                                        className="inline-flex h-6 w-6 items-center justify-center text-[#822a59] transition-colors duration-300 ease-in-out dark:text-[#822a59] dark:hover:text-[#c59d36]"
+                                        className="inline-flex h-6 w-6 items-center justify-center text-[#822a59] transition-colors duration-300 ease-in-out hover:text-[#6e1f48] dark:text-[#c59d36] dark:hover:text-[#f1d27a] dark:hover:drop-shadow-[0_0_0.35rem_rgba(197,157,54,0.45)]"
                                         whileHover={{ scale: 1.12, y: -1 }}
                                         whileTap={{ scale: 0.95 }}
                                         transition={{ type: 'spring', stiffness: 420, damping: 24 }}
@@ -187,7 +190,7 @@ export default function HeroSection() {
                                         rel="noopener noreferrer"
                                         aria-label={name}
                                         title={title}
-                                        className="inline-flex h-6 w-6 items-center justify-center text-[#822a59] transition-colors duration-300 ease-in-out dark:text-[#822a59] dark:hover:text-[#c59d36]"
+                                        className="inline-flex h-6 w-6 items-center justify-center text-[#822a59] transition-colors duration-300 ease-in-out hover:text-[#6e1f48] dark:text-[#c59d36] dark:hover:text-[#f1d27a] dark:hover:drop-shadow-[0_0_0.35rem_rgba(197,157,54,0.45)]"
                                         whileHover={{ scale: 1.12, y: -1 }}
                                         whileTap={{ scale: 0.95 }}
                                         transition={{ type: 'spring', stiffness: 420, damping: 24 }}
@@ -197,7 +200,6 @@ export default function HeroSection() {
                                 </li>
                             ))}
                         </ul>
-
                     </div>
 
                     <nav aria-label="Primary" className="hidden flex-wrap justify-center gap-4 md:flex">

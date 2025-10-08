@@ -37,7 +37,12 @@ export default function Footer() {
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 aria-label={name}
-                                className="inline-flex h-10 w-10 items-center justify-center rounded text-[#822a59] transition-colors duration-300 ease-in-out dark:text-[#822a59] dark:hover:text-[#c59d36] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#822a59] focus-visible:ring-offset-2 dark:focus-visible:ring-offset-black"
+                                className="inline-flex h-10 w-10 items-center justify-center rounded
+                           text-[#822a59] hover:text-[#6e1f48]
+                           transition-colors duration-300 ease-in-out
+                           focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#822a59] focus-visible:ring-offset-2
+                           dark:text-[#c59d36] dark:hover:text-[#f1d27a] dark:hover:drop-shadow-[0_0_0.35rem_rgba(197,157,54,0.45)]
+                           dark:focus-visible:ring-[#c59d36] dark:focus-visible:ring-offset-black"
                                 whileHover={{ scale: 1.12, y: -1 }}
                                 whileTap={{ scale: 0.95 }}
                                 transition={{ type: 'spring', stiffness: 420, damping: 24 }}
