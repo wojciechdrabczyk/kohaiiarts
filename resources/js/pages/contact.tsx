@@ -106,7 +106,6 @@ export default function Contact() {
                     </motion.p>
                 </div>
 
-                {/* Framer wrapper drives animation; Form keeps as="form" to satisfy types */}
                 <motion.div
                     initial="hidden"
                     animate="visible"
@@ -216,20 +215,21 @@ export default function Contact() {
                                     </div>
                                 )}
 
-                                <motion.button
+                                <button
                                     type="submit"
                                     disabled={processing}
-                                    className={`w-full rounded px-4 py-3 text-sm font-semibold text-white transition ${
+                                    className={`w-full rounded px-4 py-3 text-sm font-semibold text-white transition-colors duration-200 ${
                                         processing
                                             ? 'cursor-not-allowed bg-gray-400'
                                             : 'bg-[#822a59] hover:bg-[#6e1f48] dark:bg-[#822a59] dark:hover:bg-[#6e1f48]'
                                     }`}
-                                    whileHover={!processing ? { y: -1 } : {}}
-                                    whileTap={!processing ? { scale: 0.98 } : {}}
-                                    transition={{ type: 'tween', duration: 0.12 }}
                                 >
-                                    {processing ? (progress?.percentage != null ? `Sending… ${progress.percentage}%` : 'Sending…') : 'Send'}
-                                </motion.button>
+                                    {processing
+                                        ? (progress?.percentage != null ? `Sending… ${progress.percentage}%` : 'Sending…')
+                                        : 'Send'}
+                                </button>
+
+
 
                                 {(status === 'success' || (status === null && recentlySuccessful)) && (
                                     <motion.div
