@@ -160,7 +160,7 @@ export default function HeroSection() {
                                         rel="noopener noreferrer"
                                         aria-label={name}
                                         title={title}
-                                        className="inline-flex h-6 w-6 items-center justify-center text-[#822a59] dark:text-[#822a59]"
+                                        className="inline-flex h-6 w-6 items-center justify-center text-[#822a59] transition-colors duration-300 ease-in-out dark:text-[#822a59] dark:hover:text-[#c59d36]"
                                         whileHover={{ scale: 1.12, y: -1 }}
                                         whileTap={{ scale: 0.95 }}
                                         transition={{ type: 'spring', stiffness: 420, damping: 24 }}
@@ -187,7 +187,7 @@ export default function HeroSection() {
                                         rel="noopener noreferrer"
                                         aria-label={name}
                                         title={title}
-                                        className="inline-flex h-6 w-6 items-center justify-center text-[#822a59] dark:text-[#822a59]"
+                                        className="inline-flex h-6 w-6 items-center justify-center text-[#822a59] transition-colors duration-300 ease-in-out dark:text-[#822a59] dark:hover:text-[#c59d36]"
                                         whileHover={{ scale: 1.12, y: -1 }}
                                         whileTap={{ scale: 0.95 }}
                                         transition={{ type: 'spring', stiffness: 420, damping: 24 }}
@@ -197,6 +197,7 @@ export default function HeroSection() {
                                 </li>
                             ))}
                         </ul>
+
                     </div>
 
                     <nav aria-label="Primary" className="hidden flex-wrap justify-center gap-4 md:flex">

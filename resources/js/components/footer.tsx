@@ -12,7 +12,7 @@ export default function Footer() {
 
     const socialLinks2 = [
         { name: 'X', url: 'https://x.com/KohaiiArts', Icon: FaXTwitter, title: 'X' },
-        { name: 'Threads', url: 'https://www.threads.net/@kohaii_arts', Icon: FaThreads, title: 'Threads' }, // threads.net is typical
+        { name: 'Threads', url: 'https://www.threads.net/@kohaii_arts', Icon: FaThreads, title: 'Threads' },
         { name: 'Instagram', url: 'https://www.instagram.com/kohaii_arts/', Icon: BsInstagram, title: 'Instagram' },
         { name: 'Discord', url: 'https://discord.gg/hqGs4fGQXm', Icon: FaDiscord, title: 'Discord' },
         { name: 'Newgrounds', url: 'https://kohaiiarts.newgrounds.com/art', Icon: NewgroundsIcon, title: 'Newgrounds' },
@@ -37,7 +37,7 @@ export default function Footer() {
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 aria-label={name}
-                                className="inline-flex h-10 w-10 items-center justify-center rounded text-[#822a59] dark:text-[#822a59] transform-gpu focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#822a59] focus-visible:ring-offset-2 dark:focus-visible:ring-offset-black"
+                                className="inline-flex h-10 w-10 items-center justify-center rounded text-[#822a59] transition-colors duration-300 ease-in-out dark:text-[#822a59] dark:hover:text-[#c59d36] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#822a59] focus-visible:ring-offset-2 dark:focus-visible:ring-offset-black"
                                 whileHover={{ scale: 1.12, y: -1 }}
                                 whileTap={{ scale: 0.95 }}
                                 transition={{ type: 'spring', stiffness: 420, damping: 24 }}
@@ -50,7 +50,7 @@ export default function Footer() {
             </div>
 
             <p className="pt-4 text-sm text-gray-500 sm:self-center dark:text-gray-400">
-                © {new Date().getFullYear()} Kohaii Arts - All rights reserved.
+                © {new Date().getFullYear()} Kohaii Arts — All rights reserved.
             </p>
         </footer>
     );

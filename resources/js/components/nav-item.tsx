@@ -12,8 +12,9 @@ export default function NavItem({ name, label, className = '' }: { name: string;
     const base =
         'rounded px-5 py-2.5 border-2 font-medium transition-colors duration-200 ease-in-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#822a59] focus-visible:ring-offset-2 dark:focus-visible:ring-offset-black';
     const inactive =
-        'border-[#822a59] text-[#6e1f48] hover:bg-[#822a59] hover:text-white active:bg-[#561335] active:text-white dark:text-[#822a59] dark:hover:bg-[#6e1f48] dark:hover:text-white dark:active:bg-[#3a0e25]';
-    const active = 'border-[#822a59] bg-[#822a59] text-white dark:text-white dark:bg-[#6e1f48] dark:border-[#6e1f48]';
+        'border-[#822a59] text-[#6e1f48] hover:bg-[#822a59] hover:text-white active:bg-[#561335] active:text-white ' +
+        'dark:text-[#822a59] dark:hover:!text-[#c59d36] dark:hover:bg-[#6e1f48] dark:active:bg-[#3a0e25]';
+    const active = 'border-[#822a59] bg-[#822a59] text-white dark:text-[#c59d36] dark:hover:!text-[#c59d36] dark:bg-[#6e1f48] dark:border-[#6e1f48]';
 
     return (
         <Link
