@@ -11,35 +11,36 @@ export default function Support() {
                 <title>Support</title>
                 <meta name="support" content="Thank you for supporting me!" />
             </Head>
-            <section className="" style={{ fontFamily: 'Montserrat, sans-serif' }}>
+
+            <section style={{ fontFamily: 'Montserrat, sans-serif' }}>
                 <div className="mx-auto max-w-screen-xl px-4 py-8 sm:py-16 lg:px-6">
                     <h1 className="mb-4 text-center text-3xl leading-relaxed text-black dark:text-white">Thank you for considering supporting me</h1>
+
                     <div className="text-center">
                         <p className="mx-auto mb-12 max-w-2xl text-[14px] leading-[1.75] text-gray-600 dark:text-gray-300">
-                            Your support helps me keep doing what I love making art and sharing it with the world. Whether it's through Patreon,
-                            Throne, or simply sharing my work, your kindness truly means a lot.
+                            Your support helps me keep doing what I love and share my art with the world. Whether you support me on Patreon, send a
+                            gift through Throne, or simply share my work, every bit of kindness means so much.
                         </p>
                     </div>
 
                     <div className="border-t border-gray-200 pt-8 text-center dark:border-gray-700">
                         <div className="mb-12">
-                            <h2 className="mb-4 text-xl tracking-normal text-black dark:text-white">Why do I need your help</h2>
+                            <h2 className="mb-4 text-xl tracking-normal text-black dark:text-white">Why your support matters</h2>
                             <div className="mx-auto max-w-2xl text-center">
                                 <p className="text-[14px] leading-[1.75] text-gray-600 dark:text-gray-400">
-                                    Making art full-time comes with a lot of unseen challenges. Not just creatively, but practically. Support through
-                                    Patreon or Throne helps cover tools, software, and most importantly, time. It gives me the space to focus on
-                                    drawing and sharing with you.
+                                    Being a full-time artist has its challenges, both creative and practical. Your support through Patreon or Throne
+                                    helps cover art tools, software, and most importantly, time to focus on creating new pieces to share with you.
                                 </p>
                             </div>
                         </div>
 
                         <div className="mb-16">
-                            <h2 className="mb-4 text-xl tracking-normal text-black dark:text-white">What do supporters get?</h2>
+                            <h2 className="mb-4 text-xl tracking-normal text-black dark:text-white">What supporters receive</h2>
                             <div className="mx-auto max-w-2xl text-center">
                                 <p className="text-[14px] leading-[1.75] text-gray-600 dark:text-gray-400">
-                                    Supporters get access to behind-the-scenes sketches, progress shots, and personal updates I don’t share anywhere
-                                    else. Some tiers also include early access to art, high-res files, or the chance to help guide future work. But
-                                    truly, every bit of support helps me keep going, and I’m grateful for all of it.
+                                    Supporters get exclusive access to behind-the-scenes sketches, progress shots, and personal updates that I don’t
+                                    post anywhere else. Some tiers also offer early access to finished artwork, high-resolution files, and a chance to
+                                    help shape future projects. Every bit of support means the world to me.
                                 </p>
                             </div>
                         </div>
@@ -48,10 +49,10 @@ export default function Support() {
                             <a
                                 href="https://www.patreon.com/KohaiiArts"
                                 target="_blank"
-                                className="group block rounded-xl border border-[#6e1f48] bg-white p-5 shadow-md transition hover:shadow-xl dark:bg-neutral-800 dark:hover:bg-neutral-700"
+                                className="group block rounded-xl border-2 border-[#822a59] bg-white p-5 shadow-md transition-colors duration-300 hover:bg-[#822a59]/10 hover:shadow-xl dark:border-[#822a59] dark:bg-neutral-900 dark:hover:bg-[#6e1f48]/30"
                             >
                                 <div className="flex items-center gap-4">
-                                    <FaPatreon className="min-h-[40px] min-w-[40px] flex-shrink-0 text-gray-800 transition-transform group-hover:scale-105 dark:text-white" />
+                                    <FaPatreon className="min-h-[40px] min-w-[40px] flex-shrink-0 text-[#6e1f48] transition-transform group-hover:scale-105 dark:text-[#c59d36]" />
                                     <div>
                                         <h3 className="text-lg font-semibold text-gray-800 dark:text-white">Patreon</h3>
                                         <p className="mt-1 text-sm text-gray-600 dark:text-gray-400">
@@ -64,16 +65,22 @@ export default function Support() {
                             <a
                                 href="https://throne.com/kohaiiarts"
                                 target="_blank"
-                                className="group block rounded-xl border border-[#6e1f48] bg-white p-5 shadow-md transition hover:shadow-xl dark:bg-neutral-800 dark:hover:bg-neutral-700"
+                                className="group block rounded-xl border-2 border-[#822a59] bg-white p-5 shadow-md transition-colors duration-300 hover:bg-[#822a59]/10 hover:shadow-xl dark:border-[#822a59] dark:bg-neutral-900 dark:hover:bg-[#6e1f48]/30"
                             >
                                 <div className="flex items-center gap-4">
-                                    <ThroneIcon className="min-h-[40px] min-w-[40px] flex-shrink-0 text-gray-800 transition-transform group-hover:scale-105 dark:text-white" />
+                                    <ThroneIcon className="min-h-[40px] min-w-[40px] flex-shrink-0 text-[#6e1f48] transition-transform group-hover:scale-105 dark:text-[#c59d36]" />
                                     <div>
                                         <h3 className="text-lg font-semibold text-gray-800 dark:text-white">Throne</h3>
                                         <p className="mt-1 text-sm text-gray-600 dark:text-gray-400">Send me a gift directly through Throne.</p>
                                     </div>
                                 </div>
                             </a>
+                        </div>
+
+                        <div className="mt-12 text-center">
+                            <p className="text-sm text-gray-600 dark:text-gray-400">
+                                Thank you for being part of this journey. Your support truly keeps me going and helps me grow as an artist.
+                            </p>
                         </div>
                     </div>
                 </div>

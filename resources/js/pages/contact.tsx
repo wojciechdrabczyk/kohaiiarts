@@ -1,6 +1,7 @@
 import InprntIcon from '@/assets/icons/InprntIcon';
 import NewgroundsIcon from '@/assets/icons/NewgroundsIcon';
 import ThroneIcon from '@/assets/icons/ThroneIcon';
+import VGenIcon from '@/assets/icons/VgenIcon';
 import DefaultLayout from '@/layouts/default-layout';
 import { Form, Head, usePage } from '@inertiajs/react';
 import { motion, MotionConfig, stagger } from 'framer-motion';
@@ -9,7 +10,6 @@ import { BsInstagram } from 'react-icons/bs';
 import { FaDiscord } from 'react-icons/fa';
 import { FaPatreon, FaThreads, FaXTwitter } from 'react-icons/fa6';
 import { toast } from 'sonner';
-import VGenIcon from '@/assets/icons/VgenIcon';
 
 type HoneypotProps = {
     enabled: boolean;
@@ -83,7 +83,7 @@ export default function Contact() {
                                 target="_blank"
                                 aria-label={name}
                                 rel="noopener noreferrer"
-                                className="flex items-center justify-center rounded-full border-2 border-[#822a59] bg-white p-5 dark:bg-neutral-800 dark:hover:bg-neutral-700"
+                                className="group flex items-center justify-center rounded-full border-2 border-[#822a59] bg-white p-5 shadow-sm transition-colors duration-300 ease-in-out hover:bg-[#822a59]/10 focus-visible:ring-2 focus-visible:ring-[#822a59] focus-visible:ring-offset-2 focus-visible:outline-none dark:border-[#822a59] dark:bg-neutral-900 dark:hover:bg-[#6e1f48]/30 dark:focus-visible:ring-offset-black"
                                 whileHover={{ scale: 1.05, y: -1 }}
                                 whileTap={{ scale: 0.95 }}
                                 transition={{ type: 'tween', duration: 0.12 }}
@@ -185,9 +185,23 @@ export default function Contact() {
                                             </label>
 
                                             {type === 'textarea' ? (
-                                                <textarea id={id} name={id} required={required} rows={5} placeholder={placeholder} className={common} />
+                                                <textarea
+                                                    id={id}
+                                                    name={id}
+                                                    required={required}
+                                                    rows={5}
+                                                    placeholder={placeholder}
+                                                    className={common}
+                                                />
                                             ) : (
-                                                <input id={id} name={id} type={type} required={required} placeholder={placeholder} className={common} />
+                                                <input
+                                                    id={id}
+                                                    name={id}
+                                                    type={type}
+                                                    required={required}
+                                                    placeholder={placeholder}
+                                                    className={common}
+                                                />
                                             )}
 
                                             {err && <p className="text-sm text-red-600 dark:text-red-400">{err}</p>}
