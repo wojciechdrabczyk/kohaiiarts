@@ -32,22 +32,24 @@ export default function Faq() {
                                 Who are you, and what do you like drawing?
                             </h3>
                             <p className="text-sm leading-relaxed text-gray-500 dark:text-gray-400">
-                                I’m Kohaii, a digital illustrator who loves expressive characters, soft lighting, and stylish outfits. I feel most at home with
-                                female and androgynous characters, but I enjoy exploring many styles.
+                                I’m Kohaii, a digital illustrator who loves expressive characters, soft lighting, and stylish outfits. I feel most at
+                                home with female and androgynous characters, but I enjoy exploring many styles.
                             </p>
                         </div>
 
                         <div className="mb-6">
                             <h3 className="text-md mb-2 font-medium tracking-tight text-gray-900 dark:text-white">Do you stream or share WIPs?</h3>
                             <p className="text-sm leading-relaxed text-gray-500 dark:text-gray-400">
-                                Sometimes I share small work in progress moments on social media. If a piece needs to stay private, I will keep it offline.
+                                Sometimes I share small work in progress moments on social media. If a piece needs to stay private, I will keep it
+                                offline.
                             </p>
                         </div>
 
                         <div className="mb-6">
                             <h3 className="text-md mb-2 font-medium tracking-tight text-gray-900 dark:text-white">What tools do you use?</h3>
                             <p className="text-sm leading-relaxed text-gray-500 dark:text-gray-400">
-                                I work primarily in <strong>Clip Studio Paint</strong>. I color check exports and deliver high-resolution PNG or JPEG files as needed.
+                                I work primarily in <strong>Clip Studio Paint</strong>. I color check exports and deliver high-resolution PNG or JPEG
+                                files as needed.
                             </p>
                         </div>
 
@@ -56,7 +58,8 @@ export default function Faq() {
                                 What kind of references help the most?
                             </h3>
                             <p className="text-sm leading-relaxed text-gray-500 dark:text-gray-400">
-                                Good references include outfits, colors, poses, and short notes about mood or personality. Anything that helps me understand your idea is welcome.
+                                Good references include outfits, colors, poses, and short notes about mood or personality. Anything that helps me
+                                understand your idea is welcome.
                             </p>
                         </div>
 
@@ -79,7 +82,8 @@ export default function Faq() {
                         <div className="mb-6">
                             <h3 className="text-md mb-2 font-medium tracking-tight text-gray-900 dark:text-white">What’s your general process?</h3>
                             <p className="text-sm leading-relaxed text-gray-500 dark:text-gray-400">
-                                I start with references and small thumbnails, then a clean sketch, line art, and final rendering. I aim for clarity at the sketch stage so the finish feels smooth and polished.
+                                I start with references and small thumbnails, then a clean sketch, line art, and final rendering. I aim for clarity at
+                                the sketch stage so the finish feels smooth and polished.
                             </p>
                         </div>
 
@@ -92,19 +96,19 @@ export default function Faq() {
                     </div>
 
                     <div className="mt-10 flex justify-center">
-                        <div className="w-full max-w-3xl rounded-xl border-2 border-[#822a59] bg-white p-5 shadow-md transition-colors duration-300 dark:bg-neutral-900">
+                        <div className="w-full max-w-3xl rounded-xl border-2 border-[#822a59] bg-white p-5 shadow-md transition-colors duration-300 dark:border-[#c59d36] dark:bg-neutral-900">
                             <div className="flex flex-col items-center gap-3 text-center">
                                 <p className="text-sm text-gray-700 dark:text-gray-200">Looking for pricing, turnaround, and request details?</p>
                                 <div className="flex flex-wrap items-center justify-center gap-3">
                                     <Link
                                         href={route('commissions')}
-                                        className="rounded border-2 border-[#822a59] px-4 py-2 text-sm font-medium text-[#6e1f48] transition-colors duration-200 hover:bg-[#822a59] hover:text-white active:bg-[#561335] active:text-white dark:text-[#822a59] dark:hover:bg-[#6e1f48] dark:hover:text-[#c59d36] dark:active:bg-[#3a0e25]"
+                                        className="rounded border-2 border-[#822a59] px-4 py-2 text-sm font-medium text-[#6e1f48] transition-colors duration-200 hover:bg-[#822a59] hover:text-white focus-visible:ring-2 focus-visible:ring-[#822a59] focus-visible:ring-offset-2 focus-visible:outline-none active:bg-[#561335] active:text-white dark:border-[#c59d36] dark:text-[#c59d36] dark:hover:bg-[#c59d36]/20 dark:hover:text-[#c59d36] dark:focus-visible:ring-[#c59d36] dark:focus-visible:ring-offset-black dark:active:bg-[#c59d36]/30"
                                     >
                                         View Commission Info
                                     </Link>
                                     <Link
                                         href={route('contact')}
-                                        className="rounded border-2 border-[#822a59] px-4 py-2 text-sm font-medium text-[#6e1f48] transition-colors duration-200 hover:bg-[#822a59] hover:text-white active:bg-[#561335] active:text-white dark:text-[#822a59] dark:hover:bg-[#6e1f48] dark:hover:text-[#c59d36] dark:active:bg-[#3a0e25]"
+                                        className="rounded border-2 border-[#822a59] px-4 py-2 text-sm font-medium text-[#6e1f48] transition-colors duration-200 hover:bg-[#822a59] hover:text-white focus-visible:ring-2 focus-visible:ring-[#822a59] focus-visible:ring-offset-2 focus-visible:outline-none active:bg-[#561335] active:text-white dark:border-[#c59d36] dark:text-[#c59d36] dark:hover:bg-[#c59d36]/20 dark:hover:text-[#c59d36] dark:focus-visible:ring-[#c59d36] dark:focus-visible:ring-offset-black dark:active:bg-[#c59d36]/30"
                                     >
                                         Contact Me
                                     </Link>

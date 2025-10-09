@@ -49,10 +49,10 @@ export default function Support() {
                             <a
                                 href="https://www.patreon.com/KohaiiArts"
                                 target="_blank"
-                                className="group block rounded-xl border-2 border-[#822a59] bg-white p-5 shadow-md transition-colors duration-300 hover:bg-[#822a59]/10 hover:shadow-xl dark:border-[#822a59] dark:bg-neutral-900 dark:hover:bg-[#6e1f48]/30"
+                                className="group block rounded-xl border-2 border-[#822a59] bg-white p-5 shadow-md transition-colors duration-300 hover:bg-[#822a59]/10 hover:shadow-xl focus-visible:ring-2 focus-visible:ring-[#822a59] focus-visible:ring-offset-2 focus-visible:outline-none dark:border-[#c59d36] dark:bg-neutral-900 dark:hover:bg-[#4a3717]/30 dark:focus-visible:ring-[#c59d36] dark:focus-visible:ring-offset-black"
                             >
                                 <div className="flex items-center gap-4">
-                                    <FaPatreon className="min-h-[40px] min-w-[40px] flex-shrink-0 text-[#6e1f48] transition-transform group-hover:scale-105 dark:text-[#c59d36]" />
+                                    <FaPatreon className="min-h-[40px] min-w-[40px] flex-shrink-0 text-[#6e1f48] transition-all group-hover:scale-105 dark:text-[#c59d36] dark:group-hover:text-[#f1d27a] dark:group-hover:drop-shadow-[0_0_0.35rem_rgba(197,157,54,0.45)]" />
                                     <div>
                                         <h3 className="text-lg font-semibold text-gray-800 dark:text-white">Patreon</h3>
                                         <p className="mt-1 text-sm text-gray-600 dark:text-gray-400">
@@ -65,10 +65,10 @@ export default function Support() {
                             <a
                                 href="https://throne.com/kohaiiarts"
                                 target="_blank"
-                                className="group block rounded-xl border-2 border-[#822a59] bg-white p-5 shadow-md transition-colors duration-300 hover:bg-[#822a59]/10 hover:shadow-xl dark:border-[#822a59] dark:bg-neutral-900 dark:hover:bg-[#6e1f48]/30"
+                                className="group block rounded-xl border-2 border-[#822a59] bg-white p-5 shadow-md transition-colors duration-300 hover:bg-[#822a59]/10 hover:shadow-xl focus-visible:ring-2 focus-visible:ring-[#822a59] focus-visible:ring-offset-2 focus-visible:outline-none dark:border-[#c59d36] dark:bg-neutral-900 dark:hover:bg-[#4a3717]/30 dark:focus-visible:ring-[#c59d36] dark:focus-visible:ring-offset-black"
                             >
                                 <div className="flex items-center gap-4">
-                                    <ThroneIcon className="min-h-[40px] min-w-[40px] flex-shrink-0 text-[#6e1f48] transition-transform group-hover:scale-105 dark:text-[#c59d36]" />
+                                    <ThroneIcon className="min-h-[40px] min-w-[40px] flex-shrink-0 text-[#6e1f48] transition-all group-hover:scale-105 dark:text-[#c59d36] dark:group-hover:text-[#f1d27a] dark:group-hover:drop-shadow-[0_0_0.35rem_rgba(197,157,54,0.45)]" />
                                     <div>
                                         <h3 className="text-lg font-semibold text-gray-800 dark:text-white">Throne</h3>
                                         <p className="mt-1 text-sm text-gray-600 dark:text-gray-400">Send me a gift directly through Throne.</p>

@@ -69,11 +69,16 @@ export default function HeroSection() {
         () =>
             [
                 'rounded px-5 py-2.5 border-2 font-medium transition-colors duration-200 ease-in-out',
+                'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#822a59] focus-visible:ring-offset-2',
+                'dark:focus-visible:ring-[#c59d36] dark:focus-visible:ring-offset-black',
+
                 'border-[#822a59] text-[#6e1f48]',
                 'hover:bg-[#822a59] hover:text-white',
                 'active:bg-[#561335] active:text-white',
-                'dark:text-[#822a59] dark:hover:bg-[#6e1f48] dark:hover:text-white dark:active:bg-[#3a0e25]',
-                'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#822a59] focus-visible:ring-offset-2 dark:focus-visible:ring-offset-black',
+
+                'dark:border-[#c59d36] dark:text-[#c59d36]',
+                'dark:hover:bg-[#4a3717]/30',
+                'dark:active:bg-[#4a3717]/40',
             ].join(' '),
         [],
     );
@@ -110,7 +115,7 @@ export default function HeroSection() {
 
                 <MobileMenu
                     links={navLinks.map(({ label, name }) => ({ label, href: route(name) }))}
-                    brandColor="#822a59"
+                    brandColor="#c59d36"
                     onToggleTheme={toggleTheme}
                     theme={theme}
                 />

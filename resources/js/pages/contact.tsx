@@ -43,7 +43,7 @@ export default function Contact() {
         { name: 'Patreon', url: 'https://www.patreon.com/KohaiiArts', icon: <FaPatreon size={32} className="text-[#f96854]" />, title: 'Patreon' },
         { name: 'Throne', url: 'https://throne.com/kohaiiarts', icon: <ThroneIcon size={32} />, title: 'Throne' },
         { name: 'Inprnt', url: 'https://www.inprnt.com/gallery/kohaiiarts/', icon: <InprntIcon size={32} />, title: 'Inprnt' },
-        { name: 'VGen', url: 'https://vgen.co/KohaiiArts', icon: <VGenIcon size={32} />, title: 'VGen' },
+        { name: 'VGen', url: 'https://vgen.co/KohaiiArts', icon: <VGenIcon size={32} className="text-[#B8FF26]" />, title: 'VGen' },
     ];
 
     return (
@@ -83,7 +83,13 @@ export default function Contact() {
                                 target="_blank"
                                 aria-label={name}
                                 rel="noopener noreferrer"
-                                className="group flex items-center justify-center rounded-full border-2 border-[#822a59] bg-white p-5 shadow-sm transition-colors duration-300 ease-in-out hover:bg-[#822a59]/10 focus-visible:ring-2 focus-visible:ring-[#822a59] focus-visible:ring-offset-2 focus-visible:outline-none dark:border-[#822a59] dark:bg-neutral-900 dark:hover:bg-[#6e1f48]/30 dark:focus-visible:ring-offset-black"
+                                className={[
+                                    'group flex items-center justify-center rounded-full border-2 p-5 shadow-sm transition-colors duration-300 ease-in-out',
+                                    'border-[#822a59] bg-white hover:bg-[#822a59]/10',
+                                    'focus-visible:ring-2 focus-visible:ring-[#822a59] focus-visible:ring-offset-2 focus-visible:outline-none',
+                                    'dark:border-[#c59d36] dark:bg-neutral-900 dark:hover:bg-[#4a3717]/30',
+                                    'dark:focus-visible:ring-[#c59d36] dark:focus-visible:ring-offset-black',
+                                ].join(' ')}
                                 whileHover={{ scale: 1.05, y: -1 }}
                                 whileTap={{ scale: 0.95 }}
                                 transition={{ type: 'tween', duration: 0.12 }}
@@ -119,7 +125,7 @@ export default function Contact() {
                         method="post"
                         as="form"
                         id="contactForm"
-                        className="mx-auto mt-12 max-w-xl scroll-mt-24 space-y-6 rounded-xl border-2 border-[#822a59] bg-white p-12 shadow-md dark:bg-neutral-900"
+                        className="mx-auto mt-12 max-w-xl scroll-mt-24 space-y-6 rounded-xl border-2 border-[#822a59] bg-white p-12 shadow-md dark:border-[#c59d36] dark:bg-neutral-900"
                         transform={(data) => {
                             if (honeypot?.enabled) {
                                 data[honeypot.nameFieldName] = '';
@@ -168,10 +174,14 @@ export default function Contact() {
                                 ].map(({ id, label, required, type, placeholder }) => {
                                     const err = errors?.[id];
                                     const common =
+                                        // Light: purple focus
                                         `w-full rounded border px-4 py-3 text-sm transition focus:border-[#822a59] focus:ring-1 focus:ring-[#822a59] focus:outline-none ` +
+                                        // Normal surfaces + dark surfaces
                                         (err
                                             ? 'border-red-600'
-                                            : 'border-gray-300 bg-white text-gray-900 dark:border-gray-600 dark:bg-neutral-800 dark:text-gray-100');
+                                            : 'border-gray-300 bg-white text-gray-900 dark:border-gray-600 dark:bg-neutral-800 dark:text-gray-100') +
+                                        // Dark: gold focus
+                                        ' dark:focus:border-[#c59d36] dark:focus:ring-[#c59d36]';
 
                                     return (
                                         <motion.div
@@ -218,18 +228,20 @@ export default function Contact() {
                                 <button
                                     type="submit"
                                     disabled={processing}
-                                    className={`w-full rounded px-4 py-3 text-sm font-semibold text-white transition-colors duration-200 ${
+                                    className={[
+                                        'w-full rounded px-4 py-3 text-sm font-semibold transition-colors duration-200',
                                         processing
-                                            ? 'cursor-not-allowed bg-gray-400'
-                                            : 'bg-[#822a59] hover:bg-[#6e1f48] dark:bg-[#822a59] dark:hover:bg-[#6e1f48]'
-                                    }`}
+                                            ? 'cursor-not-allowed bg-gray-400 text-white'
+                                            : [
+                                                  // Light: purple primary as before
+                                                  'bg-[#822a59] text-white hover:bg-[#6e1f48]',
+                                                  // Dark: gold primary for consistency
+                                                  'dark:bg-[#c59d36] dark:text-black dark:hover:bg-[#f1d27a]',
+                                              ].join(' '),
+                                    ].join(' ')}
                                 >
-                                    {processing
-                                        ? (progress?.percentage != null ? `Sending… ${progress.percentage}%` : 'Sending…')
-                                        : 'Send'}
+                                    {processing ? (progress?.percentage != null ? `Sending… ${progress.percentage}%` : 'Sending…') : 'Send'}
                                 </button>
-
-
 
                                 {(status === 'success' || (status === null && recentlySuccessful)) && (
                                     <motion.div
