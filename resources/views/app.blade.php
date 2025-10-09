@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}"
-    @class(['dark' => ($appearance ?? 'system') === 'dark'])>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     <meta charset="utf-8">
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -28,7 +27,6 @@
     <meta name="robots" content="index,follow">
     <meta name="theme-color" content="#822a59">
 
-    {{-- Open Graph --}}
     <meta property="og:type" content="{{ $ogType }}">
     <meta property="og:site_name" content="{{ $siteName }}">
     <meta property="og:locale" content="{{ $locale }}">
@@ -40,14 +38,12 @@
     <meta property="og:image:height" content="630">
     <meta property="og:image:alt" content="Featured artwork by {{ $siteName }}">
 
-    {{-- Twitter (small card w/ square) — change to summary_large_image if you want the wide banner --}}
     <meta name="twitter:card" content="summary">
     <meta name="twitter:title" content="{{ $title }}">
     <meta name="twitter:description" content="{{ $desc }}">
     <meta name="twitter:image" content="{{ asset('img-static/twitter.jpg') }}">
     <meta name="twitter:site" content="@KohaiiArts">
 
-    {{-- Icons / fonts --}}
     <link rel="icon" href="{{ asset('favicon.ico') }}" sizes="any">
     <link rel="icon" href="{{ asset('favicon.svg') }}" type="image/svg+xml">
     <link rel="preconnect" href="https://fonts.bunny.net">
@@ -71,15 +67,34 @@
 
     <script>
         (function () {
-            var appearance = @json($appearance ?? 'system');
-            var root = document.documentElement;
-            if (appearance === 'light') { root.classList.remove('dark'); return; }
-            if (appearance === 'dark')  { root.classList.add('dark'); return; }
-            var mql = window.matchMedia('(prefers-color-scheme: dark)');
-            var apply = function(){ root.classList.toggle('dark', mql.matches); };
-            apply(); (mql.addEventListener||mql.addListener).call(mql,'change',apply);
+            try {
+                var pref = @json($appearance ?? 'system'); // 'light' | 'dark' | 'system'
+                var ls = localStorage.getItem('theme');
+                var root = document.documentElement;
+
+                function computeDark() {
+                    if (pref === 'light') return false;
+                    if (pref === 'dark')  return true;
+                    if (ls === 'light' || ls === 'dark') return ls === 'dark';
+                    return window.matchMedia('(prefers-color-scheme: dark)').matches;
+                }
+
+                root.classList.toggle('dark', computeDark());
+
+                if (pref === 'system') {
+                    var mql = window.matchMedia('(prefers-color-scheme: dark)');
+                    var apply = function () {
+                        var ls2 = localStorage.getItem('theme');
+                        root.classList.toggle('dark',
+                            ls2 === 'light' || ls2 === 'dark' ? (ls2 === 'dark') : mql.matches
+                        );
+                    };
+                    (mql.addEventListener || mql.addListener).call(mql, 'change', apply);
+                }
+            } catch (e) {}
         })();
     </script>
+
     <style>
         html{background-color: oklch(1 0 0)}
         html.dark{background-color: oklch(0.145 0 0)}

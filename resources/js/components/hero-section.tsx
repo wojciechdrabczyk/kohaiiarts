@@ -51,10 +51,18 @@ export default function HeroSection() {
     }, []);
 
     const toggleTheme = () => {
+        const root = document.documentElement;
+
+        root.classList.add('theme-transition');
+
         const next: Theme = theme === 'dark' ? 'light' : 'dark';
         setTheme(next);
         localStorage.setItem('theme', next);
-        document.documentElement.classList.toggle('dark', next === 'dark');
+        root.classList.toggle('dark', next === 'dark');
+
+        window.setTimeout(() => {
+            root.classList.remove('theme-transition');
+        }, 220);
     };
 
     const buttonStyle = useMemo(

@@ -12,10 +12,19 @@
 @custom-variant dark (&:is(.dark *));
 
 
+@layer base {
+    *,
+    ::after,
+    ::before,
+    ::backdrop,
+    ::file-selector-button {
+        border-color: var(--color-gray-200, currentColor);
+    }
+}
+
 
 @theme {
     --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji', 'Caveat Brush', 'Montserrat';
-
 
     --radius-lg: var(--radius);
     --radius-md: calc(var(--radius) - 2px);
@@ -65,50 +74,43 @@
     --color-sidebar-ring: var(--sidebar-ring);
 }
 
-/*
-  The default border color has changed to `currentColor` in Tailwind CSS v4,
-  so we've added these compatibility styles to make sure everything still
-  looks the same as it did with Tailwind CSS v3.
-
-  If we ever want to remove these styles, we need to add an explicit border
-  color utility to any element that depends on these defaults.
-*/
-@layer base {
-    *,
-    ::after,
-    ::before,
-    ::backdrop,
-    ::file-selector-button {
-        border-color: var(--color-gray-200, currentColor);
-    }
-}
-
 :root {
     --background: oklch(1 0 0);
     --foreground: oklch(0.145 0 0);
+
     --card: oklch(1 0 0);
     --card-foreground: oklch(0.145 0 0);
+
     --popover: oklch(1 0 0);
     --popover-foreground: oklch(0.145 0 0);
+
     --primary: oklch(0.205 0 0);
     --primary-foreground: oklch(0.985 0 0);
+
     --secondary: oklch(0.97 0 0);
     --secondary-foreground: oklch(0.205 0 0);
+
     --muted: oklch(0.97 0 0);
     --muted-foreground: oklch(0.556 0 0);
+
     --accent: oklch(0.97 0 0);
     --accent-foreground: oklch(0.205 0 0);
+
     --destructive: oklch(0.577 0.245 27.325);
     --destructive-foreground: oklch(0.577 0.245 27.325);
+
     --border: oklch(0.922 0 0);
     --input: oklch(0.922 0 0);
     --ring: oklch(0.87 0 0);
+
     --chart-1: oklch(0.646 0.222 41.116);
     --chart-2: oklch(0.6 0.118 184.704);
     --chart-3: oklch(0.398 0.07 227.392);
     --chart-4: oklch(0.828 0.189 84.429);
     --chart-5: oklch(0.769 0.188 70.08);
+
     --radius: 0.625rem;
+
     --sidebar: oklch(0.985 0 0);
     --sidebar-foreground: oklch(0.145 0 0);
     --sidebar-primary: oklch(0.205 0 0);
@@ -119,31 +121,42 @@
     --sidebar-ring: oklch(0.87 0 0);
 }
 
+
 .dark {
-    --background: oklch(0.187 0 89.876);
+    --background: oklch(0.187 0 89.876); /* ~#131313: modern soft black */
     --foreground: oklch(0.985 0 0);
+
     --card: oklch(0.145 0 0);
     --card-foreground: oklch(0.985 0 0);
+
     --popover: oklch(0.145 0 0);
     --popover-foreground: oklch(0.985 0 0);
+
     --primary: oklch(0.985 0 0);
     --primary-foreground: oklch(0.205 0 0);
+
     --secondary: oklch(0.269 0 0);
     --secondary-foreground: oklch(0.985 0 0);
+
     --muted: oklch(0.269 0 0);
     --muted-foreground: oklch(0.708 0 0);
+
     --accent: oklch(0.269 0 0);
     --accent-foreground: oklch(0.985 0 0);
+
     --destructive: oklch(0.396 0.141 25.723);
     --destructive-foreground: oklch(0.637 0.237 25.331);
+
     --border: oklch(0.269 0 0);
     --input: oklch(0.269 0 0);
     --ring: oklch(0.439 0 0);
+
     --chart-1: oklch(0.488 0.243 264.376);
     --chart-2: oklch(0.696 0.17 162.48);
     --chart-3: oklch(0.769 0.188 70.08);
     --chart-4: oklch(0.627 0.265 303.9);
     --chart-5: oklch(0.645 0.246 16.439);
+
     --sidebar: oklch(0.205 0 0);
     --sidebar-foreground: oklch(0.985 0 0);
     --sidebar-primary: oklch(0.985 0 0);
@@ -159,8 +172,37 @@
     * {
         @apply border-border;
     }
-
     body {
         @apply bg-background text-foreground;
+    }
+}
+
+
+html.theme-transition body,
+html.theme-transition header,
+html.theme-transition footer,
+html.theme-transition section,
+html.theme-transition nav,
+html.theme-transition main,
+html.theme-transition article,
+html.theme-transition aside,
+html.theme-transition .card,
+html.theme-transition .popover,
+html.theme-transition button,
+html.theme-transition input,
+html.theme-transition textarea,
+html.theme-transition select,
+html.theme-transition a {
+    transition:
+        background-color .18s ease-out,
+        color .18s ease-out,
+        border-color .18s ease-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html.theme-transition *,
+    html.theme-transition *::before,
+    html.theme-transition *::after {
+        transition: none !important;
     }
 }
