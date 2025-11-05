@@ -62,7 +62,6 @@ export default function Commissions() {
         return keyed ? errors[keyed] : undefined;
     };
 
-    // FAQs — first 4 show by default; rest appear after "Show more"
     const faqsPrimary = [
         {
             q: 'Do you stream progress? Can I use the art for AI/Crypto/NFT?',
@@ -190,7 +189,6 @@ export default function Commissions() {
                         I’d love to bring your vision to life.
                     </p>
 
-                    {/* Main cards — no hover glow */}
                     <div className="mt-12 rounded-xl border-2 border-[#822a59] bg-white p-6 shadow-md dark:border-[#c59d36] dark:bg-neutral-900">
                         <h2 className="mb-4 text-xl font-semibold text-gray-800 dark:text-gray-200">What’s Included</h2>
                         <ul className="list-inside list-disc space-y-1 text-sm text-gray-600 dark:text-gray-400">
@@ -391,7 +389,6 @@ export default function Commissions() {
                                             className="hidden"
                                         />
 
-                                        {/* Upload: purple (light), gold (dark) */}
                                         <label
                                             htmlFor="files"
                                             className="flex cursor-pointer items-center gap-2 rounded bg-[#822a59] px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-[#6e1f48] dark:bg-[#c59d36] dark:text-black dark:hover:bg-[#f1d27a]"
@@ -437,7 +434,6 @@ export default function Commissions() {
                                     })()}
                                 </div>
 
-                                {/* Submit: purple (light), gold (dark) */}
                                 <button
                                     type="submit"
                                     disabled={processing}
@@ -463,16 +459,16 @@ export default function Commissions() {
                         )}
                     </Form>
 
-                    {/* FAQ — keeps subtle gold glow on hover (dark) */}
                     <div ref={faqRef} className="mt-8 space-y-4">
                         {[...faqsPrimary].map(({ q, a }, idx) => (
                             <details
                                 key={idx}
-                                className="min-h-[50px] rounded-xl border-2 border-[#822a59] bg-white p-4 text-sm text-gray-600 shadow-md dark:border-[#c59d36] dark:bg-neutral-900 dark:text-gray-400 dark:hover:bg-[#4a3717]/20"
+                                className="min-h-[50px] rounded-xl border-2 border-[#822a59] bg-white p-4 text-sm text-gray-600 shadow-md transition-colors duration-200 ease-in-out hover:bg-[#822a59]/10 focus-visible:ring-2 focus-visible:ring-[#822a59]/20 focus-visible:outline-none dark:border-[#c59d36] dark:bg-neutral-900 dark:text-gray-400 dark:hover:bg-[#4a3717]/20 dark:focus-visible:ring-[#c59d36]/20"
                             >
-                                <summary className="cursor-pointer font-semibold text-gray-700 dark:text-gray-200 [&::marker]:text-[#c59d36]">
+                                <summary className="cursor-pointer font-semibold text-gray-700 dark:text-gray-200 [&::marker]:text-[#822a59] dark:[&::marker]:text-[#c59d36]">
                                     {q}
                                 </summary>
+
                                 <p className="mt-2">{a}</p>
                             </details>
                         ))}
@@ -481,9 +477,9 @@ export default function Commissions() {
                             faqsMore.map(({ q, a }, idx) => (
                                 <details
                                     key={`more-${idx}`}
-                                    className="min-h-[50px] rounded-xl border-2 border-[#822a59] bg-white p-4 text-sm text-gray-600 shadow-md dark:border-[#c59d36] dark:bg-neutral-900 dark:text-gray-400 dark:hover:bg-[#4a3717]/20"
+                                    className="min-h-[50px] rounded-xl border-2 border-[#822a59] bg-white p-4 text-sm text-gray-600 shadow-md transition-colors duration-200 ease-in-out hover:bg-[#822a59]/10 focus-visible:ring-2 focus-visible:ring-[#822a59]/20 focus-visible:outline-none dark:border-[#c59d36] dark:bg-neutral-900 dark:text-gray-400 dark:hover:bg-[#4a3717]/20 dark:focus-visible:ring-[#c59d36]/20"
                                 >
-                                    <summary className="cursor-pointer font-semibold text-gray-700 dark:text-gray-200 [&::marker]:text-[#c59d36]">
+                                    <summary className="cursor-pointer font-semibold text-gray-700 dark:text-gray-200 [&::marker]:text-[#822a59] dark:[&::marker]:text-[#c59d36]">
                                         {q}
                                     </summary>
                                     <p className="mt-2">{a}</p>
