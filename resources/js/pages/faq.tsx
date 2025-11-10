@@ -102,13 +102,13 @@ export default function Faq() {
                                 <div className="flex flex-wrap items-center justify-center gap-3">
                                     <Link
                                         href={route('commissions')}
-                                        className="rounded border-2 border-[#822a59] px-4 py-2 text-sm font-medium text-[#6e1f48] transition-colors duration-200 hover:bg-[#822a59] hover:text-white focus-visible:ring-2 focus-visible:ring-[#822a59] focus-visible:ring-offset-2 focus-visible:outline-none active:bg-[#561335] active:text-white dark:border-[#c59d36] dark:text-[#c59d36] dark:hover:bg-[#c59d36]/20 dark:hover:text-[#c59d36] dark:focus-visible:ring-[#c59d36] dark:focus-visible:ring-offset-black dark:active:bg-[#c59d36]/30"
+                                        className="rounded border-2 border-[#822a59] bg-white px-4 py-2 text-sm font-medium text-[#6e1f48] shadow-md transition-all duration-300 ease-out hover:bg-[#822a59]/10 hover:drop-shadow-[0_0_0.35rem_rgba(130,42,89,0.35)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#822a59]/40 focus-visible:ring-offset-2 dark:border-[#c59d36] dark:bg-neutral-900 dark:text-[#c59d36] dark:hover:bg-[#4a3717]/30 dark:hover:drop-shadow-[0_0_0.35rem_rgba(197,157,54,0.45)] dark:focus-visible:ring-[#c59d36]/40 dark:focus-visible:ring-offset-black"
                                     >
                                         View Commission Info
                                     </Link>
                                     <Link
                                         href={route('contact')}
-                                        className="rounded border-2 border-[#822a59] px-4 py-2 text-sm font-medium text-[#6e1f48] transition-colors duration-200 hover:bg-[#822a59] hover:text-white focus-visible:ring-2 focus-visible:ring-[#822a59] focus-visible:ring-offset-2 focus-visible:outline-none active:bg-[#561335] active:text-white dark:border-[#c59d36] dark:text-[#c59d36] dark:hover:bg-[#c59d36]/20 dark:hover:text-[#c59d36] dark:focus-visible:ring-[#c59d36] dark:focus-visible:ring-offset-black dark:active:bg-[#c59d36]/30"
+                                        className="rounded border-2 border-[#822a59] bg-white px-4 py-2 text-sm font-medium text-[#6e1f48] shadow-md transition-all duration-300 ease-out hover:bg-[#822a59]/10 hover:drop-shadow-[0_0_0.35rem_rgba(130,42,89,0.35)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#822a59]/40 focus-visible:ring-offset-2 dark:border-[#c59d36] dark:bg-neutral-900 dark:text-[#c59d36] dark:hover:bg-[#4a3717]/30 dark:hover:drop-shadow-[0_0_0.35rem_rgba(197,157,54,0.45)] dark:focus-visible:ring-[#c59d36]/40 dark:focus-visible:ring-offset-black"
                                     >
                                         Contact Me
                                     </Link>
