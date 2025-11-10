@@ -64,11 +64,19 @@ export default function Commissions() {
 
     const faqsPrimary = [
         {
-            q: 'Do you stream progress? Can I use the art for AI/Crypto/NFT?',
+            q: 'Do you ever share or stream your drawing process?',
             a: (
                 <>
-                    I may stream progress on my social platforms. My artwork <strong>cannot</strong> be used for <strong>AI, Crypto, or NFT</strong>{' '}
-                    purposes under any circumstances.
+                    I sometimes stream my art progress for my Discord subscribers and occasionally post work-in-progress previews on my social
+                    platforms.
+                </>
+            ),
+        },
+        {
+            q: 'Can I use the art for AI/Crypto/NFT?',
+            a: (
+                <>
+                    My artwork <strong>cannot</strong> be used for <strong>AI, Crypto, or NFT</strong> purposes under any circumstances.
                 </>
             ),
         },
