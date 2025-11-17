@@ -39,13 +39,16 @@ export default function HeroSection() {
     const [logoLoaded, setLogoLoaded] = useState(false);
 
     useEffect(() => {
-        const current = localStorage.getItem('theme');
-        if (current === 'dark') {
-            setTheme('dark');
-            document.documentElement.classList.add('dark');
+        const stored = localStorage.getItem('theme') as Theme | null;
+        if (stored === 'light' || stored === 'dark') {
+            setTheme(stored);
+            document.documentElement.classList.toggle('dark', stored === 'dark');
         } else {
-            setTheme('light');
-            document.documentElement.classList.remove('dark');
+            const prefersDark = window.matchMedia?.('(prefers-color-scheme: dark)').matches;
+            const initial: Theme = prefersDark ? 'dark' : 'light';
+
+            setTheme(initial);
+            document.documentElement.classList.toggle('dark', initial === 'dark');
         }
         setMounted(true);
     }, []);
@@ -72,10 +75,8 @@ export default function HeroSection() {
                 'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2',
                 'focus-visible:ring-[#822a59] dark:focus-visible:ring-[#c59d36] dark:focus-visible:ring-offset-black',
             ].join(' '),
-        []
+        [],
     );
-
-
 
     if (!mounted) return null;
 
@@ -109,9 +110,6 @@ export default function HeroSection() {
 
                 <MobileMenu
                     links={navLinks.map(({ label, name }) => ({ label, href: route(name) }))}
-                    brandColor="#c59d36"
-                    onToggleTheme={toggleTheme}
-                    theme={theme}
                 />
 
                 <div className="relative mx-auto h-[120px] w-[126px] sm:h-[150px] sm:w-[156px] md:h-[170px] md:w-[176px]">

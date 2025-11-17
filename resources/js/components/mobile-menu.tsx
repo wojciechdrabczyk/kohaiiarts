@@ -1,16 +1,15 @@
 import NewgroundsIcon from '@/assets/icons/NewgroundsIcon';
 import { Link, router } from '@inertiajs/react';
 import { AnimatePresence, motion } from 'framer-motion';
-import { useEffect, useRef, useState } from 'react';
-import { createPortal } from 'react-dom'; // ⬅️ add
+import React, { useEffect, useRef, useState } from 'react';
+import { createPortal } from 'react-dom';
 import { BsInstagram } from 'react-icons/bs';
 import { FaDiscord, FaXTwitter } from 'react-icons/fa6';
 import { SiThreads } from 'react-icons/si';
 
-type NavLink = { label: string; href?: string; name?: string }; // allow either
-type Props = { links: NavLink[]; brandColor?: string; onToggleTheme: () => void; theme?: 'light' | 'dark' };
+type NavLink = { label: string; href?: string; name?: string };
+type Props = { links: NavLink[]; theme?: 'light' | 'dark' };
 
-// Simple portal helper
 function Portal({ children }: { children: React.ReactNode }) {
     const [mounted, setMounted] = useState(false);
     useEffect(() => setMounted(true), []);
@@ -18,7 +17,7 @@ function Portal({ children }: { children: React.ReactNode }) {
     return createPortal(children, document.body);
 }
 
-export default function MobileMenu({ links, brandColor = '#822a59' }: Props) {
+export default function MobileMenu({ links }: Props) {
     const [open, setOpen] = useState(false);
     const openerRef = useRef<HTMLButtonElement | null>(null);
 
@@ -34,7 +33,6 @@ export default function MobileMenu({ links, brandColor = '#822a59' }: Props) {
             if (route().current(link.name)) return;
             router.visit(route(link.name), { preserveScroll: true, preserveState: true });
         } else if (link.href) {
-            // simple same-URL guard
             const a = new URL(link.href, window.location.origin);
             const b = new URL(window.location.href);
             if (a.pathname === b.pathname && a.search === b.search) return;
@@ -145,9 +143,8 @@ export default function MobileMenu({ links, brandColor = '#822a59' }: Props) {
                                         exit="closed"
                                     >
                                         <motion.div
-                                            className="mx-auto flex items-center justify-center gap-4 py-4"
+                                            className="mx-auto flex items-center justify-center gap-4 py-4 text-[#822a59] dark:text-[#c59d36]"
                                             variants={itemVariants}
-                                            style={{ color: brandColor }}
                                         >
                                             <a
                                                 href="https://x.com/KohaiiArts"
