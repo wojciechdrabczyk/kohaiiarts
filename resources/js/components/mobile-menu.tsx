@@ -1,10 +1,9 @@
-import NewgroundsIcon from '@/assets/icons/NewgroundsIcon';
 import { Link, router } from '@inertiajs/react';
 import { AnimatePresence, motion } from 'framer-motion';
 import React, { useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { BsInstagram } from 'react-icons/bs';
-import { FaDiscord, FaXTwitter } from 'react-icons/fa6';
+import { FaBluesky, FaDiscord, FaPatreon, FaXTwitter } from 'react-icons/fa6';
 import { SiThreads } from 'react-icons/si';
 
 type NavLink = { label: string; href?: string; name?: string };
@@ -165,15 +164,13 @@ export default function MobileMenu({ links }: Props) {
                                                 <BsInstagram size={20} />
                                             </a>
                                             <a
-                                                href="https://kohaiiarts.newgrounds.com/art"
+                                                href="https://bsky.app/profile/kohaiiarts.bsky.social"
                                                 target="_blank"
                                                 rel="noopener noreferrer"
-                                                aria-label="Newgrounds"
+                                                aria-label="Bluesky"
                                                 className="p-2 transition-transform active:scale-95"
                                             >
-                                                <span>
-                                                    <NewgroundsIcon size={20} />
-                                                </span>
+                                                <FaBluesky size={20} />
                                             </a>
                                             <a
                                                 href="https://www.threads.net/@kohaii_arts"
@@ -185,7 +182,16 @@ export default function MobileMenu({ links }: Props) {
                                                 <SiThreads size={20} />
                                             </a>
                                             <a
-                                                href="https://discord.gg/hqGs4fGQXm"
+                                                href="https://www.patreon.com/KohaiiArts"
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                aria-label="Patreon"
+                                                className="p-2 transition-transform active:scale-95"
+                                            >
+                                                <FaPatreon size={20} />
+                                            </a>
+                                            <a
+                                                href="https://discord.gg/QeVcMheptu"
                                                 aria-label="Discord"
                                                 className="p-2 transition-transform active:scale-95"
                                             >

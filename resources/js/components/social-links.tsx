@@ -15,7 +15,7 @@ export default function SocialLinks({ size = 24, className = '', brandColor = '#
     const hoverAnim = 'hover:scale-110';
 
     return (
-        <div className={`hidden md:flex flex-col items-start gap-5 ${className}`}>
+        <div className={`hidden flex-col items-start gap-5 md:flex ${className}`}>
             <div className="group">
                 <a
                     href="https://x.com/KohaiiArts"
@@ -71,7 +71,7 @@ export default function SocialLinks({ size = 24, className = '', brandColor = '#
             </div>
 
             <div className="group">
-                <a href="https://discord.gg/hqGs4fGQXm" aria-label="Discord" className={`${linkBase} ${hoverAnim}`} style={{ color: brandColor }}>
+                <a href="https://discord.gg/QeVcMheptu" aria-label="Discord" className={`${linkBase} ${hoverAnim}`} style={{ color: brandColor }}>
                     <FaDiscord size={size} />
                 </a>
             </div>

@@ -1,11 +1,11 @@
 import InprntIcon from '@/assets/icons/InprntIcon';
 import NewgroundsIcon from '@/assets/icons/NewgroundsIcon';
 import ThroneIcon from '@/assets/icons/ThroneIcon';
+import VGenIcon from '@/assets/icons/VgenIcon';
 import { motion } from 'framer-motion';
 import { BsInstagram } from 'react-icons/bs';
 import { FaDiscord } from 'react-icons/fa';
-import { FaPatreon, FaThreads, FaXTwitter } from 'react-icons/fa6';
-import VGenIcon from '@/assets/icons/VgenIcon';
+import { FaBluesky, FaPatreon, FaThreads, FaXTwitter } from 'react-icons/fa6';
 
 export default function Footer() {
     const iconProps = { size: 24 };
@@ -13,8 +13,9 @@ export default function Footer() {
     const socialLinks2 = [
         { name: 'X', url: 'https://x.com/KohaiiArts', Icon: FaXTwitter, title: 'X' },
         { name: 'Threads', url: 'https://www.threads.net/@kohaii_arts', Icon: FaThreads, title: 'Threads' },
+        { name: 'Bluesky', url: 'https://bsky.app/profile/kohaiiarts.bsky.social', Icon: FaBluesky, title: 'Bluesky' },
         { name: 'Instagram', url: 'https://www.instagram.com/kohaii_arts/', Icon: BsInstagram, title: 'Instagram' },
-        { name: 'Discord', url: 'https://discord.gg/hqGs4fGQXm', Icon: FaDiscord, title: 'Discord' },
+        { name: 'Discord', url: 'https://discord.gg/QeVcMheptu', Icon: FaDiscord, title: 'Discord' },
         { name: 'Newgrounds', url: 'https://kohaiiarts.newgrounds.com/art', Icon: NewgroundsIcon, title: 'Newgrounds' },
         { name: 'Patreon', url: 'https://www.patreon.com/KohaiiArts', Icon: FaPatreon, title: 'Patreon' },
         { name: 'Throne', url: 'https://throne.com/kohaiiarts', Icon: ThroneIcon, title: 'Throne' },
@@ -23,10 +24,7 @@ export default function Footer() {
     ];
 
     return (
-        <footer
-            className="align-center bottom-0 flex w-full flex-col items-center px-2 py-4"
-            style={{ fontFamily: 'Montserrat, sans-serif' }}
-        >
+        <footer className="align-center bottom-0 flex w-full flex-col items-center px-2 py-4" style={{ fontFamily: 'Montserrat, sans-serif' }}>
             <div className="mx-auto flex max-w-5/6 flex-col items-center justify-center sm:flex-row sm:items-center sm:justify-between">
                 <ul className="flex flex-wrap justify-center gap-10">
                     {socialLinks2.map(({ name, url, Icon, title }) => (
@@ -37,12 +35,7 @@ export default function Footer() {
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 aria-label={name}
-                                className="inline-flex h-10 w-10 items-center justify-center rounded
-                           text-[#822a59] hover:text-[#6e1f48]
-                           transition-colors duration-300 ease-in-out
-                           focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#822a59] focus-visible:ring-offset-2
-                           dark:text-[#c59d36] dark:hover:text-[#f1d27a] dark:hover:drop-shadow-[0_0_0.35rem_rgba(197,157,54,0.45)]
-                           dark:focus-visible:ring-[#c59d36] dark:focus-visible:ring-offset-black"
+                                className="inline-flex h-10 w-10 items-center justify-center rounded text-[#822a59] transition-colors duration-300 ease-in-out hover:text-[#6e1f48] focus-visible:ring-2 focus-visible:ring-[#822a59] focus-visible:ring-offset-2 focus-visible:outline-none dark:text-[#c59d36] dark:hover:text-[#f1d27a] dark:hover:drop-shadow-[0_0_0.35rem_rgba(197,157,54,0.45)] dark:focus-visible:ring-[#c59d36] dark:focus-visible:ring-offset-black"
                                 whileHover={{ scale: 1.12, y: -1 }}
                                 whileTap={{ scale: 0.95 }}
                                 transition={{ type: 'spring', stiffness: 420, damping: 24 }}
@@ -55,7 +48,7 @@ export default function Footer() {
             </div>
 
             <p className="pt-4 text-sm text-gray-500 sm:self-center dark:text-gray-400">
-                © {new Date().getFullYear()} Kohaii Arts — All rights reserved.
+                © {new Date().getFullYear()} Kohaii Arts - All rights reserved.
             </p>
         </footer>
     );

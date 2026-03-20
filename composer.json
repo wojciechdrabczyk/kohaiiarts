@@ -16,7 +16,8 @@
         "spatie/laravel-honeypot": "^4.6",
         "symfony/http-client": "^7.3",
         "symfony/mailgun-mailer": "^7.3",
-        "tightenco/ziggy": "^2.4"
+        "tightenco/ziggy": "^2.4",
+        "ext-pdo": "*"
     },
     "require-dev": {
         "fakerphp/faker": "^1.23",

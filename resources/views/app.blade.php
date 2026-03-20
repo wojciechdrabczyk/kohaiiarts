@@ -7,7 +7,7 @@
 
     @php
         $siteName = config('app.name', 'Kohaii Arts');
-        $title    = $metaTitle ?? "$siteName — Digital Illustrator / Hobbyist";
+        $title    = $metaTitle ?? "$siteName - Digital Illustrator / Hobbyist";
         $desc     = $metaDescription
                   ?? "Aspiring Illewdstrator. Dominating the world one waifu at a time. I love drawing anything and everything under the sun!";
         $url      = $canonicalUrl ?? url()->current();
@@ -51,22 +51,26 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 
+    @php
+        $schema = [
+            '@context' => 'https://schema.org',
+            '@type' => 'Person',
+            'name' => 'Kohaii',
+            'alternateName' => 'Kohaii Arts',
+            'url' => config('app.url'),
+            'jobTitle' => 'Illustrator',
+            'description' => $desc,
+            'image' => $ogImg,
+            'knowsAbout' => ['anime illustration', 'character design', 'digital art'],
+        ];
+    @endphp
+
     <script type="application/ld+json">
-        {
-          "@context": "https://schema.org",
-          "@type": "Person",
-          "name": "Kohaii",
-          "alternateName": "Kohaii Arts",
-          "url": "{{ config('app.url') }}",
-    "jobTitle": "Illustrator",
-    "description": "{{ $desc }}",
-    "image": "{{ $ogImg }}",
-    "knowsAbout": ["anime illustration", "character design", "digital art"]
-  }
+        {!! json_encode($schema, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) !!}
     </script>
 
     <script>
-        (function () {
+        (function() {
             try {
                 var pref = @json($appearance ?? 'system'); // 'light' | 'dark' | 'system'
                 var ls = localStorage.getItem('theme');
@@ -74,7 +78,7 @@
 
                 function computeDark() {
                     if (pref === 'light') return false;
-                    if (pref === 'dark')  return true;
+                    if (pref === 'dark') return true;
                     if (ls === 'light' || ls === 'dark') return ls === 'dark';
                     return window.matchMedia('(prefers-color-scheme: dark)').matches;
                 }
@@ -83,7 +87,7 @@
 
                 if (pref === 'system') {
                     var mql = window.matchMedia('(prefers-color-scheme: dark)');
-                    var apply = function () {
+                    var apply = function() {
                         var ls2 = localStorage.getItem('theme');
                         root.classList.toggle('dark',
                             ls2 === 'light' || ls2 === 'dark' ? (ls2 === 'dark') : mql.matches
@@ -91,13 +95,19 @@
                     };
                     (mql.addEventListener || mql.addListener).call(mql, 'change', apply);
                 }
-            } catch (e) {}
+            } catch (e) {
+            }
         })();
     </script>
 
     <style>
-        html{background-color: oklch(1 0 0)}
-        html.dark{background-color: oklch(0.145 0 0)}
+        html {
+            background-color: oklch(1 0 0)
+        }
+
+        html.dark {
+            background-color: oklch(0.145 0 0)
+        }
     </style>
 
     @routes

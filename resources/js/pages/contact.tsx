@@ -8,7 +8,7 @@ import { motion, MotionConfig, stagger } from 'framer-motion';
 import React, { useRef, useState } from 'react';
 import { BsInstagram } from 'react-icons/bs';
 import { FaDiscord } from 'react-icons/fa';
-import { FaPatreon, FaThreads, FaXTwitter } from 'react-icons/fa6';
+import { FaBluesky, FaPatreon, FaThreads, FaXTwitter } from 'react-icons/fa6';
 import { toast } from 'sonner';
 
 type HoneypotProps = {
@@ -33,12 +33,18 @@ export default function Contact() {
         { name: 'X', url: 'https://x.com/KohaiiArts', icon: <FaXTwitter size={32} />, title: 'X' },
         { name: 'Threads', url: 'https://www.threads.com/@kohaii_arts', icon: <FaThreads size={32} />, title: 'Threads' },
         {
+            name: 'Bluesky',
+            url: 'https://bsky.app/profile/kohaiiarts.bsky.social',
+            icon: <FaBluesky size={32} className="text-[#1185FE]" />,
+            title: 'Bluesky',
+        },
+        {
             name: 'Instagram',
             url: 'https://www.instagram.com/kohaii_arts/',
             icon: <BsInstagram size={32} className="text-pink-500" />,
             title: 'Instagram',
         },
-        { name: 'Discord', url: 'https://discord.gg/hqGs4fGQXm', icon: <FaDiscord size={32} className="text-indigo-500" />, title: 'Discord' },
+        { name: 'Discord', url: 'https://discord.gg/QeVcMheptu', icon: <FaDiscord size={32} className="text-indigo-500" />, title: 'Discord' },
         { name: 'Newgrounds', url: 'https://kohaiiarts.newgrounds.com/art', icon: <NewgroundsIcon size={32} />, title: 'Newgrounds' },
         { name: 'Patreon', url: 'https://www.patreon.com/KohaiiArts', icon: <FaPatreon size={32} className="text-[#f96854]" />, title: 'Patreon' },
         { name: 'Throne', url: 'https://throne.com/kohaiiarts', icon: <ThroneIcon size={32} />, title: 'Throne' },
